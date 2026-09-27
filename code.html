@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coding · BotWorkshop</title>
+  </head>
+  <body class="code-app">
+    <header class="topbar">
+      <a class="brand hub" href="/class.html">Class hub</a>
+      <a class="brand home" href="/">BotWorkshop</a>
+      <label class="demo-label">
+        <span data-i18n="robot">Robot</span>
+        <select id="robot-select" aria-label="Robot">
+          <option value="turtle">Turtle robot</option>
+          <option value="tello">Tello drone</option>
+        </select>
+      </label>
+      <button type="button" id="new-btn">New</button>
+      <label class="demo-label">
+        <span data-i18n="demo">Demo</span>
+        <select id="demo-select" aria-label="Loaded demo"></select>
+      </label>
+      <button type="button" class="primary" id="download-btn">Download for Arduino</button>
+      <button type="button" id="copy-btn">Copy code</button>
+      <label class="lang-label">
+        <select id="lang-select" aria-label="Language">
+          <option value="en">EN</option>
+          <option value="ar">ع</option>
+        </select>
+      </label>
+    </header>
+    <div class="hint">
+      <span id="hint-static">Pick Turtle or Tello, then snap blocks.</span>
+      <strong id="status">Ready.</strong>
+    </div>
+    <div class="work">
+      <div id="blockly"></div>
+      <aside id="face-pad" class="face-pad">
+        <header>8×8 face</header>
+        <p class="face-help">Draw here. Then use the show 8×8 drawing block.</p>
+        <div id="face-grid" class="face-grid" aria-label="8 by 8 LED face"></div>
+        <div class="face-tools">
+          <button type="button" data-face="smile">Smile</button>
+          <button type="button" data-face="clear">Clear</button>
+          <button type="button" data-face="flip180">Upside down</button>
+          <button type="button" data-face="fliph">Flip L/R</button>
+          <button type="button" data-face="flipv">Flip U/D</button>
+        </div>
+      </aside>
+      <aside class="code-pane">
+        <header id="setup">Setup</header>
+        <ol class="ide-steps" id="turtle-steps">
+          <li>
+            Install Arduino IDE from
+            <a href="https://academy.arduino.cc/pages/download-software" target="_blank" rel="noreferrer"
+              >academy.arduino.cc/pages/download-software</a
+            >
+            (desktop app, not the Microsoft Store).
+          </li>
+          <li>
+            Install the CP210x UART driver for Windows <strong>and</strong> Mac from
+            <a
+              href="https://www.silabs.com/software-and-tools/usb-to-uart-bridge-vcp-drivers?tab=downloads"
+              target="_blank"
+              rel="noreferrer"
+              >Silicon Labs USB to UART downloads</a
+            >.
+          </li>
+          <li>Open <code>turtle.ino</code> in Arduino IDE.</li>
+          <li>Tools → Board → <strong>Arduino Uno</strong>.</li>
+          <li>Tools → Port → CP210x COM or <code>cu.SLAB_USBtoUART</code>. Not COM1.</li>
+          <li>Unplug the Bluetooth module, then <strong>Upload</strong>.</li>
+        </ol>
+        <ol class="ide-steps" id="tello-steps" hidden>
+          <li>Python 3: <code>py -3 --version</code>. Camera decoder: see Setup (FFmpeg or OpenCV) <em>before</em> joining Tello Wi-Fi.</li>
+          <li><strong>Test flight</strong> (keys + camera) is on the Setup tab — not this Coding download.</li>
+          <li>Snap blocks here, then <strong>Download Tello program</strong> → <code>py -3 tello_mission.py</code> while on Tello Wi-Fi.</li>
+        </ol>
+        <header id="code-title">Arduino sketch</header>
+        <pre id="arduino-code"></pre>
+      </aside>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BotWorkshop · Day robotics workshops</title>
+    <meta
+      name="description"
+      content="Public-holiday day workshops in robotics: Foundation, Intermediate, and Advanced. Register from the home page by email or Instagram."
+    />
+    <link rel="stylesheet" href="css/site.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap bar">
+        <a class="brand-lockup" href="/">
+          <img src="/logo.png" alt="" width="64" height="64" />
+          <span>BOTWORKSHOP</span>
+        </a>
+        <button class="menu-btn" type="button" aria-label="Menu">Menu</button>
+        <nav class="primary">
+          <a href="/" aria-current="page">Home</a>
+          <a href="/courses.html">Courses</a>
+          <a href="/products.html">Products</a>
+          <a href="/explore.html">Explore</a>
+          <a href="/partners.html">Partners</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <section class="hero">
+        <div>
+          <p class="kicker">Since 2025 · Australia</p>
+          <h1>Build robots. Write programs. Take the skills with you.</h1>
+          <p class="lead">
+            One-day workshops in electronics, mechanics, and programming — usually
+            on public holidays. Register below by email or Instagram.
+          </p>
+          <div class="actions">
+            <a class="btn btn-dark" href="#register">Register</a>
+            <a class="btn btn-ghost" href="/courses.html">See courses</a>
+          </div>
+        </div>
+        <article class="hero-card upcoming" id="upcoming" hidden>
+          <span class="when">Upcoming workshop</span>
+          <strong id="upcoming-title">Loading…</strong>
+          <p id="upcoming-blurb"></p>
+          <div class="actions">
+            <a class="btn btn-ghost" href="#register">Register</a>
+            <a class="btn btn-ghost" id="upcoming-hub" href="/class.html">Class hub</a>
+          </div>
+        </article>
+        <article class="hero-card upcoming" id="upcoming-empty" hidden>
+          <span class="when">Upcoming workshop</span>
+          <strong>None announced yet</strong>
+          <p>Follow Instagram for the next public-holiday date, or register interest below.</p>
+          <div class="actions">
+            <a class="btn btn-ghost" href="#register">Register interest</a>
+          </div>
+        </article>
+      </section>
+
+      <section class="section" id="register">
+        <h2>Register</h2>
+        <p>
+          Sign up for the upcoming workshop (or register interest). Choose email or
+          Instagram chat — both go to BotWorkshop.
+        </p>
+        <div class="register-grid">
+          <article class="card">
+            <h3>By email</h3>
+            <p>Sends a message to <span id="register-email-label">botworkshopau@gmail.com</span>.</p>
+            <form class="contact" id="register-form">
+              <label>
+                Name
+                <input name="name" type="text" required autocomplete="name" />
+              </label>
+              <label>
+                Your email
+                <input name="email" type="email" required autocomplete="email" />
+              </label>
+              <label>
+                Course
+                <select name="course" id="register-course">
+                  <option value="Foundation">Foundation</option>
+                  <option value="Intermediate">Intermediate</option>
+                  <option value="Advanced">Advanced</option>
+                  <option value="Interest">General interest</option>
+                </select>
+              </label>
+              <label>
+                Message (optional)
+                <textarea name="message" rows="3" placeholder="How many people, age group, questions…"></textarea>
+              </label>
+              <button class="btn btn-teal" type="submit">Send email</button>
+            </form>
+          </article>
+          <article class="card">
+            <h3>By Instagram</h3>
+            <p>Message us in Instagram chat to register for the next day workshop.</p>
+            <div class="actions">
+              <a class="btn btn-teal" id="register-instagram" href="https://ig.me/m/botworkshop_au"
+                >Open Instagram chat</a
+              >
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Three levels, one day each</h2>
+        <p>
+          Foundation, Intermediate, and Advanced are full-day workshops. Dates are
+          set on this page (upcoming box) and on
+          <a id="home-ig-profile" href="https://www.instagram.com/botworkshop_au/">@botworkshop_au</a>.
+        </p>
+        <div class="grid">
+          <article class="card">
+            <h3>Foundation</h3>
+            <p>Learn the foundations of Electronics, Mechanics, and Programming.</p>
+            <p><a href="/courses.html">Course details</a></p>
+          </article>
+          <article class="card">
+            <h3>Intermediate</h3>
+            <p>Get into Design and complex Electronics, Mechanics, and Programming.</p>
+          </article>
+          <article class="card">
+            <h3>Advanced</h3>
+            <p>Get robots properly deployed, optimised, and closer to market skills.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        BotWorkshop ·
+        <a href="mailto:botworkshopau@gmail.com">botworkshopau@gmail.com</a>
+        ·
+        <a href="https://ig.me/m/botworkshop_au">Instagram chat</a>
+        · © 2026
+      </div>
+    </footer>
+    <script type="module" src="js/site.js"></script>
+  </body>
+</html>

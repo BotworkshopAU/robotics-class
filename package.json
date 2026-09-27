@@ -1,0 +1,18 @@
+{
+  "name": "botworkshop-turtle",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:lan": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "blockly": "^12.3.1"
+  },
+  "devDependencies": {
+    "vite": "^7.1.7"
+  }
+}
