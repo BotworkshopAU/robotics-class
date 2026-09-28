@@ -27,12 +27,14 @@ On Mac, type a word then Enter: space, up, down, left, right, r, f, q, e, c, esc
 """
 from __future__ import annotations
 
+import os
 import shutil
 import socket
 import subprocess
 import sys
 import time
 from multiprocessing import Process
+from pathlib import Path
 
 TELLO = ("192.168.10.1", 8889)
 SPEED = 40
@@ -97,13 +99,34 @@ def opencv_viewer() -> None:
     cv2.destroyAllWindows()
 
 
+def find_ffplay() -> str | None:
+    found = shutil.which("ffplay")
+    if found:
+        return found
+    # Winget Gyan.FFmpeg often installs under LocalAppData but PATH may lag.
+    local = os.environ.get("LOCALAPPDATA", "")
+    if local:
+        root = Path(local) / "Microsoft" / "WinGet" / "Packages"
+        if root.is_dir():
+            for match in root.glob("Gyan.FFmpeg*/ffmpeg-*/bin/ffplay.exe"):
+                return str(match)
+    for folder in (
+        Path(r"C:\ffmpeg\bin"),
+        Path(r"C:\Program Files\ffmpeg\bin"),
+    ):
+        candidate = folder / "ffplay.exe"
+        if candidate.is_file():
+            return str(candidate)
+    return None
+
+
 def start_camera() -> None:
     global ffplay_proc, opencv_proc
     if camera_running():
         print("Camera already on.")
         return
     send("streamon", 2)
-    ffplay = shutil.which("ffplay")
+    ffplay = find_ffplay()
     if ffplay:
         ffplay_proc = subprocess.Popen(
             [
@@ -128,7 +151,7 @@ def start_camera() -> None:
     except ImportError:
         print("No camera decoder found.")
         print("  Windows:  winget install --id Gyan.FFmpeg -e")
-        print("  then restart the terminal, or:  py -3 -m pip install opencv-python")
+        print("  then close this window and open a NEW terminal, or:  py -3 -m pip install opencv-python")
         send("streamoff", 1)
         return
     opencv_proc = Process(target=opencv_viewer, daemon=True)
@@ -231,10 +254,26 @@ def read_windows_key() -> str | None:
     return ch
 
 
+def ensure_tello() -> bool:
+    reply = send("command", 3).strip().lower()
+    if reply == "ok":
+        print("Tello ready.")
+        return True
+    print()
+    print("Tello did not answer. Fix Wi-Fi, then run again:")
+    print("  1. Power on Tello (LED blinking).")
+    print("  2. On THIS PC, join Wi-Fi named TELLO-xxxxxx (you will lose internet).")
+    print("  3. Close the Tello phone app completely (only one device can talk to it).")
+    print("  4. Confirm: in a browser, nothing loads — that is normal on Tello Wi-Fi.")
+    print()
+    return False
+
+
 def windows_live() -> None:
     print("Space = takeoff / land. Arrows = direction. c = camera. Esc = emergency.")
     last_move = 0.0
-    send("command", 2)
+    if not ensure_tello():
+        return
     start_camera()
     while True:
         ch = read_windows_key()
@@ -250,7 +289,8 @@ def windows_live() -> None:
 
 def typed_loop() -> None:
     print("Type then Enter: space  up  down  left  right  r  f  q  e  c  esc  |  quit")
-    send("command", 2)
+    if not ensure_tello():
+        return
     start_camera()
     while True:
         try:

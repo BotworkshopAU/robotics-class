@@ -104,6 +104,40 @@ body.code-app {
   cursor: wait;
 }
 
+.topbar-link {
+  display: inline-flex;
+  align-items: center;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--ink);
+  background: #fff;
+  border-radius: 8px;
+  padding: 7px 12px;
+}
+
+.topbar-link-compact {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 6px;
+  margin-left: 4px;
+}
+
+.topbar-link[hidden] {
+  display: none;
+}
+
+body.tello-mode .topbar-link {
+  background: #e8f3fb;
+  color: #123a5c;
+}
+
+html[dir="rtl"] .topbar-link-compact {
+  margin-left: 0;
+  margin-right: 4px;
+}
+
 .status {
   font-size: 0.9rem;
   min-width: 180px;

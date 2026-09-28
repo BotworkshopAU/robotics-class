@@ -23,6 +23,14 @@
       </label>
       <button type="button" class="primary" id="download-btn">Download for Arduino</button>
       <button type="button" id="copy-btn">Copy code</button>
+      <a
+        class="topbar-link topbar-link-compact"
+        id="tello-controller-btn"
+        href="tello_pc.py"
+        download="tello_pc.py"
+        hidden
+        >Download sample controller</a
+      >
       <label class="lang-label">
         <select id="lang-select" aria-label="Language">
           <option value="en">EN</option>
@@ -73,9 +81,21 @@
           <li>Unplug the Bluetooth module, then <strong>Upload</strong>.</li>
         </ol>
         <ol class="ide-steps" id="tello-steps" hidden>
-          <li>Python 3: <code>py -3 --version</code>. Camera decoder: see Setup (FFmpeg or OpenCV) <em>before</em> joining Tello Wi-Fi.</li>
-          <li><strong>Test flight</strong> (keys + camera) is on the Setup tab — not this Coding download.</li>
-          <li>Snap blocks here, then <strong>Download Tello program</strong> → <code>py -3 tello_mission.py</code> while on Tello Wi-Fi.</li>
+          <li>
+            Python 3: <code>py -3 --version</code>. For the camera, install a decoder
+            <em>before</em> joining Tello Wi-Fi:
+            <code>winget install --id Gyan.FFmpeg -e</code>
+            (restart the terminal after install).
+          </li>
+          <li>
+            <strong>Sample controller</strong> (keys + camera):
+            <a href="tello_pc.py" download="tello_pc.py">Download tello_pc.py</a>
+            → join <code>TELLO-xxxxxx</code> → <code>py -3 tello_pc.py</code>.
+          </li>
+          <li>
+            Snap blocks here, then <strong>Download Tello program</strong> →
+            <code>py -3 tello_mission.py</code> while on Tello Wi-Fi.
+          </li>
         </ol>
         <header id="code-title">Arduino sketch</header>
         <pre id="arduino-code"></pre>
