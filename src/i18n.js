@@ -21,12 +21,13 @@ const en = {
   language: "Language",
   downloadArduino: "Download for Arduino",
   downloadTello: "Download Tello program",
+  downloadTelloController: "Download sample controller",
   copyCode: "Copy code",
   hintDefault: "Pick Turtle or Tello, then snap blocks.",
   hintTurtle:
     "Draw on the 8×8 face pad, then use Lights → show 8×8 drawing. Use Upside down on the pad if the face is mounted the wrong way.",
   hintTello:
-    "This download is your block program. Test flight (keys + camera) is on the Setup tab.",
+    "Block missions download as Python. For keys + camera, download the sample Tello controller (tello_pc.py). Camera needs FFmpeg: winget install --id Gyan.FFmpeg -e",
   setup: "Setup",
   codeArduino: "Arduino sketch",
   codeTello: "Tello program (Python)",
@@ -39,6 +40,7 @@ const en = {
   statusDownloadArduino: "Saved turtle.ino — open it in Arduino IDE.",
   statusDownloadTello:
     "Saved tello_mission.py — on Tello Wi-Fi run: py -3 tello_mission.py",
+  statusTelloController: "Downloading tello_pc.py — camera needs: winget install --id Gyan.FFmpeg -e",
   statusDemoFail: "Could not load that demo.",
   confirmNew: "Clear this program?",
   faceTitle: "8×8 face",
@@ -72,9 +74,21 @@ const en = {
     <li>Unplug the Bluetooth module, then <strong>Upload</strong>.</li>
   `,
   telloStepsHtml: `
-    <li>Python 3: <code>py -3 --version</code>. Camera decoder: see Setup (FFmpeg or OpenCV) <em>before</em> joining Tello Wi-Fi.</li>
-    <li><strong>Test flight</strong> (keys + camera) is on the Setup tab — not this Coding download.</li>
-    <li>Snap blocks here, then <strong>Download Tello program</strong> → <code>py -3 tello_mission.py</code> while on Tello Wi-Fi.</li>
+    <li>
+      Python 3: <code>py -3 --version</code>. For the camera, install a decoder
+      <em>before</em> joining Tello Wi-Fi:
+      <code>winget install --id Gyan.FFmpeg -e</code>
+      (restart the terminal after install).
+    </li>
+    <li>
+      <strong>Sample controller</strong> (keys + camera):
+      <a href="tello_pc.py" download="tello_pc.py">Download tello_pc.py</a>
+      → join <code>TELLO-xxxxxx</code> → <code>py -3 tello_pc.py</code>.
+    </li>
+    <li>
+      Snap blocks here, then <strong>Download Tello program</strong> →
+      <code>py -3 tello_mission.py</code> while on Tello Wi-Fi.
+    </li>
   `,
   turtleDemos: [
     ["", "Choose a demo"],
@@ -180,12 +194,13 @@ const ar = {
   language: "اللغة",
   downloadArduino: "تنزيل لأردوينو",
   downloadTello: "تنزيل برنامج تيلو",
+  downloadTelloController: "تنزيل متحكّم تجريبي",
   copyCode: "نسخ الكود",
   hintDefault: "اختر السلحفاة أو تيلو، ثم ركّب البلوكات.",
   hintTurtle:
     "ارسم على لوحة الوجه 8×8، ثم استخدم أضواء ← عرض رسم 8×8. استخدم «مقلوب» إذا كان الوجه مركّباً بالعكس.",
   hintTello:
-    "هذا التنزيل هو برنامج البلوكات. اختبار الطيران (مفاتيح + كاميرا) في تبويب الإعداد.",
+    "مهام البلوكات تُنزَّل كبايثون. للمفاتيح والكاميرا نزّل متحكّم تيلو (tello_pc.py). الكاميرا تحتاج FFmpeg: winget install --id Gyan.FFmpeg -e",
   setup: "الإعداد",
   codeArduino: "كود أردوينو",
   codeTello: "برنامج تيلو (بايثون)",
@@ -198,6 +213,7 @@ const ar = {
   statusDownloadArduino: "تم حفظ turtle.ino — افتحه في Arduino IDE.",
   statusDownloadTello:
     "تم حفظ tello_mission.py — على شبكة تيلو نفّذ: py -3 tello_mission.py",
+  statusTelloController: "جاري تنزيل tello_pc.py — للكاميرا: winget install --id Gyan.FFmpeg -e",
   statusDemoFail: "تعذّر تحميل هذه التجربة.",
   confirmNew: "مسح هذا البرنامج؟",
   faceTitle: "وجه 8×8",
@@ -231,9 +247,21 @@ const ar = {
     <li>افصل وحدة البلوتوث، ثم <strong>Upload</strong>.</li>
   `,
   telloStepsHtml: `
-    <li>بايثون 3: <code>py -3 --version</code>. فك تشفير الكاميرا: راجع الإعداد (FFmpeg أو OpenCV) <em>قبل</em> الاتصال بشبكة تيلو.</li>
-    <li><strong>اختبار الطيران</strong> (مفاتيح + كاميرا) في تبويب الإعداد — وليس تنزيل البرمجة هنا.</li>
-    <li>ركّب البلوكات، ثم <strong>تنزيل برنامج تيلو</strong> → <code>py -3 tello_mission.py</code> وأنت على شبكة تيلو.</li>
+    <li>
+      بايثون 3: <code>py -3 --version</code>. للكاميرا ثبّت مفكّك الترميز
+      <em>قبل</em> الاتصال بشبكة تيلو:
+      <code>winget install --id Gyan.FFmpeg -e</code>
+      (أعد تشغيل الطرفية بعد التثبيت).
+    </li>
+    <li>
+      <strong>متحكّم تجريبي</strong> (مفاتيح + كاميرا):
+      <a href="tello_pc.py" download="tello_pc.py">تنزيل tello_pc.py</a>
+      → اتصل بـ <code>TELLO-xxxxxx</code> → <code>py -3 tello_pc.py</code>.
+    </li>
+    <li>
+      ركّب البلوكات، ثم <strong>تنزيل برنامج تيلو</strong> →
+      <code>py -3 tello_mission.py</code> وأنت على شبكة تيلو.
+    </li>
   `,
   turtleDemos: [
     ["", "اختر تجربة"],

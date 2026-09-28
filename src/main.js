@@ -42,6 +42,7 @@ const robotSelect = document.getElementById("robot-select");
 const demoSelect = document.getElementById("demo-select");
 const langSelect = document.getElementById("lang-select");
 const downloadBtn = document.getElementById("download-btn");
+const telloControllerBtn = document.getElementById("tello-controller-btn");
 const copyBtn = document.getElementById("copy-btn");
 const newBtn = document.getElementById("new-btn");
 const codeTitle = document.getElementById("code-title");
@@ -165,6 +166,10 @@ function applyChrome() {
     turtleSteps.hidden = true;
     telloSteps.hidden = false;
     telloSteps.innerHTML = t.telloStepsHtml;
+    if (telloControllerBtn) {
+      telloControllerBtn.hidden = false;
+      telloControllerBtn.textContent = t.downloadTelloController;
+    }
     fillDemos(t.telloDemos, localStorage.getItem("bw-tello-demo"));
   } else {
     hintEl.textContent = t.hintTurtle;
@@ -173,6 +178,7 @@ function applyChrome() {
     turtleSteps.hidden = false;
     telloSteps.hidden = true;
     turtleSteps.innerHTML = t.turtleStepsHtml;
+    if (telloControllerBtn) telloControllerBtn.hidden = true;
     fillDemos(t.turtleDemos, localStorage.getItem("bw-turtle-demo"));
   }
 }
@@ -286,6 +292,10 @@ downloadBtn.addEventListener("click", () => {
   URL.revokeObjectURL(a.href);
   statusEl.textContent =
     robot === "tello" ? ui(lang).statusDownloadTello : ui(lang).statusDownloadArduino;
+});
+
+telloControllerBtn?.addEventListener("click", () => {
+  statusEl.textContent = ui(lang).statusTelloController;
 });
 
 window.addEventListener("resize", () => Blockly.svgResize(workspace));
