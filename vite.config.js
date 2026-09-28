@@ -2,6 +2,8 @@ import { defineConfig } from "vite";
 import { resolve } from "path";
 
 export default defineConfig({
+  // Relative base so GitHub Pages (/robotics-class/) and local preview both work.
+  base: "./",
   server: {
     port: 5173,
   },

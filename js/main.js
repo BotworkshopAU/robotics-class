@@ -3,7 +3,7 @@ const panels = document.querySelectorAll(".panel");
 
 function showPanel(id) {
   if (id === "coding") {
-    window.open("/code.html", "_blank", "noopener");
+    window.open("code.html", "_blank", "noopener");
     return;
   }
   panels.forEach((panel) => {
@@ -22,13 +22,13 @@ buttons.forEach((button) => {
 const telloDemo = new URLSearchParams(location.search).get("tello");
 if (telloDemo) {
   window.location.replace(
-    `/code.html?robot=tello&demo=${encodeURIComponent(telloDemo)}`
+    `code.html?robot=tello&demo=${encodeURIComponent(telloDemo)}`
   );
 }
 
 const start = (location.hash || "#home").replace("#", "");
 if (start === "coding") {
-  window.location.replace("/code.html");
+  window.location.replace("code.html");
 } else {
   showPanel(document.getElementById(start) ? start : "home");
 }

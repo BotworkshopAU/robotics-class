@@ -5,7 +5,7 @@ const DEFAULTS = {
   title: "Foundation · Saturday 3 October 2026",
   blurb:
     "A day to meet robots: what they are, program the turtle car, fly a Tello drone, and see a 3D printer plus other robot types in person.",
-  hubUrl: "/class.html",
+  hubUrl: "class.html",
   email: "botworkshopau@gmail.com",
   instagramChat: "https://ig.me/m/botworkshop_au",
   instagramProfile: "https://www.instagram.com/botworkshop_au/",
@@ -17,7 +17,7 @@ document.querySelector(".menu-btn")?.addEventListener("click", () => {
 
 async function loadWorkshop() {
   try {
-    const res = await fetch(`/workshop.json?t=${Date.now()}`, { cache: "no-store" });
+    const res = await fetch(`workshop.json?t=${Date.now()}`, { cache: "no-store" });
     if (!res.ok) throw new Error("missing workshop.json");
     return { ...DEFAULTS, ...(await res.json()) };
   } catch {
@@ -39,7 +39,7 @@ function fillHome(config) {
     if (title) title.textContent = config.title || `${config.level} · ${config.dateLabel}`;
     if (blurb) blurb.textContent = config.blurb || "";
     if (hub) {
-      hub.href = config.hubUrl || "/class.html";
+      hub.href = config.hubUrl || "class.html";
       hub.textContent = `${config.level || "Class"} hub`;
     }
     const course = document.getElementById("register-course");
