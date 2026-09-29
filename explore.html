@@ -17,28 +17,37 @@
           <img src="logo.png" alt="" width="64" height="64" />
           <span>BOTWORKSHOP</span>
         </a>
-        <button class="menu-btn" type="button" aria-label="Menu">Menu</button>
-        <nav class="primary">
-          <a href="./">Home</a>
-          <a href="courses.html">Courses</a>
-          <a href="products.html">Products</a>
-          <a href="explore.html" aria-current="page">Explore</a>
-          <a href="partners.html">Partners</a>
-        </nav>
+        <div class="header-end">
+          <button class="menu-btn" type="button" data-i18n="menu" data-i18n-aria="menu" aria-label="Menu">Menu</button>
+          <nav class="primary">
+            <a href="./" data-i18n="navHome">Home</a>
+            <a href="courses.html" data-i18n="navCourses">Courses</a>
+            <a href="products.html" data-i18n="navProducts">Products</a>
+            <a href="explore.html" aria-current="page" data-i18n="navExplore">Explore</a>
+            <a href="partners.html" data-i18n="navPartner">Become a partner</a>
+          </nav>
+          <label class="site-lang">
+            <span class="visually-hidden" data-i18n="language">Language</span>
+            <select id="site-lang" class="site-lang-select" data-i18n-aria="language" aria-label="Language">
+              <option value="en">English</option>
+              <option value="ar">العربية</option>
+            </select>
+          </label>
+        </div>
       </div>
     </header>
 
     <main class="wrap">
       <section class="section" style="padding-top: 40px">
-        <p class="kicker">For the curious</p>
-        <h1>Explore</h1>
-        <p>
+        <p class="kicker" data-i18n="exploreKicker">For the curious</p>
+        <h1 data-i18n="exploreTitle">Explore</h1>
+        <p data-i18n="exploreLead">
           Extra videos if you want to dig deeper — not tied to a specific course.
           Handy after Foundation if you’re into Arduino and electronics.
         </p>
       </section>
 
-      <h2 class="explore-heading">Arduino &amp; electronics</h2>
+      <h2 class="explore-heading" data-i18n="exploreArduinoHeading">Arduino &amp; electronics</h2>
       <div class="video-grid">
         <article class="video">
           <iframe
@@ -96,7 +105,7 @@
 
       <p class="explore-note">
         Prefer hands-on first?
-        <a href="./#register">Join our upcoming classes</a>.
+        <a href="./#register" data-i18n="exploreJoinLink">Join our upcoming classes</a>.
       </p>
     </main>
 
@@ -105,7 +114,7 @@
         BotWorkshop ·
         <a href="mailto:botworkshopau@gmail.com">botworkshopau@gmail.com</a>
         ·
-        <a href="https://ig.me/m/botworkshop_au">Instagram chat</a>
+        <a href="https://ig.me/m/botworkshop_au" data-i18n="footerIg">Instagram chat</a>
         · © 2026
       </div>
     </footer>

@@ -1,11 +1,21 @@
+import {
+  getLang,
+  siteUi,
+  applySiteI18n,
+  wireLangSwitcher,
+} from "./site-i18n.js";
+
 const DEFAULTS = {
   enabled: true,
   level: "Foundation",
   dateLabel: "Saturday 3 October 2026",
   title: "Foundation · Saturday 3 October 2026",
+  titleAr: "تأسيسي · السبت 3 أكتوبر 2026",
   blurb:
-    "A day to meet robots: what they are, program the turtle car, fly a Tello drone, and see a 3D printer plus other robot types in person.",
-  hubUrl: "class.html",
+    "Program a real robot with simple code, learn how computers follow instructions, experiment and see the results, explore drones and modern technology, build problem-solving skills — and take home a certificate.",
+  blurbAr:
+    "برمج روبوتاً حقيقياً بكود بسيط، تعلّم كيف تتبع الحواسيب التعليمات، جرّب وراقب النتائج، استكشف الطائرات بدون طيار والتقنية الحديثة، طوّر حل المشكلات — واحصل على شهادة مشاركة.",
+  hubUrl: "class-foundation.html",
   email: "botworkshopau@gmail.com",
   instagramChat: "https://ig.me/m/botworkshop_au",
   instagramProfile: "https://www.instagram.com/botworkshop_au/",
@@ -25,31 +35,32 @@ async function loadWorkshop() {
   }
 }
 
-function fillHome(config) {
-  const upcoming = document.getElementById("upcoming");
-  const empty = document.getElementById("upcoming-empty");
-  if (!upcoming) return;
+function fillHome(config, lang = getLang()) {
+  const t = siteUi(lang);
+  const title = document.getElementById("upcoming-title");
+  const blurb = document.getElementById("upcoming-blurb");
+  const hub = document.getElementById("upcoming-hub");
+  const actions = document.getElementById("upcoming-actions");
 
-  if (config.enabled) {
-    upcoming.hidden = false;
-    if (empty) empty.hidden = true;
-    const title = document.getElementById("upcoming-title");
-    const blurb = document.getElementById("upcoming-blurb");
-    const hub = document.getElementById("upcoming-hub");
-    if (title) title.textContent = config.title || `${config.level} · ${config.dateLabel}`;
-    if (blurb) blurb.textContent = config.blurb || "";
-    if (hub) {
-      hub.href = config.hubUrl || "class.html";
-      hub.textContent = `${config.level || "Class"} hub`;
+  if (title && blurb) {
+    if (config.enabled) {
+      title.textContent =
+        lang === "ar" && config.titleAr
+          ? config.titleAr
+          : config.title || `${config.level} · ${config.dateLabel}`;
+      blurb.textContent =
+        lang === "ar" && config.blurbAr ? config.blurbAr : config.blurb || "";
+      if (actions) actions.hidden = false;
+      if (hub) {
+        hub.href = config.hubUrl || "class-foundation.html";
+        hub.textContent = `${config.level || "Class"} · ${t.classHub}`;
+        hub.hidden = false;
+      }
+    } else {
+      title.textContent = t.upcomingNoneTitle;
+      blurb.textContent = t.upcomingNoneBlurb;
+      if (hub) hub.hidden = true;
     }
-    const course = document.getElementById("register-course");
-    if (course && config.level) {
-      const match = [...course.options].find((o) => o.value === config.level);
-      if (match) course.value = config.level;
-    }
-  } else {
-    upcoming.hidden = true;
-    if (empty) empty.hidden = false;
   }
 
   const emailLabel = document.getElementById("register-email-label");
@@ -60,15 +71,12 @@ function fillHome(config) {
 
   const profile = document.getElementById("home-ig-profile");
   if (profile) profile.href = config.instagramProfile;
-}
 
-function fillCourses(config) {
-  const next = document.getElementById("courses-next-date");
-  if (!next) return;
-  next.textContent =
-    config.enabled && config.dateLabel
-      ? config.dateLabel
-      : "see Home when announced";
+  const course = document.getElementById("register-course");
+  if (course && config.enabled && config.level) {
+    const match = [...course.options].find((o) => o.value === config.level);
+    if (match) course.value = config.level;
+  }
 }
 
 function wireRegister(config) {
@@ -87,7 +95,7 @@ function wireRegister(config) {
         ? `Upcoming date: ${config.dateLabel}\n`
         : "";
     const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\nCourse: ${course}\n${dateLine}\n${message}`
+      `Name: ${name}\nEmail: ${email}\nCourse: ${course}\n${dateLine}\n${message}`,
     );
     const subject = encodeURIComponent(`BotWorkshop registration · ${course}`);
     window.location.href = `mailto:${config.email}?subject=${subject}&body=${body}`;
@@ -106,7 +114,7 @@ function wirePartnerForm() {
     const venue = String(data.get("venue") || "").trim();
     const message = String(data.get("message") || "").trim();
     const body = encodeURIComponent(
-      `Name / organisation: ${name}\nEmail: ${email}\nVenue: ${venue}\n\n${message}`
+      `Name / organisation: ${name}\nEmail: ${email}\nVenue: ${venue}\n\n${message}`,
     );
     const subject = encodeURIComponent("BotWorkshop partnership");
     window.location.href = `mailto:botworkshopau@gmail.com?subject=${subject}&body=${body}`;
@@ -114,7 +122,15 @@ function wirePartnerForm() {
 }
 
 const config = await loadWorkshop();
-fillHome(config);
-fillCourses(config);
+
+function refreshUi(lang = getLang()) {
+  applySiteI18n(lang);
+  fillHome(config, lang);
+}
+
+wireLangSwitcher((lang) => {
+  refreshUi(lang);
+});
+refreshUi(getLang());
 wireRegister(config);
 wirePartnerForm();

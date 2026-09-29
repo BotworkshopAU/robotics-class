@@ -13,28 +13,37 @@
           <img src="logo.png" alt="" width="64" height="64" />
           <span>BOTWORKSHOP</span>
         </a>
-        <button class="menu-btn" type="button" aria-label="Menu">Menu</button>
-        <nav class="primary">
-          <a href="./">Home</a>
-          <a href="courses.html">Courses</a>
-          <a href="products.html">Products</a>
-          <a href="explore.html">Explore</a>
-          <a href="partners.html">Partners</a>
-        </nav>
+        <div class="header-end">
+          <button class="menu-btn" type="button" data-i18n="menu" data-i18n-aria="menu" aria-label="Menu">Menu</button>
+          <nav class="primary">
+            <a href="./" data-i18n="navHome">Home</a>
+            <a href="courses.html" data-i18n="navCourses">Courses</a>
+            <a href="products.html" data-i18n="navProducts">Products</a>
+            <a href="explore.html" data-i18n="navExplore">Explore</a>
+            <a href="partners.html" data-i18n="navPartner">Become a partner</a>
+          </nav>
+          <label class="site-lang">
+            <span class="visually-hidden" data-i18n="language">Language</span>
+            <select id="site-lang" class="site-lang-select" data-i18n-aria="language" aria-label="Language">
+              <option value="en">English</option>
+              <option value="ar">العربية</option>
+            </select>
+          </label>
+        </div>
       </div>
     </header>
     <main class="wrap">
       <section class="section" style="padding-top: 40px">
-        <p class="kicker">Advanced</p>
-        <h1>Class hub</h1>
-        <p>
+        <p class="kicker" data-i18n="hubAdvancedKicker">Advanced</p>
+        <h1 data-i18n="hubAdvancedTitle">Class hub</h1>
+        <p data-i18n="hubAdvancedBody">
           Deploy, optimise, and take robots toward the market. This hub will
           fill when the next Advanced day is announced on Instagram.
         </p>
         <p>
-          <a href="https://ig.me/m/botworkshop_au">Ask on Instagram</a>
+          <a href="https://ig.me/m/botworkshop_au" data-i18n="hubAskIg">Ask on Instagram</a>
           ·
-          <a href="courses.html">Back to courses</a>
+          <a href="courses.html" data-i18n="hubBackCourses">Back to courses</a>
         </p>
       </section>
     </main>
@@ -43,7 +52,7 @@
         BotWorkshop ·
         <a href="mailto:botworkshopau@gmail.com">botworkshopau@gmail.com</a>
         ·
-        <a href="https://ig.me/m/botworkshop_au">Instagram chat</a>
+        <a href="https://ig.me/m/botworkshop_au" data-i18n="footerIg">Instagram chat</a>
         · © 2026
       </div>
     </footer>

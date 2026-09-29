@@ -13,57 +13,71 @@
           <img src="logo.png" alt="" width="64" height="64" />
           <span>BOTWORKSHOP</span>
         </a>
-        <button class="menu-btn" type="button" aria-label="Menu">Menu</button>
-        <nav class="primary">
-          <a href="./">Home</a>
-          <a href="courses.html" aria-current="page">Courses</a>
-          <a href="products.html">Products</a>
-          <a href="explore.html">Explore</a>
-          <a href="partners.html">Partners</a>
-        </nav>
+        <div class="header-end">
+          <button class="menu-btn" type="button" data-i18n="menu" data-i18n-aria="menu" aria-label="Menu">Menu</button>
+          <nav class="primary">
+            <a href="./" data-i18n="navHome">Home</a>
+            <a href="courses.html" aria-current="page" data-i18n="navCourses">Courses</a>
+            <a href="products.html" data-i18n="navProducts">Products</a>
+            <a href="explore.html" data-i18n="navExplore">Explore</a>
+            <a href="partners.html" data-i18n="navPartner">Become a partner</a>
+          </nav>
+          <label class="site-lang">
+            <span class="visually-hidden" data-i18n="language">Language</span>
+            <select id="site-lang" class="site-lang-select" data-i18n-aria="language" aria-label="Language">
+              <option value="en">English</option>
+              <option value="ar">العربية</option>
+            </select>
+          </label>
+        </div>
       </div>
     </header>
 
     <main class="wrap">
       <section class="section" style="padding-top: 40px">
-        <p class="kicker">Day workshops</p>
-        <h1>Courses</h1>
-        <p>
-          Each level is a one-day workshop, usually on a public holiday.
-          Register on the
-          <a href="./#register">Home page</a>
-          by email or Instagram.
+        <p class="kicker" data-i18n="coursesKicker">Day workshops</p>
+        <h1 data-i18n="coursesTitle">Courses</h1>
+        <p data-i18n="coursesLead">
+          Each level is a one-day workshop, usually on a public holiday. Register on the
+          Home page by email or Instagram.
         </p>
       </section>
 
       <div class="grid">
         <article class="card">
-          <p class="kicker">Foundation</p>
-          <h3>Foundations of electronics, mechanics, and programming</h3>
-          <p>
-            What robots are, program the turtle robot, fly Tello, and see a 3D
-            printer with other robot types.
-            Next date:
-            <strong id="courses-next-date">see Home</strong>.
+          <p class="kicker" data-i18n="courseFoundationKicker">Foundation</p>
+          <h3 data-i18n="courseFoundationTitle">Start with how robots work</h3>
+          <p data-i18n="courseFoundationBody">
+            Meet real robots, build simple programs for the turtle car, fly a
+            Tello drone, and see how sensors, motors, and code fit together —
+            perfect for first-timers and curious makers.
           </p>
           <div class="actions">
-            <a class="btn btn-teal" href="class.html">Class hub</a>
+            <a class="btn btn-teal" href="class-foundation.html" data-i18n="classHub">Class hub</a>
           </div>
         </article>
         <article class="card">
-          <p class="kicker">Intermediate</p>
-          <h3>Design and complex electronics, mechanics, and programming</h3>
-          <p>Dates announced on Home / Instagram. Class hub opens when the next day is booked.</p>
+          <p class="kicker" data-i18n="courseIntermediateKicker">Intermediate</p>
+          <h3 data-i18n="courseIntermediateTitle">Design bigger builds</h3>
+          <p data-i18n="courseIntermediateBody">
+            Go deeper into electronics and mechanics, design your own robot
+            ideas, try 3D printing for parts, and link sensors into smarter
+            programs that solve real challenges.
+          </p>
           <div class="actions">
-            <a class="btn btn-teal" href="class-intermediate.html">Class hub</a>
+            <a class="btn btn-teal" href="class-intermediate.html" data-i18n="classHub">Class hub</a>
           </div>
         </article>
         <article class="card">
-          <p class="kicker">Advanced</p>
-          <h3>Deploy, optimise, and take robots toward the market</h3>
-          <p>Dates announced on Home / Instagram. Class hub opens when the next day is booked.</p>
+          <p class="kicker" data-i18n="courseAdvancedKicker">Advanced</p>
+          <h3 data-i18n="courseAdvancedTitle">Ship it like a product</h3>
+          <p data-i18n="courseAdvancedBody">
+            Polish, test, and deploy robots that feel closer to real products —
+            reliability, performance, and the skills teams use when taking
+            ideas toward market.
+          </p>
           <div class="actions">
-            <a class="btn btn-teal" href="class-advanced.html">Class hub</a>
+            <a class="btn btn-teal" href="class-advanced.html" data-i18n="classHub">Class hub</a>
           </div>
         </article>
       </div>
@@ -74,7 +88,7 @@
         BotWorkshop ·
         <a href="mailto:botworkshopau@gmail.com">botworkshopau@gmail.com</a>
         ·
-        <a href="https://ig.me/m/botworkshop_au">Instagram chat</a>
+        <a href="https://ig.me/m/botworkshop_au" data-i18n="footerIg">Instagram chat</a>
         · © 2026
       </div>
     </footer>

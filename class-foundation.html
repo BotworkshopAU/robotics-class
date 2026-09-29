@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="fhPageTitle">Foundation class hub · BotWorkshop</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <div class="brand">
+          <a href="./" style="display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit">
+            <img src="logo.png" alt="" width="56" height="56" />
+            <div>
+              <h1 data-i18n="fhTitle">Foundation class hub</h1>
+              <p data-i18n="fhSubtitle">Day workshop · BotWorkshop</p>
+            </div>
+          </a>
+          <label class="site-lang hub-lang">
+            <span class="visually-hidden" data-i18n="language">Language</span>
+            <select id="site-lang" class="site-lang-select" data-i18n-aria="language" aria-label="Language">
+              <option value="en">English</option>
+              <option value="ar">العربية</option>
+            </select>
+          </label>
+        </div>
+      </header>
+
+      <nav aria-label="Workshop sections">
+        <button type="button" data-panel="home" aria-selected="true" data-i18n="foundationNavHome">Home</button>
+        <button type="button" data-panel="agenda" data-i18n="foundationNavAgenda">Agenda</button>
+        <button type="button" data-panel="robot" data-i18n="foundationNavRobots">The robots</button>
+        <button type="button" data-panel="projects" data-i18n="foundationNavProjects">Projects</button>
+        <button type="button" data-panel="videos" data-i18n="foundationNavVideos">Videos</button>
+        <a class="nav-link" href="code.html" target="_blank" rel="noopener" data-i18n="foundationNavCoding">Coding</a>
+        <button type="button" data-panel="setup" data-i18n="foundationNavSetup">Setup</button>
+      </nav>
+
+      <main>
+        <section id="home" class="panel active">
+          <div class="hero">
+            <div>
+              <h2 data-i18n="fhHeroTitle">Foundation day</h2>
+              <p data-i18n="fhHeroBody">
+                What robots are, program a robot, and fly a drone.
+              </p>
+              <div class="pills">
+                <span class="pill" data-i18n="fhPill1">Foundation</span>
+                <span class="pill" data-i18n="fhPill2">Day workshop</span>
+                <span class="pill" data-i18n="fhPill3">Robot + drone</span>
+              </div>
+            </div>
+            <div class="turtle" aria-hidden="true">🐢</div>
+          </div>
+
+          <div class="grid">
+            <article class="card">
+              <h3 data-i18n="fhGoalTitle">Today’s goal</h3>
+              <p data-i18n="fhGoalBody">
+                Leave knowing what a robot is, with robot missions you coded,
+                a drone flight, and a certificate to take home.
+              </p>
+            </article>
+            <article class="card">
+              <h3 data-i18n="fhNeedTitle">What you need</h3>
+              <p data-i18n="fhNeedBody">
+                Laptop, Arduino IDE, CP210x UART driver, USB cable. Robot:
+                batteries, DIP ON, Bluetooth unplugged to upload. Drone: charged
+                battery, phone app, Python 3 for block missions.
+              </p>
+            </article>
+            <article class="card">
+              <h3 data-i18n="fhCodingTitle">Coding</h3>
+              <p data-i18n="fhCodingBody">
+                Coding opens in a new page. Robot → Arduino IDE. Drone → download
+                the drone program. Test flight is on Setup.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section id="agenda" class="panel">
+          <div id="agenda-overview">
+            <article class="card">
+              <h2 data-i18n="fhAgendaTitle">Workshop agenda</h2>
+              <p data-i18n="fhAgendaLead">
+                ~3 h 15 min of robot fun. Tap Turtle robot to see every mission.
+              </p>
+            </article>
+            <div class="grid agenda-grid">
+              <article class="card agenda-slot">
+                <p class="time">0:00 – 0:15</p>
+                <h3 data-i18n="fhAg1Title">Hello &amp; cool robots</h3>
+                <p data-i18n="fhAg1Body">Say hi — then see awesome robots!</p>
+              </article>
+
+              <button type="button" class="card agenda-slot agenda-card" id="open-turtle-agenda">
+                <p class="time">0:15 – 2:15</p>
+                <h3 data-i18n="fhAg2Title">Turtle robot</h3>
+                <p data-i18n="fhAg2Body">Faces, dances, chase games &amp; more!</p>
+                <span class="agenda-open" data-i18n="fhAg2Open">Open missions →</span>
+              </button>
+
+              <article class="card agenda-slot">
+                <p class="time">2:15 – 2:45</p>
+                <h3 data-i18n="fhAg3Title">Tello drone</h3>
+                <p data-i18n="fhAg3Body">Take off! Then discover how flying works.</p>
+              </article>
+
+              <article class="card agenda-slot">
+                <p class="time">2:45 – 2:55</p>
+                <h3 data-i18n="fhAg4Title">How robots think</h3>
+                <p data-i18n="fhAg4Body">Peek inside — brains, motors &amp; sensors.</p>
+              </article>
+
+              <article class="card agenda-slot">
+                <p class="time">2:55 – 3:05</p>
+                <h3 data-i18n="fhAg5Title">Robots everywhere</h3>
+                <p data-i18n="fhAg5Body">Watch robots help in the real world.</p>
+              </article>
+
+              <article class="card agenda-slot">
+                <p class="time">3:05 – 3:15</p>
+                <h3 data-i18n="fhAg6Title">Certificates &amp; photos</h3>
+                <p data-i18n="fhAg6Body">You did it — smile for the camera!</p>
+              </article>
+            </div>
+          </div>
+
+          <div id="agenda-detail" class="agenda-detail" hidden>
+            <button type="button" class="agenda-back" id="agenda-back" data-i18n="fhBackAgenda">← Back to agenda</button>
+            <article class="card">
+              <h2 data-i18n="fhTurtleProjectsTitle">Turtle projects</h2>
+              <p data-i18n="fhTurtleProjectsLead">
+                Pick a project, try the challenge, show it off! Coding → Turtle →
+                open the link → change blocks → download → upload (unplug Bluetooth).
+              </p>
+            </article>
+            <div class="project-grid" data-i18n-aria="fhTurtleProjectsTitle" aria-label="Turtle projects">
+              <article class="project-card">
+                <p class="project-tag" data-i18n="fhP1Tag">Start here</p>
+                <h3 data-i18n="fhP1Title">Meet your turtle</h3>
+                <p data-i18n="fhP1Body">Wheels, eyes, lights — snap Coding blocks like Lego!</p>
+                <p class="project-challenge" data-i18n="fhP1Challenge">Try a sample and upload once.</p>
+                <p class="timeline-code">
+                  <a href="code.html" target="_blank" rel="noopener" data-i18n="foundationNavCoding">Coding</a>
+                  ·
+                  <a href="#robot" data-i18n="fhP1Robots">Robots</a>
+                  ·
+                  <a href="#setup" data-i18n="fhP1Setup">Setup</a>
+                </p>
+              </article>
+              <article class="project-card">
+                <p class="project-tag" data-i18n="fhP2Tag">Warm-up</p>
+                <h3 data-i18n="fhP2Title">8×8 face art</h3>
+                <p data-i18n="fhP2Body">Draw a smile, letter, or secret emoji on the light face.</p>
+                <p class="project-challenge" data-i18n="fhP2Challenge">Challenge: class guesses your drawing!</p>
+                <p class="timeline-code">
+                  <a href="code.html?demo=face" target="_blank" rel="noopener" data-i18n="fhP2Link">Draw face</a>
+                </p>
+              </article>
+              <article class="project-card">
+                <p class="project-tag" data-i18n="fhP3Tag">Show</p>
+                <h3 data-i18n="fhP3Title">Dance party</h3>
+                <p data-i18n="fhP3Body">Mix moves into a funny turtle dance.</p>
+                <p class="project-challenge" data-i18n="fhP3Challenge">Vote: funniest or coolest dance!</p>
+                <p class="timeline-code">
+                  <a href="code.html?demo=dance" target="_blank" rel="noopener" data-i18n="fhP3Dance">Dance</a>
+                  ·
+                  <a href="code.html?demo=square" target="_blank" rel="noopener" data-i18n="fhP3Square">Square</a>
+                </p>
+              </article>
+              <article class="project-card">
+                <p class="project-tag" data-i18n="fhP4Tag">Eyes</p>
+                <h3 data-i18n="fhP4Title">Don’t bump</h3>
+                <p data-i18n="fhP4Body">Servo looks left &amp; right to find empty space, then escapes!</p>
+                <p class="project-challenge" data-i18n="fhP4Challenge">Can it dodge every wall?</p>
+                <p class="timeline-code">
+                  <a href="code.html?demo=avoid" target="_blank" rel="noopener" data-i18n="fhP4Link">Avoid + look</a>
+                </p>
+              </article>
+              <article class="project-card">
+                <p class="project-tag" data-i18n="fhP5Tag">Eyes</p>
+                <h3 data-i18n="fhP5Title">Follow me</h3>
+                <p data-i18n="fhP5Body">Servo scans while driving — when it spots you, it turns and chases!</p>
+                <p class="project-challenge" data-i18n="fhP5Challenge">Walk — will it stay behind you?</p>
+                <p class="timeline-code">
+                  <a href="code.html?demo=follow" target="_blank" rel="noopener" data-i18n="fhP5Link">Follow + look</a>
+                </p>
+              </article>
+              <article class="project-card">
+                <p class="project-tag" data-i18n="fhP6Tag">Game</p>
+                <h3 data-i18n="fhP6Title">Cat &amp; mice</h3>
+                <p data-i18n="fhP6Body">
+                  Three turtles on the floor. One is the cat (follow). The other two
+                  are mice (avoid) and run away. If the cat catches a mouse — that
+                  mouse loses!
+                </p>
+                <p class="project-challenge" data-i18n="fhP6Challenge">Last mouse free wins!</p>
+                <p class="timeline-code">
+                  <span data-i18n="fhP6Cat">Cat:</span>
+                  <a href="code.html?demo=follow" target="_blank" rel="noopener" data-i18n="fhP6FollowLink">follow</a>
+                  · <span data-i18n="fhP6Mice">Mice:</span>
+                  <a href="code.html?demo=avoid" target="_blank" rel="noopener" data-i18n="fhP6AvoidLink">avoid</a>
+                </p>
+              </article>
+              <article class="project-card">
+                <p class="project-tag" data-i18n="fhP7Tag">Track</p>
+                <h3 data-i18n="fhP7Title">Tape track</h3>
+                <p data-i18n="fhP7Body">Build a black path — can the turtle stay on it?</p>
+                <p class="project-challenge" data-i18n="fhP7Challenge">Rally: finish the loop twice!</p>
+                <p class="timeline-code">
+                  <a href="code.html?demo=line" target="_blank" rel="noopener" data-i18n="fhP7Link">Line follow</a>
+                </p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="robot" class="panel">
+          <article class="card">
+            <h2 data-i18n="fhTwoRobotsTitle">Two robots today</h2>
+            <p data-i18n="fhTwoRobotsBody">
+              A ground turtle you program over USB, and a Tello quadcopter you fly
+              to feel lift, weight, thrust, and drag.
+            </p>
+          </article>
+
+          <article class="card">
+            <h2 data-i18n="fhTurtleTitle">Turtle robot · KS0558 Smart Turtle Car V3.0</h2>
+            <p>
+              <span data-i18n="fhTurtleIntro">Arduino-compatible car. The Keyestudio V4.0 board (UNO, ATmega328P, CP2102 USB) reads sensors; the stacked 8833 driver board runs the motors.</span>
+              <a
+                href="https://docs.keyestudio.com/projects/KS0558/en/latest/docs/1.Product%20Introduction/1.Product%20Introduction.html"
+                data-i18n="fhProductIntro"
+                >Product introduction</a
+              >.
+            </p>
+          </article>
+          <div class="grid">
+            <article class="card">
+              <h3 data-i18n="fhBrainTitle">Brain</h3>
+              <p data-i18n="fhBrainBody">
+                V4.0 UNO-compatible board. Program over USB. Install the CP2102
+                driver if Windows does not show a COM port.
+              </p>
+            </article>
+            <article class="card">
+              <h3 data-i18n="fhShieldTitle">Motor shield</h3>
+              <p data-i18n="fhShieldBody">
+                Keyestudio 8833 (DRV8833) expansion board: motors, IR receiver,
+                ultrasonic / line-track ports, Bluetooth header, servo. Motor
+                drive 6–9 V. Direction pins D2/D4, PWM speed D5/D6 (0–255).
+              </p>
+            </article>
+            <article class="card">
+              <h3 data-i18n="fhMoveTitle">Movement</h3>
+              <p data-i18n="fhMoveBody">
+                Two N20 metal gear motors (~63 rpm at 5 V) plus casters. Power
+                the battery holder and set the DIP switch to ON when you want the
+                car to drive.
+              </p>
+            </article>
+            <article class="card">
+              <h3 data-i18n="fhUltraTitle">Ultrasonic + servo</h3>
+              <p data-i18n="fhUltraBody">
+                Ranger on a 9g servo “neck”. Detects about 2–400 cm, narrow cone.
+                Used for avoiding, following, and “stay in a circle”.
+              </p>
+            </article>
+            <article class="card">
+              <h3 data-i18n="fhLineTitle">Line tracking</h3>
+              <p data-i18n="fhLineBody">
+                IR line sensor under the chassis. Kit includes a tracking runway.
+                Dark line on light floor is the class stretch goal.
+              </p>
+            </article>
+            <article class="card">
+              <h3 data-i18n="fhFaceTitle">Face, IR, Bluetooth</h3>
+              <p data-i18n="fhFaceBody">
+                8×8 LED matrix for expressions. IR remote (<10 m). DX-BT24 BLE
+                (<20 m) with Android “Turtle Car” / iOS “keyes BT car”. Unplug the
+                Bluetooth module before uploading code, then plug it back in.
+              </p>
+            </article>
+          </div>
+          <div class="note" data-i18n="fhPowerNote">
+            Power: logic 5 V, motor input 6–9 V. Battery holder (18650 or 4×AA in
+            the kit) plus USB for programming. Switch motors off between tests so
+            kits last the session.
+          </div>
+
+          <article class="card" style="margin-top: 22px">
+            <h2 data-i18n="fhTelloTitle">Tello drone · Ryze Robotics</h2>
+            <p>
+              <span data-i18n="fhTelloIntro">A small indoor quadcopter for learning flight and coding. Facts below are from</span>
+              <a href="https://www.ryzerobotics.com/tello">ryzerobotics.com/tello</a>
+              <span data-i18n="fhTelloAnd">and the</span>
+              <a href="https://www.ryzerobotics.com/tello/specs" data-i18n="fhTelloSpecs">specs</a>.
+            </p>
+          </article>
+          <div class="grid">
+            <article class="card">
+              <h3 data-i18n="fhForcesTitle">Four forces</h3>
+              <p data-i18n="fhForcesBody">
+                Weight (~80 g with props and battery) pulls down. Lift from the
+                four 3-inch props pushes up. Thrust comes from tilting so some of
+                that force goes sideways. Drag from air slows that motion.
+              </p>
+            </article>
+            <article class="card">
+              <h3 data-i18n="fhHoverTitle">Hover, climb, descend</h3>
+              <p data-i18n="fhHoverBody">
+                Hover: lift = weight (vision positioning helps it stay put).
+                Climb: lift > weight. Descend / land: lift < weight. Barometer and
+                range finder help hold height.
+              </p>
+            </article>
+            <article class="card">
+              <h3 data-i18n="fhYawTitle">How a quad yaws</h3>
+              <p data-i18n="fhYawBody">
+                Pitch and roll: tilt the body so thrust has a horizontal part.
+                Yaw: opposite rotors speed up or slow down so torque spins the
+                drone without much tilt. DJI flight tech keeps it stable.
+              </p>
+            </article>
+            <article class="card">
+              <h3 data-i18n="fhEnergyTitle">Energy &amp; limits</h3>
+              <p data-i18n="fhEnergyBody">
+                1.1 Ah / 3.8 V pack, about 13 min in the air. Official max: 100 m
+                distance, 8 m/s, 30 m height. Class stays indoor and low.
+                Low-battery alert and failsafe landing are built in.
+              </p>
+            </article>
+            <article class="card">
+              <h3 data-i18n="fhSizeTitle">Size &amp; safety</h3>
+              <p data-i18n="fhSizeBody">
+                About 98×92.5×41 mm. Auto takeoff and land with a tap. Throw &amp;
+                Go, 8D flips, and Bounce exist on the app — we skip stunts in the
+                first coding missions.
+              </p>
+            </article>
+            <article class="card">
+              <h3 data-i18n="fhSeeTitle">See &amp; talk</h3>
+              <p data-i18n="fhSeeBody">
+                5 MP stills, 720p live view, electronic image stabilisation, two
+                antennas, 2.4 GHz Wi-Fi. The drone is its own hotspot
+                (TELLO-xxxxxx) for the PC scripts and the phone app.
+              </p>
+            </article>
+            <article class="card">
+              <h3 data-i18n="fhAppTitle">Optional · Tello mobile app</h3>
+              <p data-i18n="fhAppBody">
+                You can also fly from a phone instead of the PC. Download the
+                official app. Join TELLO-xxxxxx on the phone. Do not fly from the
+                phone and the PC at the same time.
+              </p>
+            </article>
+            <article class="card">
+              <h3 data-i18n="fhCamTitle">Camera on a PC</h3>
+              <p data-i18n="fhCamBody">
+                The test flight download on the Setup tab opens the 720p stream
+                (streamon, UDP port 11111). Install FFmpeg (ffplay) or
+                opencv-python first. Press c to toggle the camera. The browser
+                cannot show this video.
+              </p>
+            </article>
+          </div>
+          <div class="note" data-i18n="fhClassPath">
+            Class path: Setup → test flight (keys + camera). Coding → your Tello
+            program. The official app is optional.
+          </div>
+        </section>
+
+        <section id="projects" class="panel">
+          <article class="card">
+            <h2 data-i18n="fhProjTurtleTitle">Turtle projects</h2>
+            <p data-i18n="fhProjTurtleLead">
+              LED, motors, 8×8 face, avoid, line follow — Coding (new page) → Turtle.
+              Draw on the 8×8 pad. Use Upside down on the pad if the face is mounted the wrong way.
+            </p>
+          </article>
+          <ul class="project-list">
+            <li>
+              <a href="https://docs.keyestudio.com/projects/KS0558/en/latest/docs/5.KidsBlock%28Scratch%29/Projects/Project%2001.html"
+                ><span data-i18n="fhTp1">1. LED blink</span> <small data-i18n="fhTp1s">Hello world on D9</small></a>
+            </li>
+            <li>
+              <a href="https://docs.keyestudio.com/projects/KS0558/en/latest/docs/5.KidsBlock%28Scratch%29/Projects/Project%2002.html"
+                ><span data-i18n="fhTp2">2. Adjust LED brightness</span> <small data-i18n="fhTp2s">PWM dimming</small></a>
+            </li>
+            <li>
+              <a href="https://docs.keyestudio.com/projects/KS0558/en/latest/docs/5.KidsBlock%28Scratch%29/Projects/Project%2003.html"
+                ><span data-i18n="fhTp3">3. Line tracking sensor</span> <small data-i18n="fhTp3s">Read the IR sensors</small></a>
+            </li>
+            <li>
+              <a href="https://docs.keyestudio.com/projects/KS0558/en/latest/docs/5.KidsBlock%28Scratch%29/Projects/Project%2004.html"
+                ><span data-i18n="fhTp4">4. Servo control</span> <small data-i18n="fhTp4s">Ultrasonic neck</small></a>
+            </li>
+            <li>
+              <a href="https://docs.keyestudio.com/projects/KS0558/en/latest/docs/5.KidsBlock%28Scratch%29/Projects/Project%2005.html"
+                ><span data-i18n="fhTp5">5. Ultrasonic sensor</span> <small data-i18n="fhTp5s">Distance in cm</small></a>
+            </li>
+            <li>
+              <a href="https://docs.keyestudio.com/projects/KS0558/en/latest/docs/5.KidsBlock%28Scratch%29/Projects/Project%2006.html"
+                ><span data-i18n="fhTp6">6. IR reception</span> <small data-i18n="fhTp6s">Remote buttons</small></a>
+            </li>
+            <li>
+              <a href="https://docs.keyestudio.com/projects/KS0558/en/latest/docs/5.KidsBlock%28Scratch%29/Projects/Project%2007.html"
+                ><span data-i18n="fhTp7">7. Bluetooth remote</span> <small data-i18n="fhTp7s">Phone app link</small></a>
+            </li>
+            <li>
+              <a href="https://docs.keyestudio.com/projects/KS0558/en/latest/docs/5.KidsBlock%28Scratch%29/Projects/Project%2008.html"
+                ><span data-i18n="fhTp8">8. Motor drive &amp; speed</span> <small data-i18n="fhTp8s">Forward, back, turn</small></a>
+            </li>
+            <li>
+              <a href="https://docs.keyestudio.com/projects/KS0558/en/latest/docs/5.KidsBlock%28Scratch%29/Projects/Project%2009.html"
+                ><span data-i18n="fhTp9">9. 8×8 face</span> <small data-i18n="fhTp9s">Draw in Coding → Lights</small></a>
+            </li>
+            <li>
+              <a href="https://docs.keyestudio.com/projects/KS0558/en/latest/docs/5.KidsBlock%28Scratch%29/Projects/Project%2010.html"
+                ><span data-i18n="fhTp10">10. Move in a confined space</span> <small data-i18n="fhTp10s">Stay in a circle</small></a>
+            </li>
+            <li>
+              <a href="https://docs.keyestudio.com/projects/KS0558/en/latest/docs/5.KidsBlock%28Scratch%29/Projects/Project%2011.html"
+                ><span data-i18n="fhTp11">11. Line tracking robot</span> <small data-i18n="fhTp11s">Follow the runway</small></a>
+            </li>
+            <li>
+              <a href="https://docs.keyestudio.com/projects/KS0558/en/latest/docs/5.KidsBlock%28Scratch%29/Projects/Project%2012.html"
+                ><span data-i18n="fhTp12">12. Ultrasonic follow</span> <small data-i18n="fhTp12s">Keep a set distance</small></a>
+            </li>
+            <li>
+              <a href="https://docs.keyestudio.com/projects/KS0558/en/latest/docs/5.KidsBlock%28Scratch%29/Projects/Project%2013.html"
+                ><span data-i18n="fhTp13">13. Ultrasonic avoiding</span> <small data-i18n="fhTp13s">Class “wow” demo</small></a>
+            </li>
+            <li>
+              <a href="https://docs.keyestudio.com/projects/KS0558/en/latest/docs/5.KidsBlock%28Scratch%29/Projects/Project%2014.html"
+                ><span data-i18n="fhTp14">14. IR remote robot</span> <small data-i18n="fhTp14s">Drive with the remote</small></a>
+            </li>
+            <li>
+              <a href="https://docs.keyestudio.com/projects/KS0558/en/latest/docs/5.KidsBlock%28Scratch%29/Projects/Project%2015.html"
+                ><span data-i18n="fhTp15">15. Bluetooth control tank</span> <small data-i18n="fhTp15s">App drive</small></a>
+            </li>
+            <li>
+              <a href="https://docs.keyestudio.com/projects/KS0558/en/latest/docs/5.KidsBlock%28Scratch%29/Projects/Project%2016.html"
+                ><span data-i18n="fhTp16">16. Multi-purpose Bluetooth</span> <small data-i18n="fhTp16s">All functions in one</small></a>
+            </li>
+          </ul>
+
+          <article class="card" style="margin-top: 22px">
+            <h2 data-i18n="fhProjTelloTitle">Tello projects</h2>
+            <p data-i18n="fhProjTelloLead">
+              Open one to load the blocks in a new Coding page, then Download Tello
+              program. Stay low. Test flight (keys + camera) is on Setup.
+            </p>
+          </article>
+          <ul class="project-list">
+            <li>
+              <a href="code.html?robot=tello&amp;demo=takeoff" target="_blank" rel="noopener"
+                ><span data-i18n="fhTe1">1. Takeoff and land</span> <small data-i18n="fhTe1s">Lift &gt; weight, then land</small></a>
+            </li>
+            <li>
+              <a href="code.html?robot=tello&amp;demo=hover" target="_blank" rel="noopener"
+                ><span data-i18n="fhTe2">2. Hover</span> <small data-i18n="fhTe2s">Lift = weight for a few seconds</small></a>
+            </li>
+            <li>
+              <a href="code.html?robot=tello&amp;demo=forward" target="_blank" rel="noopener"
+                ><span data-i18n="fhTe3">3. Forward and back</span> <small data-i18n="fhTe3s">Thrust vs drag</small></a>
+            </li>
+            <li>
+              <a href="code.html?robot=tello&amp;demo=climb" target="_blank" rel="noopener"
+                ><span data-i18n="fhTe4">4. Climb and descend</span> <small data-i18n="fhTe4s">Up, hover, down</small></a>
+            </li>
+            <li>
+              <a href="code.html?robot=tello&amp;demo=yaw" target="_blank" rel="noopener"
+                ><span data-i18n="fhTe5">5. Yaw left and right</span> <small data-i18n="fhTe5s">Rotate in place</small></a>
+            </li>
+            <li>
+              <a href="code.html?robot=tello&amp;demo=square" target="_blank" rel="noopener"
+                ><span data-i18n="fhTe6">6. Air square</span> <small data-i18n="fhTe6s">Forward + 90° yaw, four times</small></a>
+            </li>
+          </ul>
+        </section>
+
+        <section id="videos" class="panel">
+          <article class="card">
+            <h2 data-i18n="fhVideosTitle">Videos</h2>
+            <p data-i18n="fhVideosLead">
+              Class playlist: ideas and coding, physics of flight, our kits, then
+              real-world showcases.
+            </p>
+          </article>
+
+          <h3 class="video-section-title" data-i18n="fhVidIdeas">Ideas &amp; coding</h3>
+          <div class="video-grid">
+            <article class="video">
+              <iframe src="https://www.youtube.com/embed/k5J40eEFawU" title="Future now" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+              <div class="meta">
+                <h3 data-i18n="fhVidFuture">Future now</h3>
+                <p data-i18n="fhVidFutureBody">Set the scene for why robotics and tech matter today.</p>
+              </div>
+            </article>
+            <article class="video">
+              <iframe src="https://www.youtube.com/embed/KJXd73u1g2c" title="What is coding?" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+              <div class="meta">
+                <h3 data-i18n="fhVidCoding">What is coding?</h3>
+                <p data-i18n="fhVidCodingBody">Simple picture of programs as instructions for machines.</p>
+              </div>
+            </article>
+            <article class="video">
+              <iframe src="https://www.youtube.com/embed/HGvv7aMyC-s?start=10" title="Block coding" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+              <div class="meta">
+                <h3 data-i18n="fhVidBlocks">Block coding</h3>
+                <p data-i18n="fhVidBlocksBody">Snap-together blocks — same idea as our Coding page.</p>
+              </div>
+            </article>
+            <article class="video">
+              <iframe src="https://www.youtube.com/embed/wDsjcA6D3zA" title="What is a robot?" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+              <div class="meta">
+                <h3 data-i18n="fhVidRobot">What is a robot?</h3>
+                <p data-i18n="fhVidRobotBody">Sense → think → act. Intro for the start of class.</p>
+              </div>
+            </article>
+          </div>
+
+          <h3 class="video-section-title" data-i18n="fhVidPhysics">Physics</h3>
+          <div class="video-grid">
+            <article class="video">
+              <iframe src="https://www.youtube.com/embed/Gg0TXNXgz-w" title="How airplanes fly" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+              <div class="meta">
+                <h3 data-i18n="fhVidPlane">How airplanes fly</h3>
+                <p data-i18n="fhVidPlaneBody">Lift, weight, thrust, and drag on a fixed wing.</p>
+              </div>
+            </article>
+            <article class="video">
+              <iframe src="https://www.youtube.com/embed/VKbrE1GvAG8?start=9" title="How drones fly" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+              <div class="meta">
+                <h3 data-i18n="fhVidDrone">How drones fly</h3>
+                <p data-i18n="fhVidDroneBody">Same four forces on a quadcopter — useful before Tello.</p>
+              </div>
+            </article>
+          </div>
+
+          <h3 class="video-section-title" data-i18n="fhVidKit">Our kit</h3>
+          <div class="video-grid">
+            <article class="video">
+              <iframe src="https://www.youtube.com/embed/0Ui5qDWg08s" title="Turtle robot" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+              <div class="meta">
+                <h3 data-i18n="fhVidTurtle">Turtle robot</h3>
+                <p data-i18n="fhVidTurtleBody">Meet the Smart Turtle Car used in Foundation.</p>
+              </div>
+            </article>
+            <article class="video">
+              <iframe src="https://www.youtube.com/embed/Z8_c704o6JE" title="Tello drone" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+              <div class="meta">
+                <h3 data-i18n="fhVidTello">Tello drone</h3>
+                <p data-i18n="fhVidTelloBody">The drone we fly in Foundation class.</p>
+              </div>
+            </article>
+          </div>
+
+          <h3 class="video-section-title" data-i18n="fhVidShow">Showcase</h3>
+          <div class="video-grid">
+            <article class="video">
+              <iframe src="https://www.youtube.com/embed/bcQolz9Ffl8" title="Sydney drone show" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+              <div class="meta">
+                <h3 data-i18n="fhVidSydney">Sydney drone show</h3>
+                <p data-i18n="fhVidSydneyBody">Many drones acting as one coordinated system.</p>
+              </div>
+            </article>
+            <article class="video">
+              <iframe src="https://www.youtube.com/embed/Bd_bx6a4hgE" title="BYD factory robots" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+              <div class="meta">
+                <h3 data-i18n="fhVidByd">Robot in factory · BYD</h3>
+                <p data-i18n="fhVidBydBody">Industrial robots on a production line.</p>
+              </div>
+            </article>
+            <article class="video">
+              <iframe src="https://www.youtube.com/embed/G-WdDeQ4TKw" title="Amazon warehouse robots" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+              <div class="meta">
+                <h3 data-i18n="fhVidAmazon">Robot in factory · Amazon warehouse</h3>
+                <p data-i18n="fhVidAmazonBody">Warehouse robots moving shelves and goods.</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section id="setup" class="panel">
+          <article class="card">
+            <h2 data-i18n="fhSetupTurtleTitle">Setup for the turtle robot</h2>
+            <p data-i18n="fhSetupTurtleLead">Do this on each laptop before (or at the start of) class. Windows and Mac.</p>
+          </article>
+          <ol class="steps">
+            <li data-i18n="fhSetupT1">Install Arduino IDE from academy.arduino.cc (desktop app, not the Microsoft Store).</li>
+            <li data-i18n="fhSetupT2">Install the CP210x UART driver (Windows and Mac) from Silicon Labs USB to UART downloads. Choose the Windows or macOS package. On Mac, allow it in Privacy &amp; Security if asked, then restart.</li>
+            <li data-i18n="fhSetupT3">Tools → Board → Arduino Uno.</li>
+            <li data-i18n="fhSetupT4">Tools → Port → Silicon Labs CP210x COM (not COM1) or cu.SLAB_USBtoUART / usbserial on Mac.</li>
+            <li data-i18n="fhSetupT5">Unplug the DX-BT24 Bluetooth module before every upload. Batteries in and DIP switch ON when the turtle should drive.</li>
+          </ol>
+          <article class="card" style="margin-top: 22px">
+            <h2 data-i18n="fhSetupTelloTitle">Setup for the Tello drone (from a PC)</h2>
+            <p data-i18n="fhSetupTelloLead">
+              Fly and program from the laptop. The browser cannot talk to Tello
+              directly — Python on this PC sends the SDK commands over Wi-Fi.
+            </p>
+          </article>
+          <ol class="steps">
+            <li data-i18n="fhSetupD1">Charge the 1.1 Ah / 3.8 V battery. Props on. Indoor, clear space.</li>
+            <li data-i18n="fhSetupD2">Power on Tello. On the PC, connect Wi-Fi to TELLO-xxxxxx (you will lose internet).</li>
+            <li data-i18n="fhSetupD3">Close the Tello phone app. Only this PC should control the drone.</li>
+            <li data-i18n="fhSetupD4">Install Python 3. On Windows check with py -3 --version.</li>
+            <li data-i18n="fhSetupD5">Camera on PC: install a decoder, then restart the terminal. Windows (FFmpeg): winget install --id Gyan.FFmpeg -e — confirm with ffplay -version. Mac: brew install ffmpeg. Or: py -3 -m pip install opencv-python (needs internet before you join Tello Wi-Fi).</li>
+            <li>
+              <span data-i18n="fhSetupD6">Join Wi-Fi TELLO-xxxxxx. Then download the test flight (this is not your Coding program — it only checks keys and camera):</span>
+              <p>
+                <a class="file-download" href="tello_pc.py" download="tello_pc.py" data-i18n="fhSetupDownload">Download test flight</a>
+              </p>
+              <span data-i18n="fhSetupD6b">Run py -3 tello_pc.py. Space = takeoff / land. Arrows = fly. c = camera. r/f up/down, q/e yaw, Esc emergency.</span>
+            </li>
+            <li data-i18n="fhSetupD7">Your Tello program: open Coding → Tello drone → Download Tello program → py -3 tello_mission.py while still on Tello Wi-Fi.</li>
+            <li data-i18n="fhSetupD8">Stay low. Official max 13 min / 100 m / 8 m/s / 30 m height. Land on low battery.</li>
+            <li data-i18n="fhSetupD9">Optional: fly from a phone with the official app. Join TELLO-xxxxxx on the phone. Close Python first — one device at a time.</li>
+          </ol>
+        </section>
+
+      </main>
+
+      <footer>
+        <span data-i18n="fhFooterTurtle">Turtle facts:</span>
+        <a href="https://docs.keyestudio.com/projects/KS0558/en/latest/">Keyestudio KS0558</a>
+        · <span data-i18n="fhFooterTello">Tello facts:</span>
+        <a href="https://www.ryzerobotics.com/tello">Ryze Tello</a>
+      </footer>
+    </div>
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
