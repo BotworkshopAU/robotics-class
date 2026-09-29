@@ -21,7 +21,8 @@
         <span data-i18n="demo">Demo</span>
         <select id="demo-select" aria-label="Loaded demo"></select>
       </label>
-      <button type="button" class="primary" id="download-btn">Download for Arduino</button>
+      <button type="button" class="primary" id="upload-btn">Upload to Turtle</button>
+      <button type="button" id="download-btn">Download .ino</button>
       <button type="button" id="copy-btn">Copy code</button>
       <a
         class="topbar-link topbar-link-compact"
@@ -59,26 +60,24 @@
       <aside class="code-pane">
         <header id="setup">Setup</header>
         <ol class="ide-steps" id="turtle-steps">
+          <li>Use <strong>Chrome</strong> or Edge on a laptop (not a phone).</li>
           <li>
-            Install Arduino IDE from
-            <a href="https://academy.arduino.cc/pages/download-software" target="_blank" rel="noreferrer"
-              >academy.arduino.cc/pages/download-software</a
-            >
-            (desktop app, not the Microsoft Store).
+            On <strong>this PC</strong> (once): <code>npm run setup:cli</code>, then always
+            <code>npm run dev</code> and open <code>http://localhost:5173/code.html</code>
+            — Upload does not work from the public website.
           </li>
           <li>
-            Install the CP210x UART driver for Windows <strong>and</strong> Mac from
+            Once per laptop: install the CP210x USB driver from
             <a
               href="https://www.silabs.com/software-and-tools/usb-to-uart-bridge-vcp-drivers?tab=downloads"
               target="_blank"
               rel="noreferrer"
-              >Silicon Labs USB to UART downloads</a
+              >Silicon Labs</a
             >.
           </li>
-          <li>Open <code>turtle.ino</code> in Arduino IDE.</li>
-          <li>Tools → Board → <strong>Arduino Uno</strong>.</li>
-          <li>Tools → Port → CP210x COM or <code>cu.SLAB_USBtoUART</code>. Not COM1.</li>
-          <li>Unplug the Bluetooth module, then <strong>Upload</strong>.</li>
+          <li>Plug in the Turtle USB cable. <strong>Unplug Bluetooth</strong> on the robot.</li>
+          <li>Snap blocks, then click <strong>Upload to Turtle</strong> and pick the USB port.</li>
+          <li>Need Arduino IDE instead? Use <strong>Download .ino</strong>.</li>
         </ol>
         <ol class="ide-steps" id="tello-steps" hidden>
           <li>

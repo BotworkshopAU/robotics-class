@@ -18,6 +18,7 @@ import {
 } from "./tello.js";
 import { initFacePad, setFaceHex, SMILE } from "./face_pad.js";
 import { getLang, setLang, ui } from "./i18n.js";
+import { uploadTurtleSketch, webSerialSupported, compileApiAvailable, isLocalCodingHost } from "./upload.js";
 import "./code.css";
 
 let lang = getLang();
@@ -45,6 +46,7 @@ const robotSelect = document.getElementById("robot-select");
 const demoSelect = document.getElementById("demo-select");
 const langSelect = document.getElementById("lang-select");
 const downloadBtn = document.getElementById("download-btn");
+const uploadBtn = document.getElementById("upload-btn");
 const telloControllerBtn = document.getElementById("tello-controller-btn");
 const copyBtn = document.getElementById("copy-btn");
 const newBtn = document.getElementById("new-btn");
@@ -135,6 +137,26 @@ function applyFacePadLabels(t) {
   }
 }
 
+let uploadReady = false;
+
+async function refreshUploadAvailability() {
+  if (!uploadBtn || robot !== "turtle") return;
+  const t = ui(lang);
+  if (!webSerialSupported()) {
+    uploadReady = false;
+    uploadBtn.disabled = true;
+    return;
+  }
+  const health = await compileApiAvailable();
+  uploadReady = health.ok && health.cli;
+  uploadBtn.disabled = !uploadReady;
+  if (!uploadReady && isLocalCodingHost() && health.reason === "no-cli") {
+    statusEl.textContent = t.statusUploadNoCli;
+  } else if (!uploadReady && !isLocalCodingHost()) {
+    /* public site: leave status alone until they click */
+  }
+}
+
 function applyChrome() {
   const t = ui(lang);
   document.documentElement.lang = lang === "ar" ? "ar" : "en";
@@ -165,6 +187,11 @@ function applyChrome() {
   if (robot === "tello") {
     hintEl.textContent = t.hintTello;
     downloadBtn.textContent = t.downloadTello;
+    downloadBtn.classList.add("primary");
+    if (uploadBtn) {
+      uploadBtn.hidden = true;
+      uploadBtn.classList.remove("primary");
+    }
     codeTitle.textContent = t.codeTello;
     turtleSteps.hidden = true;
     telloSteps.hidden = false;
@@ -177,12 +204,20 @@ function applyChrome() {
   } else {
     hintEl.textContent = t.hintTurtle;
     downloadBtn.textContent = t.downloadArduino;
+    downloadBtn.classList.remove("primary");
+    if (uploadBtn) {
+      uploadBtn.hidden = false;
+      uploadBtn.textContent = t.uploadTurtle;
+      uploadBtn.classList.add("primary");
+      uploadBtn.disabled = true;
+    }
     codeTitle.textContent = t.codeArduino;
     turtleSteps.hidden = false;
     telloSteps.hidden = true;
     turtleSteps.innerHTML = t.turtleStepsHtml;
     if (telloControllerBtn) telloControllerBtn.hidden = true;
     fillDemos(t.turtleDemos, localStorage.getItem("bw-turtle-demo"));
+    void refreshUploadAvailability();
   }
 }
 
@@ -301,6 +336,54 @@ downloadBtn.addEventListener("click", () => {
   URL.revokeObjectURL(a.href);
   statusEl.textContent =
     robot === "tello" ? ui(lang).statusDownloadTello : ui(lang).statusDownloadArduino;
+});
+
+let uploading = false;
+uploadBtn?.addEventListener("click", async () => {
+  if (robot !== "turtle") return;
+  if (uploading) {
+    statusEl.textContent = ui(lang).statusUploadBusy;
+    return;
+  }
+  const t = ui(lang);
+  if (!uploadReady) {
+    await refreshUploadAvailability();
+  }
+  if (!uploadReady) {
+    statusEl.textContent = isLocalCodingHost() ? t.statusUploadNoApi : t.statusUploadNotLocal;
+    return;
+  }
+  uploading = true;
+  uploadBtn.disabled = true;
+  try {
+    await uploadTurtleSketch(codeEl.textContent, (phase, pct) => {
+      if (phase === "compiling") statusEl.textContent = t.statusUploadingCompile;
+      else if (phase === "pick-port") statusEl.textContent = t.statusUploadingPort;
+      else if (phase === "opening") statusEl.textContent = t.statusUploadingOpen;
+      else if (phase === "flashing") {
+        statusEl.textContent =
+          typeof pct === "number"
+            ? t.statusUploadingFlashPct.replace("{pct}", String(Math.round(pct)))
+            : t.statusUploadingFlash;
+      } else if (phase === "done") statusEl.textContent = t.statusUploadDone;
+    });
+    statusEl.textContent = t.statusUploadDone;
+  } catch (err) {
+    console.error(err);
+    const code = err?.code;
+    if (code === "no-serial") statusEl.textContent = t.statusUploadNoSerial;
+    else if (code === "not-local") statusEl.textContent = t.statusUploadNotLocal;
+    else if (code === "no-api") statusEl.textContent = t.statusUploadNoApi;
+    else if (code === "no-cli") statusEl.textContent = t.statusUploadNoCli;
+    else if (code === "cancelled" || err?.name === "NotFoundError") {
+      statusEl.textContent = t.statusUploadCancelled;
+    } else {
+      statusEl.textContent = `${t.statusUploadFail} ${String(err?.message || err).slice(0, 120)}`;
+    }
+  } finally {
+    uploading = false;
+    await refreshUploadAvailability();
+  }
 });
 
 telloControllerBtn?.addEventListener("click", () => {
