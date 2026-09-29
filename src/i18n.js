@@ -19,13 +19,14 @@ const en = {
   newBtn: "New",
   demo: "Demo",
   language: "Language",
-  downloadArduino: "Download for Arduino",
+  downloadArduino: "Download .ino",
   downloadTello: "Download Tello program",
   downloadTelloController: "Download sample controller",
+  uploadTurtle: "Upload to Turtle",
   copyCode: "Copy code",
   hintDefault: "Pick Turtle or Tello, then snap blocks.",
   hintTurtle:
-    "Draw on the 8×8 face pad, then use Lights → show 8×8 drawing. Use Upside down on the pad if the face is mounted the wrong way.",
+    "Snap blocks, unplug Bluetooth, plug USB, then Upload to Turtle. Draw on the 8×8 pad for face lights.",
   hintTello:
     "Block missions download as Python. For keys + camera, download the sample Tello controller (tello_pc.py). Camera needs FFmpeg: winget install --id Gyan.FFmpeg -e",
   setup: "Setup",
@@ -37,10 +38,25 @@ const en = {
   statusNew: "New program.",
   statusCopyArduino: "Arduino copied.",
   statusCopyTello: "Python copied.",
-  statusDownloadArduino: "Saved turtle.ino — open it in Arduino IDE.",
+  statusDownloadArduino: "Saved turtle.ino — open it in Arduino IDE if you need the old path.",
   statusDownloadTello:
     "Saved tello_mission.py — on Tello Wi-Fi run: py -3 tello_mission.py",
   statusTelloController: "Downloading tello_pc.py — camera needs: winget install --id Gyan.FFmpeg -e",
+  statusUploadingCompile: "Compiling…",
+  statusUploadingPort: "Pick the Turtle USB port…",
+  statusUploadingOpen: "Connecting…",
+  statusUploadingFlash: "Uploading…",
+  statusUploadingFlashPct: "Uploading… {pct}%",
+  statusUploadDone: "Done! Turtle is programmed.",
+  statusUploadBusy: "Upload already running…",
+  statusUploadNoSerial: "Use Chrome or Edge on a laptop (Web Serial).",
+  statusUploadNoApi:
+    "Upload needs this PC: npm run setup:cli once, then npm run dev, open http://localhost:5173/code.html",
+  statusUploadNotLocal:
+    "Upload only works on this PC via localhost (npm run dev). The public site cannot flash the Turtle.",
+  statusUploadNoCli: "Arduino CLI missing on this PC — run npm run setup:cli once.",
+  statusUploadCancelled: "Upload cancelled.",
+  statusUploadFail: "Upload failed.",
   statusDemoFail: "Could not load that demo.",
   confirmNew: "Clear this program?",
   faceTitle: "8×8 face",
@@ -52,26 +68,24 @@ const en = {
   faceFlipH: "Flip L/R",
   faceFlipV: "Flip U/D",
   turtleStepsHtml: `
+    <li>Use <strong>Chrome</strong> or Edge on a laptop (not a phone).</li>
     <li>
-      Install Arduino IDE from
-      <a href="https://academy.arduino.cc/pages/download-software" target="_blank" rel="noreferrer"
-        >academy.arduino.cc/pages/download-software</a
-      >
-      (desktop app, not the Microsoft Store).
+      On <strong>this PC</strong> (once): <code>npm run setup:cli</code>, then always
+      <code>npm run dev</code> and open <code>http://localhost:5173/code.html</code>
+      — Upload does not work from the public website.
     </li>
     <li>
-      Install the CP210x UART driver for Windows <strong>and</strong> Mac from
+      Once per laptop: install the CP210x USB driver from
       <a
         href="https://www.silabs.com/software-and-tools/usb-to-uart-bridge-vcp-drivers?tab=downloads"
         target="_blank"
         rel="noreferrer"
-        >Silicon Labs USB to UART downloads</a
+        >Silicon Labs</a
       >.
     </li>
-    <li>Open <code>turtle.ino</code> in Arduino IDE.</li>
-    <li>Tools → Board → <strong>Arduino Uno</strong>.</li>
-    <li>Tools → Port → CP210x COM or <code>cu.SLAB_USBtoUART</code>. Not COM1.</li>
-    <li>Unplug the Bluetooth module, then <strong>Upload</strong>.</li>
+    <li>Plug in the Turtle USB cable. <strong>Unplug Bluetooth</strong> on the robot.</li>
+    <li>Snap blocks, then click <strong>Upload to Turtle</strong> and pick the USB port.</li>
+    <li>Need Arduino IDE instead? Use <strong>Download .ino</strong>.</li>
   `,
   telloStepsHtml: `
     <li>
@@ -192,13 +206,14 @@ const ar = {
   newBtn: "جديد",
   demo: "تجربة",
   language: "اللغة",
-  downloadArduino: "تنزيل لأردوينو",
+  downloadArduino: "تنزيل .ino",
   downloadTello: "تنزيل برنامج تيلو",
   downloadTelloController: "تنزيل متحكّم تجريبي",
+  uploadTurtle: "رفع إلى السلحفاة",
   copyCode: "نسخ الكود",
   hintDefault: "اختر السلحفاة أو تيلو، ثم ركّب البلوكات.",
   hintTurtle:
-    "ارسم على لوحة الوجه 8×8، ثم استخدم أضواء ← عرض رسم 8×8. استخدم «مقلوب» إذا كان الوجه مركّباً بالعكس.",
+    "ركّب البلوكات، افصل البلوتوث، وصّل USB، ثم اضغط «رفع إلى السلحفاة». ارسم على لوحة 8×8 لأضواء الوجه.",
   hintTello:
     "مهام البلوكات تُنزَّل كبايثون. للمفاتيح والكاميرا نزّل متحكّم تيلو (tello_pc.py). الكاميرا تحتاج FFmpeg: winget install --id Gyan.FFmpeg -e",
   setup: "الإعداد",
@@ -210,10 +225,25 @@ const ar = {
   statusNew: "برنامج جديد.",
   statusCopyArduino: "تم نسخ كود أردوينو.",
   statusCopyTello: "تم نسخ بايثون.",
-  statusDownloadArduino: "تم حفظ turtle.ino — افتحه في Arduino IDE.",
+  statusDownloadArduino: "تم حفظ turtle.ino — افتحه في Arduino IDE إذا احتجت الطريقة القديمة.",
   statusDownloadTello:
     "تم حفظ tello_mission.py — على شبكة تيلو نفّذ: py -3 tello_mission.py",
   statusTelloController: "جاري تنزيل tello_pc.py — للكاميرا: winget install --id Gyan.FFmpeg -e",
+  statusUploadingCompile: "جاري الترجمة…",
+  statusUploadingPort: "اختر منفذ USB للسلحفاة…",
+  statusUploadingOpen: "جاري الاتصال…",
+  statusUploadingFlash: "جاري الرفع…",
+  statusUploadingFlashPct: "جاري الرفع… {pct}%",
+  statusUploadDone: "تم! السلحفاة مبرمجة.",
+  statusUploadBusy: "الرفع قيد التنفيذ…",
+  statusUploadNoSerial: "استخدم Chrome أو Edge على حاسوب (Web Serial).",
+  statusUploadNoApi:
+    "الرفع يحتاج هذا الحاسوب: npm run setup:cli مرة، ثم npm run dev، وافتح http://localhost:5173/code.html",
+  statusUploadNotLocal:
+    "الرفع يعمل فقط على هذا الحاسوب عبر localhost (npm run dev). الموقع العام لا يبرمج السلحفاة.",
+  statusUploadNoCli: "Arduino CLI غير موجود على هذا الحاسوب — نفّذ npm run setup:cli مرة واحدة.",
+  statusUploadCancelled: "تم إلغاء الرفع.",
+  statusUploadFail: "فشل الرفع.",
   statusDemoFail: "تعذّر تحميل هذه التجربة.",
   confirmNew: "مسح هذا البرنامج؟",
   faceTitle: "وجه 8×8",
@@ -225,26 +255,24 @@ const ar = {
   faceFlipH: "قلب ي/ش",
   faceFlipV: "قلب أ/س",
   turtleStepsHtml: `
+    <li>استخدم <strong>Chrome</strong> أو Edge على حاسوب محمول (وليس هاتف).</li>
     <li>
-      ثبّت Arduino IDE من
-      <a href="https://academy.arduino.cc/pages/download-software" target="_blank" rel="noreferrer"
-        >academy.arduino.cc/pages/download-software</a
-      >
-      (تطبيق سطح المكتب، وليس متجر Microsoft).
+      على <strong>هذا الحاسوب</strong> (مرة): <code>npm run setup:cli</code>، ثم دائماً
+      <code>npm run dev</code> وافتح <code>http://localhost:5173/code.html</code>
+      — الرفع لا يعمل من الموقع العام.
     </li>
     <li>
-      ثبّت تعريف CP210x لويندوز <strong>وماك</strong> من
+      مرة لكل حاسوب: ثبّت تعريف CP210x من
       <a
         href="https://www.silabs.com/software-and-tools/usb-to-uart-bridge-vcp-drivers?tab=downloads"
         target="_blank"
         rel="noreferrer"
-        >تحميلات Silicon Labs USB to UART</a
+        >Silicon Labs</a
       >.
     </li>
-    <li>افتح <code>turtle.ino</code> في Arduino IDE.</li>
-    <li>Tools → Board → <strong>Arduino Uno</strong>.</li>
-    <li>Tools → Port → منفذ CP210x أو <code>cu.SLAB_USBtoUART</code>. ليس COM1.</li>
-    <li>افصل وحدة البلوتوث، ثم <strong>Upload</strong>.</li>
+    <li>وصّل كابل USB للسلحفاة. <strong>افصل البلوتوث</strong> على الروبوت.</li>
+    <li>ركّب البلوكات، ثم اضغط <strong>رفع إلى السلحفاة</strong> واختر منفذ USB.</li>
+    <li>تحتاج Arduino IDE؟ استخدم <strong>تنزيل .ino</strong>.</li>
   `,
   telloStepsHtml: `
     <li>

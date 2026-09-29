@@ -97,6 +97,14 @@ async function compileSketch(sketch) {
 
 export function createApp() {
   const app = express();
+  app.use((req, res, next) => {
+    // Same-origin only (Vite proxy / --serve-dist). No public CORS for remote sites.
+    if (req.method === "OPTIONS") {
+      res.status(204).end();
+      return;
+    }
+    next();
+  });
   app.use(express.json({ limit: "400kb" }));
 
   app.post("/api/compile", async (req, res) => {
@@ -137,7 +145,9 @@ export function createApp() {
 }
 
 if (process.argv[1] && path.normalize(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  createApp().listen(PORT, () => {
-    console.log(`Compile API on http://127.0.0.1:${PORT}`);
+  // Bind localhost only — Upload is meant for the programming PC, not the LAN/internet.
+  const host = process.env.HOST || "127.0.0.1";
+  createApp().listen(PORT, host, () => {
+    console.log(`Compile API on http://${host}:${PORT}`);
   });
 }

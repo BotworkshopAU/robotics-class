@@ -4,15 +4,24 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "dev:lan": "vite --host",
+    "dev": "node server/dev.mjs",
+    "dev:lan": "node server/dev.mjs --host",
+    "class": "node server/dev.mjs",
+    "compile-api": "node server/compile.mjs",
+    "setup:cli": "node server/setup-cli.mjs",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "serve": "npm run build && node server/compile.mjs --serve-dist",
+    "vite": "vite"
   },
+
   "dependencies": {
-    "blockly": "^12.3.1"
+    "blockly": "^12.3.1",
+    "express": "^5.2.1",
+    "webserial-flasher": "^1.0.1"
   },
   "devDependencies": {
+    "@types/express": "^5.0.6",
     "vite": "^7.1.7"
   }
 }

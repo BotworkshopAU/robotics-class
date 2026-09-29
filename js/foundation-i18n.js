@@ -21,10 +21,10 @@ export const foundationEn = {
     "Leave knowing what a robot is, with robot missions you coded, a drone flight, and a certificate to take home.",
   fhNeedTitle: "What you need",
   fhNeedBody:
-    "Laptop, Arduino IDE, CP210x UART driver, USB cable. Robot: batteries, DIP ON, Bluetooth unplugged to upload. Drone: charged battery, phone app, Python 3 for block missions.",
+    "Laptop with Chrome/Edge, CP210x USB driver, USB cable. Robot: batteries, DIP ON, Bluetooth unplugged to upload. Drone: charged battery, phone app, Python 3 for block missions.",
   fhCodingTitle: "Coding",
   fhCodingBody:
-    "Coding opens in a new page. Robot → Arduino IDE. Drone → download the drone program. Test flight is on Setup.",
+    "Coding opens in a new page. Robot → Upload to Turtle in the browser. Drone → download the drone program. Test flight is on Setup.",
 
   fhAgendaTitle: "Workshop agenda",
   fhAgendaLead:
@@ -45,7 +45,7 @@ export const foundationEn = {
   fhBackAgenda: "← Back to agenda",
   fhTurtleProjectsTitle: "Turtle projects",
   fhTurtleProjectsLead:
-    "Pick a project, try the challenge, show it off! Coding → Turtle → open the link → change blocks → download → upload (unplug Bluetooth).",
+    "Pick a project, try the challenge, show it off! Coding → Turtle → change blocks → Upload to Turtle (unplug Bluetooth).",
 
   fhP1Tag: "Start here",
   fhP1Title: "Meet your turtle",
@@ -115,7 +115,7 @@ export const foundationEn = {
   fhFaceBody:
     "8×8 LED matrix for expressions. IR remote (<10 m). DX-BT24 BLE (<20 m) with Android “Turtle Car” / iOS “keyes BT car”. Unplug the Bluetooth module before uploading code, then plug it back in.",
   fhPowerNote:
-    "Power: logic 5 V, motor input 6–9 V. Battery holder (18650 or 4×AA in the kit) plus USB for programming. Switch motors off between tests so kits last the session.",
+    "Power: logic 5 V, motor input 6-9 V. Battery holder (18650 or 4×AA in the kit) plus USB for programming. Switch motors off between tests so kits last the session.",
 
   fhTelloTitle: "Tello drone · Ryze Robotics",
   fhTelloIntro: "A small indoor quadcopter for learning flight and coding. Facts below are from",
@@ -229,19 +229,22 @@ export const foundationEn = {
   fhVidBydBody: "Industrial robots on a production line.",
   fhVidAmazon: "Robot in factory · Amazon warehouse",
   fhVidAmazonBody: "Warehouse robots moving shelves and goods.",
+  fhVidGood: "Robots for good · head-controlled wheelchair",
+  fhVidGoodBody:
+    "Building tech that helps someone move again — robotics for a good cause.",
 
   fhSetupTurtleTitle: "Setup for the turtle robot",
   fhSetupTurtleLead:
-    "Do this on each laptop before (or at the start of) class. Windows and Mac.",
+    "Do this on each laptop before (or at the start of) class. Windows and Mac. Upload runs in Chrome — no Arduino IDE required for class.",
   fhSetupT1:
-    "Install Arduino IDE from academy.arduino.cc (desktop app, not the Microsoft Store).",
+    "Use Chrome or Edge (not a phone). Install the CP210x UART driver from Silicon Labs USB to UART downloads (Windows and Mac). On Mac, allow it in Privacy & Security if asked, then restart.",
   fhSetupT2:
-    "Install the CP210x UART driver (Windows and Mac) from Silicon Labs USB to UART downloads. Choose the Windows or macOS package. On Mac, allow it in Privacy & Security if asked, then restart.",
-  fhSetupT3: "Tools → Board → Arduino Uno.",
+    "On this PC (for Upload to Turtle): npm run setup:cli once, then npm run dev, and open http://localhost:5173/code.html. The public website cannot flash the robot.",
+  fhSetupT3: "Plug the Turtle USB cable into the laptop.",
   fhSetupT4:
-    "Tools → Port → Silicon Labs CP210x COM (not COM1) or cu.SLAB_USBtoUART / usbserial on Mac.",
-  fhSetupT5:
     "Unplug the DX-BT24 Bluetooth module before every upload. Batteries in and DIP switch ON when the turtle should drive.",
+  fhSetupT5:
+    "Snap blocks → Upload to Turtle → pick the USB port. Download .ino is only a backup if you need Arduino IDE.",
   fhSetupTelloTitle: "Setup for the Tello drone (from a PC)",
   fhSetupTelloLead:
     "Fly and program from the laptop. The browser cannot talk to Tello directly — Python on this PC sends the SDK commands over Wi-Fi.",
@@ -289,10 +292,10 @@ export const foundationAr = {
     "تغادر وأنت تعرف ما هو الروبوت، مع اداء مهام عبر برمجة الروبوت، وطيران درون، وشهادة للمشاركة.",
   fhNeedTitle: "ماذا تحتاج",
   fhNeedBody:
-    "حاسوب محمول، Arduino IDE، برنامج تشغيل CP210x، كابل USB. الروبوت: بطاريات، DIP قيد التشغيل، افصل البلوتوث عند الرفع. الدرون: بطارية مشحونة، تطبيق الهاتف، بايثون 3 لمهام البلوكات.",
+    "حاسوب محمول مع Chrome أو Edge، تعريف CP210x، كابل USB. الروبوت: بطاريات، DIP قيد التشغيل، افصل البلوتوث عند الرفع. الدرون: بطارية مشحونة، تطبيق الهاتف، بايثون 3 لمهام البلوكات.",
   fhCodingTitle: "البرمجة",
   fhCodingBody:
-    "البرمجة تفتح في صفحة جديدة. الروبوت → Arduino IDE. الدرون → تنزيل برنامج الدرون. رحلة الاختبار في الإعداد.",
+    "البرمجة تفتح في صفحة جديدة. الروبوت → رفع إلى السلحفاة من المتصفح. الدرون → تنزيل برنامج الدرون. رحلة الاختبار في الإعداد.",
 
   fhAgendaTitle: "جدول الورشة",
   fhAgendaLead:
@@ -313,7 +316,7 @@ export const foundationAr = {
   fhBackAgenda: "← العودة للجدول",
   fhTurtleProjectsTitle: "مشاريع السلحفاة",
   fhTurtleProjectsLead:
-    "اختر مشروعاً، جرّب التحدي، واعرضه! البرمجة → سلحفاة → افتح الرابط → عدّل البلوكات → نزّل → ارفع (افصل البلوتوث).",
+    "اختر مشروعاً، جرّب التحدي، واعرضه! البرمجة → سلحفاة → عدّل البلوكات → رفع إلى السلحفاة (افصل البلوتوث).",
 
   fhP1Tag: "ابدأ هنا",
   fhP1Title: "تعرّف على سلحفاتك",
@@ -497,19 +500,22 @@ export const foundationAr = {
   fhVidBydBody: "روبوتات صناعية على خط إنتاج.",
   fhVidAmazon: "روبوت في مصنع · مستودع أمازون",
   fhVidAmazonBody: "روبوتات مستودع تنقل الرفوف والبضائع.",
+  fhVidGood: "روبوتات للخير · كرسي متحرك يُتحكم بالرأس",
+  fhVidGoodBody:
+    "بناء تقنية تساعد شخصاً على الحركة مجدداً — روبوتات من أجل قضية خيّرة.",
 
   fhSetupTurtleTitle: "إعداد روبوت السلحفاة",
   fhSetupTurtleLead:
-    "افعل هذا على كل حاسوب قبل الصف (أو في بدايته). ويندوز وماك.",
+    "افعل هذا على كل حاسوب قبل الصف (أو في بدايته). ويندوز وماك. الرفع من Chrome — لا حاجة لـ Arduino IDE في الصف.",
   fhSetupT1:
-    "ثبّت Arduino IDE من academy.arduino.cc (تطبيق سطح المكتب، وليس متجر مايكروسوفت).",
+    "استخدم Chrome أو Edge (وليس هاتف). ثبّت تعريف CP210x من تحميلات Silicon Labs USB to UART (ويندوز وماك). على ماك اسمح به في الخصوصية والأمان إن طُلب، ثم أعد التشغيل.",
   fhSetupT2:
-    "ثبّت برنامج CP210x UART (ويندوز وماك) من تحميلات Silicon Labs USB to UART. اختر حزمة ويندوز أو ماك. على ماك اسمح به في الخصوصية والأمان إن طُلب، ثم أعد التشغيل.",
-  fhSetupT3: "Tools → Board → Arduino Uno.",
+    "على هذا الحاسوب (للرفع إلى السلحفاة): npm run setup:cli مرة، ثم npm run dev، وافتح http://localhost:5173/code.html. الموقع العام لا يبرمج الروبوت.",
+  fhSetupT3: "وصّل كابل USB للسلحفاة بالحاسوب.",
   fhSetupT4:
-    "Tools → Port → Silicon Labs CP210x COM (وليس COM1) أو cu.SLAB_USBtoUART / usbserial على ماك.",
-  fhSetupT5:
     "افصل وحدة DX-BT24 بلوتوث قبل كل رفع. البطاريات داخلة وDIP على ON عندما يجب أن تقود السلحفاة.",
+  fhSetupT5:
+    "ركّب البلوكات → رفع إلى السلحفاة → اختر منفذ USB. تنزيل .ino احتياطي فقط إذا احتجت Arduino IDE.",
   fhSetupTelloTitle: "إعداد طائرة تيلو (من الحاسوب)",
   fhSetupTelloLead:
     "طِر وبرمِج من الحاسوب المحمول. المتصفح لا يتحدث مع تيلو مباشرة — بايثون على هذا الحاسوب يرسل أوامر SDK عبر الواي فاي.",
