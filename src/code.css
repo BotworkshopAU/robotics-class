@@ -95,13 +95,113 @@ body.code-app {
 .topbar button.primary {
   background: #143d38;
   color: white;
-  margin-left: auto;
   font-weight: 700;
 }
 
 .topbar button.primary:disabled {
-  opacity: 0.6;
-  cursor: wait;
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.upload-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-left: auto;
+  gap: 0;
+}
+
+.upload-info-btn {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 18px;
+  height: 18px;
+  padding: 0 !important;
+  border-radius: 999px !important;
+  font-size: 0.7rem !important;
+  font-weight: 800 !important;
+  line-height: 1;
+  background: #f4b942 !important;
+  color: #1a1a1a !important;
+  border: 2px solid #fff !important;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 25%);
+  cursor: help !important;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+  z-index: 2;
+}
+
+.upload-wrap.needs-setup:hover .upload-info-btn,
+.upload-wrap.needs-setup:focus-within .upload-info-btn,
+.upload-info-btn:focus {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.upload-tip {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 20;
+  width: min(280px, 70vw);
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.4;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 28%);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.upload-tip::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 0;
+  right: 0;
+  height: 10px;
+}
+
+.upload-tip code {
+  font-size: 0.72rem;
+  background: #333;
+  padding: 1px 4px;
+  border-radius: 4px;
+}
+
+.upload-wrap.needs-setup .upload-info-btn:hover + .upload-tip,
+.upload-wrap.needs-setup .upload-info-btn:focus + .upload-tip,
+.upload-tip:hover {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+html[dir="rtl"] .upload-wrap {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+html[dir="rtl"] .upload-info-btn {
+  right: auto;
+  left: -6px;
+}
+
+html[dir="rtl"] .upload-tip {
+  right: auto;
+  left: 0;
+}
+
+html[dir="rtl"] .topbar button.primary {
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .topbar-link {
@@ -174,11 +274,6 @@ html[dir="rtl"] .face-pad {
 html[dir="rtl"] .code-pane {
   border-left: 0;
   border-right: 1px solid #333;
-}
-
-html[dir="rtl"] .topbar button.primary {
-  margin-left: 0;
-  margin-right: auto;
 }
 
 html[dir="rtl"] .lang-label {

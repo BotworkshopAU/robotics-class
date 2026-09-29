@@ -54,6 +54,15 @@ const en = {
     "Upload needs this PC: npm run setup:cli once, then npm run dev, open http://localhost:5173/code.html",
   statusUploadNotLocal:
     "Upload only works on this PC via localhost (npm run dev). The public site cannot flash the Turtle.",
+  uploadHelpAria: "How to enable Upload",
+  uploadHelpNotLocal:
+    "Download/clone this project on this PC. Then run <code>npm run setup:cli</code> once and <code>npm run dev</code>. Open <code>http://localhost:5173/code.html</code> — Upload only works locally.",
+  uploadHelpNoApi:
+    "On this PC run <code>npm run setup:cli</code> once, then <code>npm run dev</code>, and keep Coding on localhost.",
+  uploadHelpNoCli:
+    "Arduino CLI is missing on this PC. Run <code>npm run setup:cli</code>, then restart <code>npm run dev</code>.",
+  uploadHelpNoSerial:
+    "Use Chrome or Edge on a laptop (Web Serial). Phones cannot upload.",
   statusUploadNoCli: "Arduino CLI missing on this PC — run npm run setup:cli once.",
   statusUploadCancelled: "Upload cancelled.",
   statusUploadFail: "Upload failed.",
@@ -241,6 +250,15 @@ const ar = {
     "الرفع يحتاج هذا الحاسوب: npm run setup:cli مرة، ثم npm run dev، وافتح http://localhost:5173/code.html",
   statusUploadNotLocal:
     "الرفع يعمل فقط على هذا الحاسوب عبر localhost (npm run dev). الموقع العام لا يبرمج السلحفاة.",
+  uploadHelpAria: "كيف تفعّل الرفع",
+  uploadHelpNotLocal:
+    "نزّل/انسخ المشروع على هذا الحاسوب. ثم نفّذ <code>npm run setup:cli</code> مرة و<code>npm run dev</code>. افتح <code>http://localhost:5173/code.html</code> — الرفع محلي فقط.",
+  uploadHelpNoApi:
+    "على هذا الحاسوب نفّذ <code>npm run setup:cli</code> مرة، ثم <code>npm run dev</code>، وابقَ على localhost.",
+  uploadHelpNoCli:
+    "Arduino CLI غير موجود. نفّذ <code>npm run setup:cli</code> ثم أعد تشغيل <code>npm run dev</code>.",
+  uploadHelpNoSerial:
+    "استخدم Chrome أو Edge على حاسوب محمول (Web Serial). الهاتف لا يدعم الرفع.",
   statusUploadNoCli: "Arduino CLI غير موجود على هذا الحاسوب — نفّذ npm run setup:cli مرة واحدة.",
   statusUploadCancelled: "تم إلغاء الرفع.",
   statusUploadFail: "فشل الرفع.",
