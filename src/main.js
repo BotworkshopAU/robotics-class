@@ -32,6 +32,9 @@ let robot =
     : "turtle";
 if (pageParams.get("robot") === "tello") {
   localStorage.setItem("bw-robot", "tello");
+} else if (pageParams.get("robot") === "turtle") {
+  localStorage.setItem("bw-robot", "turtle");
+  robot = "turtle";
 }
 
 const blocklyDiv = document.getElementById("blockly");
@@ -241,6 +244,12 @@ if (robot === "tello" && demoParam && telloDemos[demoParam]) {
   Blockly.serialization.workspaces.load(telloDemos[demoParam], workspace);
   localStorage.setItem("bw-tello-demo", demoParam);
   demoSelect.value = demoParam;
+  statusEl.textContent = `Demo: ${demoSelect.options[demoSelect.selectedIndex]?.text || demoParam}`;
+} else if (robot === "turtle" && demoParam && demos[demoParam]) {
+  Blockly.serialization.workspaces.load(demos[demoParam], workspace);
+  localStorage.setItem("bw-turtle-demo", demoParam);
+  demoSelect.value = demoParam;
+  if (demoParam === "face") setFaceHex(SMILE);
   statusEl.textContent = `Demo: ${demoSelect.options[demoSelect.selectedIndex]?.text || demoParam}`;
 } else {
   loadWorkspace();

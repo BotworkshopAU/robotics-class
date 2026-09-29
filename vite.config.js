@@ -12,6 +12,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, "index.html"),
         code: resolve(__dirname, "code.html"),
+        classFoundation: resolve(__dirname, "class-foundation.html"),
         class: resolve(__dirname, "class.html"),
         courses: resolve(__dirname, "courses.html"),
         contact: resolve(__dirname, "contact.html"),

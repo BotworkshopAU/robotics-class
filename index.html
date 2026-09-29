@@ -17,90 +17,94 @@
           <img src="logo.png" alt="" width="64" height="64" />
           <span>BOTWORKSHOP</span>
         </a>
-        <button class="menu-btn" type="button" aria-label="Menu">Menu</button>
-        <nav class="primary">
-          <a href="./" aria-current="page">Home</a>
-          <a href="courses.html">Courses</a>
-          <a href="products.html">Products</a>
-          <a href="explore.html">Explore</a>
-          <a href="partners.html">Partners</a>
-        </nav>
+        <div class="header-end">
+          <button class="menu-btn" type="button" data-i18n-aria="menu" aria-label="Menu" data-i18n="menu">Menu</button>
+          <nav class="primary">
+            <a href="./" aria-current="page" data-i18n="navHome">Home</a>
+            <a href="courses.html" data-i18n="navCourses">Courses</a>
+            <a href="products.html" data-i18n="navProducts">Products</a>
+            <a href="explore.html" data-i18n="navExplore">Explore</a>
+            <a href="partners.html" data-i18n="navPartner">Become a partner</a>
+          </nav>
+          <label class="site-lang">
+            <span class="visually-hidden" data-i18n="language">Language</span>
+            <select id="site-lang" class="site-lang-select" data-i18n-aria="language" aria-label="Language">
+              <option value="en">English</option>
+              <option value="ar">العربية</option>
+            </select>
+          </label>
+        </div>
       </div>
     </header>
 
     <main class="wrap">
       <section class="hero">
         <div>
-          <p class="kicker">Since 2025 · Australia</p>
-          <h1>Build robots. Write programs. Take the skills with you.</h1>
-          <p class="lead">
+          <p class="kicker" data-i18n="homeKicker">Since 2025 · Australia</p>
+          <h1 data-i18n="homeTitle">Build robots. Write programs. Take the skills with you.</h1>
+          <p class="lead" data-i18n="homeLead">
             One-day workshops in electronics, mechanics, and programming — usually
             on public holidays. Register below by email or Instagram.
           </p>
           <div class="actions">
-            <a class="btn btn-dark" href="#register">Register</a>
-            <a class="btn btn-ghost" href="courses.html">See courses</a>
+            <a class="btn btn-dark" href="#register" data-i18n="homeRegister">Register</a>
+            <a class="btn btn-ghost" href="courses.html" data-i18n="homeSeeCourses">See courses</a>
           </div>
         </div>
-        <article class="hero-card upcoming" id="upcoming" hidden>
-          <span class="when">Upcoming workshop</span>
+        <article class="hero-card upcoming" id="upcoming">
+          <span class="when" data-i18n="upcomingWhen">Upcoming workshop</span>
           <strong id="upcoming-title">Loading…</strong>
           <p id="upcoming-blurb"></p>
-          <div class="actions">
-            <a class="btn btn-ghost" href="#register">Register</a>
-            <a class="btn btn-ghost" id="upcoming-hub" href="class.html">Class hub</a>
-          </div>
-        </article>
-        <article class="hero-card upcoming" id="upcoming-empty" hidden>
-          <span class="when">Upcoming workshop</span>
-          <strong>None announced yet</strong>
-          <p>Follow Instagram for the next public-holiday date, or register interest below.</p>
-          <div class="actions">
-            <a class="btn btn-ghost" href="#register">Register interest</a>
+          <div class="actions" id="upcoming-actions">
+            <a class="btn btn-ghost" href="#register" data-i18n="upcomingRegister">Register</a>
+            <a class="btn btn-ghost" id="upcoming-hub" href="class-foundation.html">Class hub</a>
           </div>
         </article>
       </section>
 
       <section class="section" id="register">
-        <h2>Register</h2>
-        <p>
+        <h2 data-i18n="registerTitle">Register</h2>
+        <p data-i18n="registerLead">
           Sign up for the upcoming workshop (or register interest). Choose email or
           Instagram chat — both go to BotWorkshop.
         </p>
         <div class="register-grid">
           <article class="card">
-            <h3>By email</h3>
-            <p>Sends a message to <span id="register-email-label">botworkshopau@gmail.com</span>.</p>
+            <h3 data-i18n="registerByEmail">By email</h3>
+            <p>
+              <span data-i18n="registerEmailHint">Sends a message to</span>
+              <span id="register-email-label">botworkshopau@gmail.com</span>.
+            </p>
             <form class="contact" id="register-form">
               <label>
-                Name
+                <span data-i18n="registerName">Name</span>
                 <input name="name" type="text" required autocomplete="name" />
               </label>
               <label>
-                Your email
+                <span data-i18n="registerYourEmail">Your email</span>
                 <input name="email" type="email" required autocomplete="email" />
               </label>
               <label>
-                Course
+                <span data-i18n="registerCourse">Course</span>
                 <select name="course" id="register-course">
-                  <option value="Foundation">Foundation</option>
-                  <option value="Intermediate">Intermediate</option>
-                  <option value="Advanced">Advanced</option>
-                  <option value="Interest">General interest</option>
+                  <option value="Foundation" data-i18n="registerOptFoundation">Foundation</option>
+                  <option value="Intermediate" data-i18n="registerOptIntermediate">Intermediate</option>
+                  <option value="Advanced" data-i18n="registerOptAdvanced">Advanced</option>
+                  <option value="Interest" data-i18n="registerOptInterest">General interest</option>
                 </select>
               </label>
               <label>
-                Message (optional)
-                <textarea name="message" rows="3" placeholder="How many people, age group, questions…"></textarea>
+                <span data-i18n="registerMessage">Message (optional)</span>
+                <textarea name="message" rows="3" data-i18n-placeholder="registerMessagePh" placeholder="How many people, age group, questions…"></textarea>
               </label>
-              <button class="btn btn-teal" type="submit">Send email</button>
+              <button class="btn btn-teal" type="submit" data-i18n="registerSend">Send email</button>
             </form>
           </article>
           <article class="card">
-            <h3>By Instagram</h3>
-            <p>Message us in Instagram chat to register for the next day workshop.</p>
+            <h3 data-i18n="registerByIg">By Instagram</h3>
+            <p data-i18n="registerIgHint">Message us in Instagram chat to register for the next day workshop.</p>
             <div class="actions">
-              <a class="btn btn-teal" id="register-instagram" href="https://ig.me/m/botworkshop_au"
+              <a class="btn btn-teal" id="register-instagram" href="https://ig.me/m/botworkshop_au" data-i18n="registerOpenIg"
                 >Open Instagram chat</a
               >
             </div>
@@ -109,27 +113,36 @@
       </section>
 
       <section class="section">
-        <h2>Three levels, one day each</h2>
+        <h2 data-i18n="levelsTitle">Three levels, one day each</h2>
         <p>
-          Foundation, Intermediate, and Advanced are full-day workshops. Dates are
-          set on this page (upcoming box) and on
+          <span data-i18n="levelsLead">Foundation, Intermediate, and Advanced are full-day workshops. Dates are shown in the upcoming box and on</span>
           <a id="home-ig-profile" href="https://www.instagram.com/botworkshop_au/">@botworkshop_au</a>.
         </p>
         <div class="grid">
           <article class="card">
-            <h3>Foundation</h3>
-            <p>Learn the foundations of Electronics, Mechanics, and Programming.</p>
-            <p><a href="courses.html">Course details</a></p>
+            <h3 data-i18n="levelFoundationTitle">Foundation</h3>
+            <p data-i18n="levelFoundationBody">
+              Meet robots, program the turtle, fly Tello — sensors, motors, and
+              code for first-timers.
+            </p>
           </article>
           <article class="card">
-            <h3>Intermediate</h3>
-            <p>Get into Design and complex Electronics, Mechanics, and Programming.</p>
+            <h3 data-i18n="levelIntermediateTitle">Intermediate</h3>
+            <p data-i18n="levelIntermediateBody">
+              Design bigger builds, go deeper on electronics and mechanics, meet 3D printing, and write smarter programs.
+            </p>
           </article>
           <article class="card">
-            <h3>Advanced</h3>
-            <p>Get robots properly deployed, optimised, and closer to market skills.</p>
+            <h3 data-i18n="levelAdvancedTitle">Advanced</h3>
+            <p data-i18n="levelAdvancedBody">
+              Polish, test, and deploy robots — skills closer to real products
+              and the market.
+            </p>
           </article>
         </div>
+        <p class="courses-all">
+          <a href="courses.html" data-i18n="coursesAllLink">Course details — all levels</a>
+        </p>
       </section>
     </main>
 
@@ -138,7 +151,7 @@
         BotWorkshop ·
         <a href="mailto:botworkshopau@gmail.com">botworkshopau@gmail.com</a>
         ·
-        <a href="https://ig.me/m/botworkshop_au">Instagram chat</a>
+        <a href="https://ig.me/m/botworkshop_au" data-i18n="footerIg">Instagram chat</a>
         · © 2026
       </div>
     </footer>

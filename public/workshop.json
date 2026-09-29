@@ -3,8 +3,10 @@
   "level": "Foundation",
   "dateLabel": "Saturday 3 October 2026",
   "title": "Foundation · Saturday 3 October 2026",
-  "blurb": "A day to meet robots: what they are, program the turtle car, fly a Tello drone, and see a 3D printer plus other robot types in person.",
-  "hubUrl": "class.html",
+  "titleAr": "تأسيسي · السبت 3 أكتوبر 2026",
+  "blurb": "Program a real robot with simple code, learn how computers follow instructions, experiment and see the results, explore drones and modern technology, build problem-solving skills — and take home a certificate.",
+  "blurbAr": "برمج روبوتاً حقيقياً بكود بسيط، تعلّم كيف تتبع الحواسيب التعليمات، جرّب وراقب النتائج، استكشف الطائرات بدون طيار والتقنية الحديثة، طوّر حل المشكلات — واحصل على شهادة مشاركة.",
+  "hubUrl": "class-foundation.html",
   "email": "botworkshopau@gmail.com",
   "instagramChat": "https://ig.me/m/botworkshop_au",
   "instagramProfile": "https://www.instagram.com/botworkshop_au/"
