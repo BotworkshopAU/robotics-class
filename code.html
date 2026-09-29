@@ -21,21 +21,7 @@
         <span data-i18n="demo">Demo</span>
         <select id="demo-select" aria-label="Loaded demo"></select>
       </label>
-      <span class="upload-wrap" id="upload-wrap">
-        <button type="button" class="primary" id="upload-btn">Upload to Turtle</button>
-        <button
-          type="button"
-          class="upload-info-btn"
-          id="upload-info-btn"
-          aria-describedby="upload-tip"
-          aria-label="How to enable Upload"
-          tabindex="-1"
-          hidden
-        >
-          i
-        </button>
-        <span class="upload-tip" id="upload-tip" role="tooltip" hidden></span>
-      </span>
+      <button type="button" class="primary" id="upload-btn" hidden>Upload to Turtle</button>
       <button type="button" id="download-btn">Download .ino</button>
       <button type="button" id="copy-btn">Copy code</button>
       <a
@@ -76,11 +62,6 @@
         <ol class="ide-steps" id="turtle-steps">
           <li>Use <strong>Chrome</strong> or Edge on a laptop (not a phone).</li>
           <li>
-            On <strong>this PC</strong> (once): <code>npm run setup:cli</code>, then always
-            <code>npm run dev</code> and open <code>http://localhost:5173/code.html</code>
-            — Upload does not work from the public website.
-          </li>
-          <li>
             Once per laptop: install the CP210x USB driver from
             <a
               href="https://www.silabs.com/software-and-tools/usb-to-uart-bridge-vcp-drivers?tab=downloads"
@@ -90,8 +71,12 @@
             >.
           </li>
           <li>Plug in the Turtle USB cable. <strong>Unplug Bluetooth</strong> on the robot.</li>
-          <li>Snap blocks, then click <strong>Upload to Turtle</strong> and pick the USB port.</li>
-          <li>Need Arduino IDE instead? Use <strong>Download .ino</strong>.</li>
+          <li>
+            On the public site use <strong>Download .ino</strong> and upload with Arduino IDE.
+            <strong>Upload to Turtle</strong> appears only when you run this project locally
+            (<code>npm run setup:cli</code> then <code>npm run dev</code> →
+            <code>http://localhost:5173/code.html</code>).
+          </li>
         </ol>
         <ol class="ide-steps" id="tello-steps" hidden>
           <li>
