@@ -21,7 +21,21 @@
         <span data-i18n="demo">Demo</span>
         <select id="demo-select" aria-label="Loaded demo"></select>
       </label>
-      <button type="button" class="primary" id="upload-btn">Upload to Turtle</button>
+      <span class="upload-wrap" id="upload-wrap">
+        <button type="button" class="primary" id="upload-btn">Upload to Turtle</button>
+        <button
+          type="button"
+          class="upload-info-btn"
+          id="upload-info-btn"
+          aria-describedby="upload-tip"
+          aria-label="How to enable Upload"
+          tabindex="-1"
+          hidden
+        >
+          i
+        </button>
+        <span class="upload-tip" id="upload-tip" role="tooltip" hidden></span>
+      </span>
       <button type="button" id="download-btn">Download .ino</button>
       <button type="button" id="copy-btn">Copy code</button>
       <a
