@@ -26,7 +26,7 @@ const en = {
   copyCode: "Copy code",
   hintDefault: "Pick Turtle or Tello, then snap blocks.",
   hintTurtle:
-    "Snap blocks, unplug Bluetooth, plug USB, then Upload to Turtle. Draw on the 8×8 pad for face lights.",
+    "Snap blocks, then Download .ino (or Upload to Turtle when running locally). Draw on the 8×8 pad for face lights.",
   hintTello:
     "Block missions download as Python. For keys + camera, download the sample Tello controller (tello_pc.py). Camera needs FFmpeg: winget install --id Gyan.FFmpeg -e",
   setup: "Setup",
@@ -55,14 +55,17 @@ const en = {
   statusUploadNotLocal:
     "Upload only works on this PC via localhost (npm run dev). The public site cannot flash the Turtle.",
   uploadHelpAria: "How to enable Upload",
+  uploadHelpTitle: "Enable Upload to Turtle",
+  uploadHelpClose: "Close",
+  uploadHelpOk: "Got it",
   uploadHelpNotLocal:
-    "Download/clone this project on this PC. Then run <code>npm run setup:cli</code> once and <code>npm run dev</code>. Open <code>http://localhost:5173/code.html</code> — Upload only works locally.",
+    "<p>Upload only works when Coding runs on <strong>this PC</strong> (not the public website).</p><ol><li>Download or clone this project onto the laptop.</li><li>In a terminal in the project folder, run once:<br><code>npm install</code><br><code>npm run setup:cli</code></li><li>Every class session, start the local site:<br><code>npm run dev</code></li><li>Open Chrome/Edge at<br><code>http://localhost:5173/code.html</code></li><li>Plug USB, unplug Bluetooth, then press <strong>Upload to Turtle</strong>.</li></ol>",
   uploadHelpNoApi:
-    "On this PC run <code>npm run setup:cli</code> once, then <code>npm run dev</code>, and keep Coding on localhost.",
+    "<p>The local compile server is not running on this PC.</p><ol><li>In the project folder run once if needed:<br><code>npm run setup:cli</code></li><li>Start the site:<br><code>npm run dev</code></li><li>Stay on<br><code>http://localhost:5173/code.html</code></li></ol>",
   uploadHelpNoCli:
-    "Arduino CLI is missing on this PC. Run <code>npm run setup:cli</code>, then restart <code>npm run dev</code>.",
+    "<p>Arduino CLI is missing on this PC.</p><ol><li>In the project folder run:<br><code>npm run setup:cli</code></li><li>Restart the site:<br><code>npm run dev</code></li><li>Open<br><code>http://localhost:5173/code.html</code></li></ol>",
   uploadHelpNoSerial:
-    "Use Chrome or Edge on a laptop (Web Serial). Phones cannot upload.",
+    "<p>Upload needs <strong>Chrome</strong> or <strong>Edge</strong> on a laptop.</p><ol><li>Do not use a phone or Safari-only setup.</li><li>Open Coding on this computer, then try again.</li></ol>",
   statusUploadNoCli: "Arduino CLI missing on this PC — run npm run setup:cli once.",
   statusUploadCancelled: "Upload cancelled.",
   statusUploadFail: "Upload failed.",
@@ -79,11 +82,6 @@ const en = {
   turtleStepsHtml: `
     <li>Use <strong>Chrome</strong> or Edge on a laptop (not a phone).</li>
     <li>
-      On <strong>this PC</strong> (once): <code>npm run setup:cli</code>, then always
-      <code>npm run dev</code> and open <code>http://localhost:5173/code.html</code>
-      — Upload does not work from the public website.
-    </li>
-    <li>
       Once per laptop: install the CP210x USB driver from
       <a
         href="https://www.silabs.com/software-and-tools/usb-to-uart-bridge-vcp-drivers?tab=downloads"
@@ -93,8 +91,12 @@ const en = {
       >.
     </li>
     <li>Plug in the Turtle USB cable. <strong>Unplug Bluetooth</strong> on the robot.</li>
-    <li>Snap blocks, then click <strong>Upload to Turtle</strong> and pick the USB port.</li>
-    <li>Need Arduino IDE instead? Use <strong>Download .ino</strong>.</li>
+    <li>
+      On the public site use <strong>Download .ino</strong> and upload with Arduino IDE.
+      <strong>Upload to Turtle</strong> appears only when you run this project locally
+      (<code>npm run setup:cli</code> then <code>npm run dev</code> →
+      <code>http://localhost:5173/code.html</code>).
+    </li>
   `,
   telloStepsHtml: `
     <li>
@@ -222,7 +224,7 @@ const ar = {
   copyCode: "نسخ الكود",
   hintDefault: "اختر السلحفاة أو تيلو، ثم ركّب البلوكات.",
   hintTurtle:
-    "ركّب البلوكات، افصل البلوتوث، وصّل USB، ثم اضغط «رفع إلى السلحفاة». ارسم على لوحة 8×8 لأضواء الوجه.",
+    "ركّب البلوكات، ثم نزّل .ino (أو ارفع إلى السلحفاة عند التشغيل محلياً). ارسم على لوحة 8×8 لأضواء الوجه.",
   hintTello:
     "مهام البلوكات تُنزَّل كبايثون. للمفاتيح والكاميرا نزّل متحكّم تيلو (tello_pc.py). الكاميرا تحتاج FFmpeg: winget install --id Gyan.FFmpeg -e",
   setup: "الإعداد",
@@ -251,14 +253,17 @@ const ar = {
   statusUploadNotLocal:
     "الرفع يعمل فقط على هذا الحاسوب عبر localhost (npm run dev). الموقع العام لا يبرمج السلحفاة.",
   uploadHelpAria: "كيف تفعّل الرفع",
+  uploadHelpTitle: "تفعيل رفع إلى السلحفاة",
+  uploadHelpClose: "إغلاق",
+  uploadHelpOk: "حسناً",
   uploadHelpNotLocal:
-    "نزّل/انسخ المشروع على هذا الحاسوب. ثم نفّذ <code>npm run setup:cli</code> مرة و<code>npm run dev</code>. افتح <code>http://localhost:5173/code.html</code> — الرفع محلي فقط.",
+    "<p>الرفع يعمل فقط عندما تعمل البرمجة على <strong>هذا الحاسوب</strong> (وليس الموقع العام).</p><ol><li>نزّل أو انسخ المشروع إلى الحاسوب المحمول.</li><li>في الطرفية داخل مجلد المشروع نفّذ مرة:<br><code>npm install</code><br><code>npm run setup:cli</code></li><li>في كل حصة شغّل الموقع محلياً:<br><code>npm run dev</code></li><li>افتح Chrome/Edge على<br><code>http://localhost:5173/code.html</code></li><li>وصّل USB، افصل البلوتوث، ثم اضغط <strong>رفع إلى السلحفاة</strong>.</li></ol>",
   uploadHelpNoApi:
-    "على هذا الحاسوب نفّذ <code>npm run setup:cli</code> مرة، ثم <code>npm run dev</code>، وابقَ على localhost.",
+    "<p>خادم الترجمة المحلي غير شغّال على هذا الحاسوب.</p><ol><li>في مجلد المشروع نفّذ إن لزم:<br><code>npm run setup:cli</code></li><li>شغّل الموقع:<br><code>npm run dev</code></li><li>ابقَ على<br><code>http://localhost:5173/code.html</code></li></ol>",
   uploadHelpNoCli:
-    "Arduino CLI غير موجود. نفّذ <code>npm run setup:cli</code> ثم أعد تشغيل <code>npm run dev</code>.",
+    "<p>Arduino CLI غير موجود على هذا الحاسوب.</p><ol><li>في مجلد المشروع نفّذ:<br><code>npm run setup:cli</code></li><li>أعد تشغيل الموقع:<br><code>npm run dev</code></li><li>افتح<br><code>http://localhost:5173/code.html</code></li></ol>",
   uploadHelpNoSerial:
-    "استخدم Chrome أو Edge على حاسوب محمول (Web Serial). الهاتف لا يدعم الرفع.",
+    "<p>الرفع يحتاج <strong>Chrome</strong> أو <strong>Edge</strong> على حاسوب محمول.</p><ol><li>لا تستخدم هاتفاً أو إعداد Safari فقط.</li><li>افتح البرمجة على هذا الحاسوب ثم أعد المحاولة.</li></ol>",
   statusUploadNoCli: "Arduino CLI غير موجود على هذا الحاسوب — نفّذ npm run setup:cli مرة واحدة.",
   statusUploadCancelled: "تم إلغاء الرفع.",
   statusUploadFail: "فشل الرفع.",
@@ -275,11 +280,6 @@ const ar = {
   turtleStepsHtml: `
     <li>استخدم <strong>Chrome</strong> أو Edge على حاسوب محمول (وليس هاتف).</li>
     <li>
-      على <strong>هذا الحاسوب</strong> (مرة): <code>npm run setup:cli</code>، ثم دائماً
-      <code>npm run dev</code> وافتح <code>http://localhost:5173/code.html</code>
-      — الرفع لا يعمل من الموقع العام.
-    </li>
-    <li>
       مرة لكل حاسوب: ثبّت تعريف CP210x من
       <a
         href="https://www.silabs.com/software-and-tools/usb-to-uart-bridge-vcp-drivers?tab=downloads"
@@ -289,8 +289,12 @@ const ar = {
       >.
     </li>
     <li>وصّل كابل USB للسلحفاة. <strong>افصل البلوتوث</strong> على الروبوت.</li>
-    <li>ركّب البلوكات، ثم اضغط <strong>رفع إلى السلحفاة</strong> واختر منفذ USB.</li>
-    <li>تحتاج Arduino IDE؟ استخدم <strong>تنزيل .ino</strong>.</li>
+    <li>
+      على الموقع العام استخدم <strong>تنزيل .ino</strong> وارفعه بـ Arduino IDE.
+      زر <strong>رفع إلى السلحفاة</strong> يظهر فقط عند تشغيل المشروع محلياً
+      (<code>npm run setup:cli</code> ثم <code>npm run dev</code> →
+      <code>http://localhost:5173/code.html</code>).
+    </li>
   `,
   telloStepsHtml: `
     <li>

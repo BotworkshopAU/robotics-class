@@ -47,9 +47,6 @@ const demoSelect = document.getElementById("demo-select");
 const langSelect = document.getElementById("lang-select");
 const downloadBtn = document.getElementById("download-btn");
 const uploadBtn = document.getElementById("upload-btn");
-const uploadWrap = document.getElementById("upload-wrap");
-const uploadInfoBtn = document.getElementById("upload-info-btn");
-const uploadTip = document.getElementById("upload-tip");
 const telloControllerBtn = document.getElementById("tello-controller-btn");
 const copyBtn = document.getElementById("copy-btn");
 const newBtn = document.getElementById("new-btn");
@@ -141,51 +138,38 @@ function applyFacePadLabels(t) {
 }
 
 let uploadReady = false;
-let uploadBlockReason = "not-local";
 
-function uploadHelpHtml(t, reason) {
-  if (reason === "no-serial") return t.uploadHelpNoSerial;
-  if (reason === "no-cli") return t.uploadHelpNoCli;
-  if (reason === "no-api") return t.uploadHelpNoApi;
-  return t.uploadHelpNotLocal;
-}
-
-function syncUploadHelpUi() {
-  if (!uploadWrap || !uploadInfoBtn || !uploadTip) return;
-  const t = ui(lang);
-  const needsSetup = robot === "turtle" && !uploadReady;
-  uploadWrap.hidden = robot === "tello";
-  uploadWrap.classList.toggle("needs-setup", needsSetup);
-  uploadInfoBtn.hidden = !needsSetup;
-  uploadInfoBtn.setAttribute("aria-label", t.uploadHelpAria);
-  uploadTip.innerHTML = uploadHelpHtml(t, uploadBlockReason);
-  uploadTip.hidden = !needsSetup;
+/** Upload is only offered on localhost when the local compile API is ready. */
+function syncUploadButton() {
+  if (!uploadBtn) return;
+  const show = robot === "turtle" && uploadReady;
+  uploadBtn.hidden = !show;
+  uploadBtn.disabled = !show;
+  uploadBtn.classList.toggle("primary", show);
+  if (show) {
+    uploadBtn.textContent = ui(lang).uploadTurtle;
+    downloadBtn.classList.remove("primary");
+  } else if (robot === "turtle") {
+    downloadBtn.classList.add("primary");
+  }
 }
 
 async function refreshUploadAvailability() {
-  if (!uploadBtn || robot !== "turtle") return;
-  const t = ui(lang);
-  if (!webSerialSupported()) {
+  if (!uploadBtn) return;
+  if (robot !== "turtle") {
     uploadReady = false;
-    uploadBlockReason = "no-serial";
-    uploadBtn.disabled = true;
-    syncUploadHelpUi();
+    syncUploadButton();
+    return;
+  }
+  // Public / non-local hosts never expose Upload (no discovery, no flash path).
+  if (!isLocalCodingHost() || !webSerialSupported()) {
+    uploadReady = false;
+    syncUploadButton();
     return;
   }
   const health = await compileApiAvailable();
-  uploadReady = health.ok && health.cli;
-  uploadBlockReason = uploadReady
-    ? "ok"
-    : health.reason === "no-cli"
-      ? "no-cli"
-      : health.reason === "no-api"
-        ? "no-api"
-        : "not-local";
-  uploadBtn.disabled = !uploadReady;
-  syncUploadHelpUi();
-  if (!uploadReady && isLocalCodingHost() && health.reason === "no-cli") {
-    statusEl.textContent = t.statusUploadNoCli;
-  }
+  uploadReady = Boolean(health.ok && health.cli);
+  syncUploadButton();
 }
 
 function applyChrome() {
@@ -219,7 +203,6 @@ function applyChrome() {
     hintEl.textContent = t.hintTello;
     downloadBtn.textContent = t.downloadTello;
     downloadBtn.classList.add("primary");
-    if (uploadWrap) uploadWrap.hidden = true;
     if (uploadBtn) {
       uploadBtn.hidden = true;
       uploadBtn.classList.remove("primary");
@@ -236,13 +219,10 @@ function applyChrome() {
   } else {
     hintEl.textContent = t.hintTurtle;
     downloadBtn.textContent = t.downloadArduino;
-    downloadBtn.classList.remove("primary");
-    if (uploadWrap) uploadWrap.hidden = false;
+    downloadBtn.classList.add("primary");
     if (uploadBtn) {
-      uploadBtn.hidden = false;
+      uploadBtn.hidden = true;
       uploadBtn.textContent = t.uploadTurtle;
-      uploadBtn.classList.add("primary");
-      uploadBtn.disabled = true;
     }
     codeTitle.textContent = t.codeArduino;
     turtleSteps.hidden = false;
@@ -378,14 +358,9 @@ uploadBtn?.addEventListener("click", async () => {
     statusEl.textContent = ui(lang).statusUploadBusy;
     return;
   }
+  await refreshUploadAvailability();
+  if (!uploadReady) return;
   const t = ui(lang);
-  if (!uploadReady) {
-    await refreshUploadAvailability();
-  }
-  if (!uploadReady) {
-    statusEl.textContent = isLocalCodingHost() ? t.statusUploadNoApi : t.statusUploadNotLocal;
-    return;
-  }
   uploading = true;
   uploadBtn.disabled = true;
   try {
