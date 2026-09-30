@@ -9,6 +9,7 @@ import {
   SETUP_SENSORS,
 } from "./runtime.js";
 import { faceListForSketch } from "./face_pad.js";
+import { getMotorFlip } from "./motors_pref.js";
 
 export const arduinoGenerator = new Blockly.Generator("Arduino");
 
@@ -144,7 +145,9 @@ export function workspaceToSketch(workspace) {
     ? `#include <Servo.h>\nServo turtleServo;\n`
     : "";
   const includeMatrix = arduinoGenerator.matrixNeeded ? `#include <Wire.h>\n` : "";
-  const motorFns = drive ? `\n${MOTOR_RUNTIME}\n` : "";
+  const motorFns = drive
+    ? `\n${MOTOR_RUNTIME.replace("MOTOR_FLIP_VALUE", String(getMotorFlip()))}\n`
+    : "";
   const sensorFns = sense ? `\n${SENSOR_RUNTIME}\n` : "";
   const matrixFns = arduinoGenerator.matrixNeeded ? `\n${MATRIX_RUNTIME}\n` : "";
   const servoSetup = arduinoGenerator.servoNeeded

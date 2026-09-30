@@ -47,7 +47,7 @@
       <div id="blockly"></div>
       <aside id="face-pad" class="face-pad">
         <header>8×8 face</header>
-        <p class="face-help">Draw here. Then use the show 8×8 drawing block.</p>
+        <p class="face-help">Draw upright here. The kit face is mounted upside down — Upload flips it for you.</p>
         <div id="face-grid" class="face-grid" aria-label="8 by 8 LED face"></div>
         <div class="face-tools">
           <button type="button" data-face="smile">Smile</button>
@@ -55,6 +55,21 @@
           <button type="button" data-face="flip180">Upside down</button>
           <button type="button" data-face="fliph">Flip L/R</button>
           <button type="button" data-face="flipv">Flip U/D</button>
+        </div>
+        <div class="motor-prefs" id="motor-prefs">
+          <header data-i18n-motor="motorTitle">Motors</header>
+          <p class="face-help" data-i18n-motor="motorHelp">
+            If motors are on the other side or the robot drives the wrong way, change this then Upload again.
+          </p>
+          <label class="motor-flip-label">
+            <span data-i18n-motor="motorFlip">Wiring</span>
+            <select id="motor-flip" aria-label="Motor wiring">
+              <option value="0">Normal</option>
+              <option value="1">Reverse direction</option>
+              <option value="2">Swap left / right</option>
+              <option value="3">Reverse + swap L/R</option>
+            </select>
+          </label>
         </div>
       </aside>
       <aside class="code-pane">

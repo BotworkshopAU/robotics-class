@@ -14,8 +14,22 @@ export const PINS = `
 
 export const MOTOR_RUNTIME = `
 int turtleSpeed = 160;
+// 0 = normal, 1 = reverse dirs, 2 = swap L/R, 3 = reverse + swap
+int motorFlip = MOTOR_FLIP_VALUE;
 
 void motors(int leftDir, int leftPwm, int rightDir, int rightPwm) {
+  if (motorFlip == 1 || motorFlip == 3) {
+    leftDir = leftDir == HIGH ? LOW : HIGH;
+    rightDir = rightDir == HIGH ? LOW : HIGH;
+  }
+  if (motorFlip == 2 || motorFlip == 3) {
+    int d = leftDir;
+    int p = leftPwm;
+    leftDir = rightDir;
+    leftPwm = rightPwm;
+    rightDir = d;
+    rightPwm = p;
+  }
   digitalWrite(ML_Ctrl, leftDir);
   analogWrite(ML_PWM, leftPwm);
   digitalWrite(MR_Ctrl, rightDir);
@@ -86,10 +100,16 @@ void matrixBegin() {
 }
 
 void matrixShow(const uint8_t *rows) {
+  // Kit face is mounted upside down — rotate 180 so pad drawings look right on the robot.
   Wire.beginTransmission(MATRIX_ADDR);
   Wire.write((uint8_t)0x00);
   for (uint8_t i = 0; i < 8; i++) {
-    Wire.write(rows[i]);
+    uint8_t r = rows[7 - i];
+    uint8_t rev = 0;
+    for (uint8_t b = 0; b < 8; b++) {
+      if (r & (1 << b)) rev |= (uint8_t)(1 << (7 - b));
+    }
+    Wire.write(rev);
     Wire.write((uint8_t)0x00);
   }
   Wire.endTransmission();
