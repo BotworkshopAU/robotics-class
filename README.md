@@ -16,7 +16,7 @@ To program the Turtle from the browser on a laptop:
 2. Install once:
    ```bash
    npm install
-   npm run setup:cli   # Arduino CLI + Uno core
+   npm run setup:cli   # Arduino CLI + Uno core + Servo library
    ```
 3. Run the site locally every class session:
    ```bash
