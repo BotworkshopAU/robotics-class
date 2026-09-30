@@ -70,6 +70,18 @@
               <option value="3">Reverse + swap L/R</option>
             </select>
           </label>
+          <hr class="prefs-divider" aria-hidden="true" />
+          <header class="prefs-subhead" data-i18n-motor="lineTitle">Line sensor</header>
+          <p class="face-help" data-i18n-motor="lineHelp">
+            Switches how the sensors decide they are on the tape. If line-follow ignores the path or treats the floor as the line, try the other setting, then Upload again.
+          </p>
+          <label class="motor-flip-label">
+            <span data-i18n-motor="lineSense">Track match</span>
+            <select id="line-sense" aria-label="Line sensor track match">
+              <option value="1">Standard</option>
+              <option value="0">Flipped</option>
+            </select>
+          </label>
         </div>
       </aside>
       <aside class="code-pane">

@@ -17,7 +17,7 @@ import {
   workspaceToTelloPython,
 } from "./tello.js";
 import { initFacePad, setFaceHex, SMILE } from "./face_pad.js";
-import { getMotorFlip, setMotorFlip } from "./motors_pref.js";
+import { getMotorFlip, setMotorFlip, getLineSense, setLineSense } from "./motors_pref.js";
 import { getLang, setLang, ui } from "./i18n.js";
 import { uploadTurtleSketch, webSerialSupported, compileApiAvailable, isLocalCodingHost } from "./upload.js";
 import "./code.css";
@@ -139,18 +139,30 @@ function applyFacePadLabels(t) {
   const motorPrefs = document.getElementById("motor-prefs");
   if (motorPrefs) {
     const mHeader = motorPrefs.querySelector("header");
-    const mHelp = motorPrefs.querySelector(".face-help");
-    const mLabel = motorPrefs.querySelector(".motor-flip-label > span");
+    const helps = motorPrefs.querySelectorAll(".face-help");
+    const labels = motorPrefs.querySelectorAll(".motor-flip-label > span");
     const sel = document.getElementById("motor-flip");
+    const lineSel = document.getElementById("line-sense");
+    const lineHeader = motorPrefs.querySelector(".prefs-subhead");
     if (mHeader) mHeader.textContent = t.motorTitle;
-    if (mHelp) mHelp.textContent = t.motorHelp;
-    if (mLabel) mLabel.textContent = t.motorFlip;
+    if (helps[0]) helps[0].textContent = t.motorHelp;
+    if (labels[0]) labels[0].textContent = t.motorFlip;
     if (sel) {
       const opts = [t.motorFlip0, t.motorFlip1, t.motorFlip2, t.motorFlip3];
       [...sel.options].forEach((opt, i) => {
         if (opts[i]) opt.textContent = opts[i];
       });
       sel.setAttribute("aria-label", t.motorFlip);
+    }
+    if (lineHeader) lineHeader.textContent = t.lineTitle;
+    if (helps[1]) helps[1].textContent = t.lineHelp;
+    if (labels[1]) labels[1].textContent = t.lineSense;
+    if (lineSel) {
+      const byVal = { 1: t.lineSenseStandard, 0: t.lineSenseFlipped };
+      [...lineSel.options].forEach((opt) => {
+        if (byVal[opt.value] != null) opt.textContent = byVal[opt.value];
+      });
+      lineSel.setAttribute("aria-label", t.lineSense);
     }
   }
 }
@@ -310,6 +322,15 @@ if (motorFlipSelect) {
   motorFlipSelect.value = String(getMotorFlip());
   motorFlipSelect.addEventListener("change", () => {
     setMotorFlip(motorFlipSelect.value);
+    refreshCode();
+  });
+}
+
+const lineSenseSelect = document.getElementById("line-sense");
+if (lineSenseSelect) {
+  lineSenseSelect.value = String(getLineSense());
+  lineSenseSelect.addEventListener("change", () => {
+    setLineSense(lineSenseSelect.value);
     refreshCode();
   });
 }

@@ -9,7 +9,7 @@ import {
   SETUP_SENSORS,
 } from "./runtime.js";
 import { faceListForSketch } from "./face_pad.js";
-import { getMotorFlip } from "./motors_pref.js";
+import { getMotorFlip, getLineSense } from "./motors_pref.js";
 
 export const arduinoGenerator = new Blockly.Generator("Arduino");
 
@@ -107,7 +107,7 @@ arduinoGenerator.forBlock["turtle_distance_lt"] = (block) => [
   arduinoGenerator.PRECEDENCE,
 ];
 arduinoGenerator.forBlock["turtle_line"] = (block) => [
-  `lineIsBlack(${block.getFieldValue("PIN")})`,
+  `onTheLine(${block.getFieldValue("PIN")})`,
   arduinoGenerator.PRECEDENCE,
 ];
 arduinoGenerator.forBlock["turtle_servo"] = function (block) {
@@ -148,7 +148,9 @@ export function workspaceToSketch(workspace) {
   const motorFns = drive
     ? `\n${MOTOR_RUNTIME.replace("MOTOR_FLIP_VALUE", String(getMotorFlip()))}\n`
     : "";
-  const sensorFns = sense ? `\n${SENSOR_RUNTIME}\n` : "";
+  const sensorFns = sense
+    ? `\n${SENSOR_RUNTIME.replace("LINE_ON_HIGH_VALUE", String(getLineSense()))}\n`
+    : "";
   const matrixFns = arduinoGenerator.matrixNeeded ? `\n${MATRIX_RUNTIME}\n` : "";
   const servoSetup = arduinoGenerator.servoNeeded
     ? `  turtleServo.attach(SERVO_PIN);\n  turtleServo.write(90);\n`

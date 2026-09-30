@@ -253,12 +253,23 @@ html[dir="rtl"] .lang-label {
   margin-bottom: 6px;
 }
 
+.motor-prefs .prefs-subhead {
+  margin-top: 0;
+}
+
+.motor-prefs .prefs-divider {
+  border: 0;
+  border-top: 1px solid #333;
+  margin: 14px 0 12px;
+}
+
 .motor-flip-label {
   display: flex;
   flex-direction: column;
   gap: 6px;
   font-size: 0.75rem;
   color: #ccc;
+  margin-bottom: 8px;
 }
 
 .motor-flip-label select {

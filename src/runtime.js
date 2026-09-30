@@ -78,8 +78,11 @@ int distanceCm() {
   return (int)(us * 0.034 / 2);
 }
 
-int lineIsBlack(int pin) {
-  return digitalRead(pin) == HIGH;
+int lineOnHigh = LINE_ON_HIGH_VALUE;
+
+int onTheLine(int pin) {
+  int v = digitalRead(pin);
+  return lineOnHigh ? (v == HIGH) : (v == LOW);
 }
 `.trim();
 

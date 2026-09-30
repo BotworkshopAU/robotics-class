@@ -87,6 +87,12 @@ const en = {
   motorFlip1: "Reverse direction",
   motorFlip2: "Swap left / right",
   motorFlip3: "Reverse + swap L/R",
+  lineTitle: "Line sensor",
+  lineHelp:
+    "Switches how the sensors decide they are on the tape. If line-follow ignores the path or treats the floor as the line, try the other setting, then Upload again.",
+  lineSense: "Track match",
+  lineSenseStandard: "Standard",
+  lineSenseFlipped: "Flipped",
   turtleStepsHtml: `
     <li>Use <strong>Chrome</strong> or Edge on a laptop (not a phone).</li>
     <li>
@@ -175,7 +181,7 @@ const en = {
     else: "else %1",
     distance: "distance (cm)",
     distanceLt: "distance < %1 cm",
-    line: "line %1 is black",
+    line: "line %1 on the track",
     lineL: "left",
     lineM: "middle",
     lineR: "right",
@@ -292,6 +298,12 @@ const ar = {
   motorFlip1: "عكس الاتجاه",
   motorFlip2: "تبديل يسار / يمين",
   motorFlip3: "عكس + تبديل ي/ش",
+  lineTitle: "حساس الخط",
+  lineHelp:
+    "يغيّر كيف تقرر الحساسات أنها على الشريط. إذا تجاهل تتبع الخط المسار أو اعتبر الأرض هي الخط، جرّب الإعداد الآخر ثم ارفع مرة أخرى.",
+  lineSense: "مطابقة المسار",
+  lineSenseStandard: "قياسي",
+  lineSenseFlipped: "مقلوب",
   turtleStepsHtml: `
     <li>استخدم <strong>Chrome</strong> أو Edge على حاسوب محمول (وليس هاتف).</li>
     <li>
@@ -380,7 +392,7 @@ const ar = {
     else: "وإلا %1",
     distance: "المسافة (سم)",
     distanceLt: "المسافة < %1 سم",
-    line: "الخط %1 أسود",
+    line: "الخط %1 على المسار",
     lineL: "يسار",
     lineM: "وسط",
     lineR: "يمين",
