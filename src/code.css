@@ -241,6 +241,37 @@ html[dir="rtl"] .lang-label {
   cursor: pointer;
 }
 
+.motor-prefs {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #333;
+}
+
+.motor-prefs header {
+  color: #f4b942;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.motor-flip-label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: #ccc;
+}
+
+.motor-flip-label select {
+  font: inherit;
+  font-size: 0.8rem;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background: #111;
+  color: #eee;
+  cursor: pointer;
+}
+
 #blockly {
   min-height: 0;
   height: 100%;

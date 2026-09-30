@@ -173,36 +173,19 @@
               </article>
               <article class="project-card">
                 <p class="project-tag" data-i18n="fhP4Tag">Eyes</p>
-                <h3 data-i18n="fhP4Title">Don’t bump</h3>
-                <p data-i18n="fhP4Body">Servo looks left &amp; right to find empty space, then escapes!</p>
-                <p class="project-challenge" data-i18n="fhP4Challenge">Can it dodge every wall?</p>
-                <p class="timeline-code">
-                  <a href="code.html?demo=avoid" target="_blank" rel="noopener" data-i18n="fhP4Link">Avoid + look</a>
+                <h3 data-i18n="fhP4Title">Ultrasonic scan &amp; move</h3>
+                <p data-i18n="fhP4Body">
+                  Eyes look left/right when something is close, then the turtle moves.
+                  Motors wiring Normal = flee. Reverse = chase.
                 </p>
-              </article>
-              <article class="project-card">
-                <p class="project-tag" data-i18n="fhP5Tag">Eyes</p>
-                <h3 data-i18n="fhP5Title">Follow me</h3>
-                <p data-i18n="fhP5Body">Servo scans while driving — when it spots you, it turns and chases!</p>
-                <p class="project-challenge" data-i18n="fhP5Challenge">Walk — will it stay behind you?</p>
-                <p class="timeline-code">
-                  <a href="code.html?demo=follow" target="_blank" rel="noopener" data-i18n="fhP5Link">Follow + look</a>
+                <p class="project-challenge" data-i18n="fhP4Challenge">Can it dodge walls — and chase a friend?</p>
+                <p class="project-game" data-i18n="fhP4Game">
+                  Game — Cat &amp; mice: same program on every turtle. Cat uses Motors →
+                  Reverse direction (chase). Mice keep Normal (flee). If the cat catches
+                  a mouse, that mouse is out. Last mouse free wins!
                 </p>
-              </article>
-              <article class="project-card">
-                <p class="project-tag" data-i18n="fhP6Tag">Game</p>
-                <h3 data-i18n="fhP6Title">Cat &amp; mice</h3>
-                <p data-i18n="fhP6Body">
-                  Three turtles on the floor. One is the cat (follow). The other two
-                  are mice (avoid) and run away. If the cat catches a mouse — that
-                  mouse loses!
-                </p>
-                <p class="project-challenge" data-i18n="fhP6Challenge">Last mouse free wins!</p>
                 <p class="timeline-code">
-                  <span data-i18n="fhP6Cat">Cat:</span>
-                  <a href="code.html?demo=follow" target="_blank" rel="noopener" data-i18n="fhP6FollowLink">follow</a>
-                  · <span data-i18n="fhP6Mice">Mice:</span>
-                  <a href="code.html?demo=avoid" target="_blank" rel="noopener" data-i18n="fhP6AvoidLink">avoid</a>
+                  <a href="code.html?demo=scan" target="_blank" rel="noopener" data-i18n="fhP4Link">Open scan &amp; move</a>
                 </p>
               </article>
               <article class="project-card">
@@ -266,7 +249,7 @@
               <h3 data-i18n="fhUltraTitle">Ultrasonic + servo</h3>
               <p data-i18n="fhUltraBody">
                 Ranger on a 9g servo “neck”. Detects about 2–400 cm, narrow cone.
-                Used for avoiding, following, and “stay in a circle”.
+                Used for ultrasonic scan &amp; move and “stay in a circle”.
               </p>
             </article>
             <article class="card">
@@ -377,8 +360,8 @@
           <article class="card">
             <h2 data-i18n="fhProjTurtleTitle">Turtle projects</h2>
             <p data-i18n="fhProjTurtleLead">
-              LED, motors, 8×8 face, avoid, line follow — Coding (new page) → Turtle.
-              Draw on the 8×8 pad. Use Upside down on the pad if the face is mounted the wrong way.
+              LED, motors, 8×8 face, ultrasonic scan &amp; move, line follow — Coding (new page) → Turtle.
+              Draw upright on the 8×8 pad; Upload flips it for the kit mount.
             </p>
           </article>
           <ul class="project-list">
@@ -427,24 +410,20 @@
                 ><span data-i18n="fhTp11">11. Line tracking robot</span> <small data-i18n="fhTp11s">Follow the runway</small></a>
             </li>
             <li>
-              <a href="https://docs.keyestudio.com/projects/KS0558/en/latest/docs/5.KidsBlock%28Scratch%29/Projects/Project%2012.html"
-                ><span data-i18n="fhTp12">12. Ultrasonic follow</span> <small data-i18n="fhTp12s">Keep a set distance</small></a>
-            </li>
-            <li>
-              <a href="https://docs.keyestudio.com/projects/KS0558/en/latest/docs/5.KidsBlock%28Scratch%29/Projects/Project%2013.html"
-                ><span data-i18n="fhTp13">13. Ultrasonic avoiding</span> <small data-i18n="fhTp13s">Class “wow” demo</small></a>
+              <a href="code.html?demo=scan" target="_blank" rel="noopener"
+                ><span data-i18n="fhTp12">12. Ultrasonic scan &amp; move</span> <small data-i18n="fhTp12s">Normal flee · Reverse chase · Cat &amp; mice</small></a>
             </li>
             <li>
               <a href="https://docs.keyestudio.com/projects/KS0558/en/latest/docs/5.KidsBlock%28Scratch%29/Projects/Project%2014.html"
-                ><span data-i18n="fhTp14">14. IR remote robot</span> <small data-i18n="fhTp14s">Drive with the remote</small></a>
+                ><span data-i18n="fhTp13">13. IR remote robot</span> <small data-i18n="fhTp13s">Drive with the remote</small></a>
             </li>
             <li>
               <a href="https://docs.keyestudio.com/projects/KS0558/en/latest/docs/5.KidsBlock%28Scratch%29/Projects/Project%2015.html"
-                ><span data-i18n="fhTp15">15. Bluetooth control tank</span> <small data-i18n="fhTp15s">App drive</small></a>
+                ><span data-i18n="fhTp14">14. Bluetooth control tank</span> <small data-i18n="fhTp14s">App drive</small></a>
             </li>
             <li>
               <a href="https://docs.keyestudio.com/projects/KS0558/en/latest/docs/5.KidsBlock%28Scratch%29/Projects/Project%2016.html"
-                ><span data-i18n="fhTp16">16. Multi-purpose Bluetooth</span> <small data-i18n="fhTp16s">All functions in one</small></a>
+                ><span data-i18n="fhTp15">15. Multi-purpose Bluetooth</span> <small data-i18n="fhTp15s">All functions in one</small></a>
             </li>
           </ul>
 

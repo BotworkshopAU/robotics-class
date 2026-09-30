@@ -73,12 +73,20 @@ const en = {
   confirmNew: "Clear this program?",
   faceTitle: "8×8 face",
   faceHelp:
-    "Draw here. Then use the show 8×8 drawing block.",
+    "Draw upright here. The kit face is mounted upside down — Upload flips it for you.",
   faceSmile: "Smile",
   faceClear: "Clear",
   faceFlip180: "Upside down",
   faceFlipH: "Flip L/R",
   faceFlipV: "Flip U/D",
+  motorTitle: "Motors",
+  motorHelp:
+    "If motors are on the other side or the robot drives the wrong way, change this then Upload again.",
+  motorFlip: "Wiring",
+  motorFlip0: "Normal",
+  motorFlip1: "Reverse direction",
+  motorFlip2: "Swap left / right",
+  motorFlip3: "Reverse + swap L/R",
   turtleStepsHtml: `
     <li>Use <strong>Chrome</strong> or Edge on a laptop (not a phone).</li>
     <li>
@@ -124,8 +132,7 @@ const en = {
     ["dance", "Dance"],
     ["look", "Servo look left/right"],
     ["face", "Draw on 8×8 face"],
-    ["avoid", "Avoid — look for space"],
-    ["follow", "Follow — scan & chase"],
+    ["scan", "Ultrasonic scan & move"],
     ["line", "Line follow"],
   ],
   telloDemos: [
@@ -271,12 +278,20 @@ const ar = {
   confirmNew: "مسح هذا البرنامج؟",
   faceTitle: "وجه 8×8",
   faceHelp:
-    "ارسم هنا. ثم استخدم بلوك عرض رسم 8×8.",
+    "ارسم بشكل مستقيم هنا. الوجه في المجموعة مثبت مقلوباً — الرفع يقلبه تلقائياً.",
   faceSmile: "ابتسامة",
   faceClear: "مسح",
   faceFlip180: "مقلوب",
   faceFlipH: "قلب ي/ش",
   faceFlipV: "قلب أ/س",
+  motorTitle: "المحركات",
+  motorHelp:
+    "إذا كانت المحركات على الجهة الأخرى أو الروبوت يسير بالاتجاه الخطأ، غيّر هذا ثم ارفع البرنامج مرة أخرى.",
+  motorFlip: "التوصيل",
+  motorFlip0: "عادي",
+  motorFlip1: "عكس الاتجاه",
+  motorFlip2: "تبديل يسار / يمين",
+  motorFlip3: "عكس + تبديل ي/ش",
   turtleStepsHtml: `
     <li>استخدم <strong>Chrome</strong> أو Edge على حاسوب محمول (وليس هاتف).</li>
     <li>
@@ -322,8 +337,7 @@ const ar = {
     ["dance", "رقصة"],
     ["look", "سيرفو ينظر يمين/يسار"],
     ["face", "رسم على وجه 8×8"],
-    ["avoid", "تفادي — ابحث عن فراغ"],
-    ["follow", "تتبع — امسح وطارد"],
+    ["scan", "مسح فوق صوتي وحركة"],
     ["line", "تتبع الخط"],
   ],
   telloDemos: [

@@ -17,6 +17,7 @@ import {
   workspaceToTelloPython,
 } from "./tello.js";
 import { initFacePad, setFaceHex, SMILE } from "./face_pad.js";
+import { getMotorFlip, setMotorFlip } from "./motors_pref.js";
 import { getLang, setLang, ui } from "./i18n.js";
 import { uploadTurtleSketch, webSerialSupported, compileApiAvailable, isLocalCodingHost } from "./upload.js";
 import "./code.css";
@@ -121,7 +122,7 @@ function fillDemos(options, selected) {
 function applyFacePadLabels(t) {
   if (!facePad) return;
   const header = facePad.querySelector(":scope > header");
-  const help = facePad.querySelector(".face-help");
+  const help = facePad.querySelector(":scope > .face-help");
   if (header) header.textContent = t.faceTitle;
   if (help) help.textContent = t.faceHelp;
   const map = {
@@ -134,6 +135,23 @@ function applyFacePadLabels(t) {
   for (const [key, label] of Object.entries(map)) {
     const btn = facePad.querySelector(`[data-face='${key}']`);
     if (btn) btn.textContent = label;
+  }
+  const motorPrefs = document.getElementById("motor-prefs");
+  if (motorPrefs) {
+    const mHeader = motorPrefs.querySelector("header");
+    const mHelp = motorPrefs.querySelector(".face-help");
+    const mLabel = motorPrefs.querySelector(".motor-flip-label > span");
+    const sel = document.getElementById("motor-flip");
+    if (mHeader) mHeader.textContent = t.motorTitle;
+    if (mHelp) mHelp.textContent = t.motorHelp;
+    if (mLabel) mLabel.textContent = t.motorFlip;
+    if (sel) {
+      const opts = [t.motorFlip0, t.motorFlip1, t.motorFlip2, t.motorFlip3];
+      [...sel.options].forEach((opt, i) => {
+        if (opts[i]) opt.textContent = opts[i];
+      });
+      sel.setAttribute("aria-label", t.motorFlip);
+    }
   }
 }
 
@@ -286,6 +304,15 @@ function setLanguage(next) {
 injectWorkspace();
 applyChrome();
 initFacePad(() => refreshCode());
+
+const motorFlipSelect = document.getElementById("motor-flip");
+if (motorFlipSelect) {
+  motorFlipSelect.value = String(getMotorFlip());
+  motorFlipSelect.addEventListener("change", () => {
+    setMotorFlip(motorFlipSelect.value);
+    refreshCode();
+  });
+}
 
 const demoParam = new URLSearchParams(location.search).get("demo");
 if (robot === "tello" && demoParam && telloDemos[demoParam]) {
