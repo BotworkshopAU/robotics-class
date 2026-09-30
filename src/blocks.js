@@ -406,7 +406,7 @@ export const demos = {
       ],
     },
   },
-  avoid: startNext({
+  scan: startNext({
     type: "turtle_servo",
     fields: { DEG: 90 },
     next: {
@@ -617,164 +617,6 @@ export const demos = {
       },
     },
   }),
-  follow: startNext({
-    type: "turtle_servo",
-    fields: { DEG: 90 },
-    next: {
-      block: {
-        type: "turtle_forever",
-        inputs: {
-          DO: {
-            block: {
-              type: "turtle_if_else",
-              inputs: {
-                COND: {
-                  block: {
-                    type: "turtle_distance_lt",
-                    fields: { CM: 55 },
-                  },
-                },
-                DO: {
-                  block: {
-                    type: "turtle_if_else",
-                    inputs: {
-                      COND: {
-                        block: {
-                          type: "turtle_distance_lt",
-                          fields: { CM: 14 },
-                        },
-                      },
-                      DO: {
-                        block: {
-                          type: "turtle_stop",
-                          next: {
-                            block: {
-                              type: "turtle_servo",
-                              fields: { DEG: 90 },
-                            },
-                          },
-                        },
-                      },
-                      ELSE: {
-                        block: {
-                          type: "turtle_speed",
-                          fields: { SPEED: 255 },
-                          next: {
-                            block: {
-                              type: "turtle_forward",
-                              fields: { SECS: 0.28 },
-                              next: {
-                                block: {
-                                  type: "turtle_servo",
-                                  fields: { DEG: 55 },
-                                  next: {
-                                    block: {
-                                      type: "turtle_wait",
-                                      fields: { SECS: 0.08 },
-                                      next: {
-                                        block: {
-                                          type: "turtle_if_else",
-                                          inputs: {
-                                            COND: {
-                                              block: {
-                                                type: "turtle_distance_lt",
-                                                fields: { CM: 55 },
-                                              },
-                                            },
-                                            DO: {
-                                              block: {
-                                                type: "turtle_left",
-                                                fields: { SECS: 0.1 },
-                                                next: {
-                                                  block: {
-                                                    type: "turtle_servo",
-                                                    fields: { DEG: 90 },
-                                                  },
-                                                },
-                                              },
-                                            },
-                                            ELSE: {
-                                              block: {
-                                                type: "turtle_servo",
-                                                fields: { DEG: 125 },
-                                                next: {
-                                                  block: {
-                                                    type: "turtle_wait",
-                                                    fields: { SECS: 0.08 },
-                                                    next: {
-                                                      block: {
-                                                        type: "turtle_if_else",
-                                                        inputs: {
-                                                          COND: {
-                                                            block: {
-                                                              type: "turtle_distance_lt",
-                                                              fields: { CM: 55 },
-                                                            },
-                                                          },
-                                                          DO: {
-                                                            block: {
-                                                              type: "turtle_right",
-                                                              fields: { SECS: 0.1 },
-                                                              next: {
-                                                                block: {
-                                                                  type: "turtle_servo",
-                                                                  fields: { DEG: 90 },
-                                                                },
-                                                              },
-                                                            },
-                                                          },
-                                                          ELSE: {
-                                                            block: {
-                                                              type: "turtle_servo",
-                                                              fields: { DEG: 90 },
-                                                            },
-                                                          },
-                                                        },
-                                                      },
-                                                    },
-                                                  },
-                                                },
-                                              },
-                                            },
-                                          },
-                                        },
-                                      },
-                                    },
-                                  },
-                                },
-                              },
-                            },
-                          },
-                        },
-                      },
-                    },
-                  },
-                },
-                ELSE: {
-                  block: {
-                    type: "turtle_servo",
-                    fields: { DEG: 90 },
-                    next: {
-                      block: {
-                        type: "turtle_speed",
-                        fields: { SPEED: 200 },
-                        next: {
-                          block: {
-                            type: "turtle_left",
-                            fields: { SECS: 0.12 },
-                          },
-                        },
-                      },
-                    },
-                  },
-                },
-              },
-            },
-          },
-        },
-      },
-    },
-  }),
   line: startNext({
     type: "turtle_forever",
     inputs: {
@@ -832,6 +674,7 @@ export const demos = {
     type: "turtle_matrix",
   }),
 };
+
 
 function startNext(block) {
   return {

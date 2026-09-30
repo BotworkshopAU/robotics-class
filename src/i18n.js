@@ -132,8 +132,7 @@ const en = {
     ["dance", "Dance"],
     ["look", "Servo look left/right"],
     ["face", "Draw on 8×8 face"],
-    ["avoid", "Avoid — look when blocked"],
-    ["follow", "Follow — look when chasing"],
+    ["scan", "Ultrasonic scan & move"],
     ["line", "Line follow"],
   ],
   telloDemos: [
@@ -338,8 +337,7 @@ const ar = {
     ["dance", "رقصة"],
     ["look", "سيرفو ينظر يمين/يسار"],
     ["face", "رسم على وجه 8×8"],
-    ["avoid", "تفادي — انظر عند العائق"],
-    ["follow", "تتبع — انظر عند المطاردة"],
+    ["scan", "مسح فوق صوتي وحركة"],
     ["line", "تتبع الخط"],
   ],
   telloDemos: [
