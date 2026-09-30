@@ -74,7 +74,7 @@ export const foundationEn = {
   fhP4Link: "Open scan & move",
   fhP7Tag: "Track",
   fhP7Title: "Tape track",
-  fhP7Body: "Build a black path — can the turtle stay on it?",
+  fhP7Body: "Build a tape path — can the turtle stay on it?",
   fhP7Challenge: "Rally: finish the loop twice!",
   fhP7Link: "Line follow",
 
@@ -99,7 +99,7 @@ export const foundationEn = {
     "Ranger on a 9g servo “neck”. Detects about 2–400 cm, narrow cone. Used for ultrasonic scan & move and “stay in a circle”.",
   fhLineTitle: "Line tracking",
   fhLineBody:
-    "IR line sensor under the chassis. Kit includes a tracking runway. Dark line on light floor is the class stretch goal.",
+    "IR line sensor under the chassis. Kit includes a tracking runway. If the turtle misses the tape, try Line sensor → Flipped in Coding, then Upload again.",
   fhFaceTitle: "Face, IR, Bluetooth",
   fhFaceBody:
     "8×8 LED matrix for expressions. IR remote (<10 m). DX-BT24 BLE (<20 m) with Android “Turtle Car” / iOS “keyes BT car”. Unplug the Bluetooth module before uploading code, then plug it back in.",
@@ -332,7 +332,7 @@ export const foundationAr = {
   fhP4Link: "افتح مسح وحركة",
   fhP7Tag: "مسار",
   fhP7Title: "مسار الشريط",
-  fhP7Body: "اصنع مساراً أسود — هل تبقى السلحفاة عليه؟",
+  fhP7Body: "اصنع مسار شريط — هل تبقى السلحفاة عليه؟",
   fhP7Challenge: "سباق: أكمل الحلقة مرتين!",
   fhP7Link: "تتبع الخط",
 
@@ -357,7 +357,7 @@ export const foundationAr = {
     "حساس مسافة على «رقبة» سيرفو 9غ. يكتشف تقريباً 2–400 سم، مخروط ضيق. لمسح فوق صوتي وحركة و«البقاء في دائرة».",
   fhLineTitle: "تتبع الخط",
   fhLineBody:
-    "حساس خط IR تحت الهيكل. الطقم يتضمن مدرجاً. خط داكن على أرضية فاتحة هدف ممتد للصف.",
+    "حساس خط IR تحت الهيكل. الطقم يتضمن مدرجاً. إذا أخطأت السلحفاة الشريط، جرّب حساس الخط → مقلوب في البرمجة ثم ارفع مرة أخرى.",
   fhFaceTitle: "وجه، IR، بلوتوث",
   fhFaceBody:
     "مصفوفة LED 8×8 للتعبيرات. ريموت IR (<10 م). DX-BT24 BLE (<20 م) مع Android «Turtle Car» / iOS «keyes BT car». افصل وحدة البلوتوث قبل رفع الكود ثم أعد توصيلها.",
