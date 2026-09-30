@@ -41,7 +41,6 @@ const cacheRoot = path.join(root, ".cache", "arduino");
 const sketchDir = path.join(cacheRoot, "turtle");
 const sketchFile = path.join(sketchDir, "turtle.ino");
 const buildPath = path.join(cacheRoot, "build");
-const buildCache = path.join(cacheRoot, "core-cache");
 const hexCacheDir = path.join(cacheRoot, "hex");
 const fqbn = "arduino:avr:uno";
 
@@ -54,7 +53,6 @@ function sketchHash(sketch) {
 async function compileSketch(sketch) {
   await mkdir(sketchDir, { recursive: true });
   await mkdir(buildPath, { recursive: true });
-  await mkdir(buildCache, { recursive: true });
   await mkdir(hexCacheDir, { recursive: true });
 
   const hash = sketchHash(sketch);
@@ -69,6 +67,7 @@ async function compileSketch(sketch) {
     }
     await writeFile(sketchFile, sketch, "utf8");
     const cli = whichCli();
+    // arduino-cli 1.x: --build-cache-path is removed; use --build-path only.
     await run(cli, [
       "compile",
       "--fqbn",
@@ -76,10 +75,6 @@ async function compileSketch(sketch) {
       "--warnings",
       "none",
       "--build-path",
-      buildPath,
-      "--build-cache-path",
-      buildCache,
-      "--output-dir",
       buildPath,
       sketchDir,
     ]);
