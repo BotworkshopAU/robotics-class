@@ -10,6 +10,7 @@ export const PINS = `
 #define LINE_R 8
 #define TRIG_PIN 12
 #define ECHO_PIN 13
+#define IR_PIN 3
 `.trim();
 
 export const MOTOR_RUNTIME = `
@@ -83,6 +84,30 @@ int lineOnHigh = LINE_ON_HIGH_VALUE;
 int onTheLine(int pin) {
   int v = digitalRead(pin);
   return lineOnHigh ? (v == HIGH) : (v == LOW);
+}
+`.trim();
+
+/** Classic IRremote 2.x API (matches Keyestudio sketches). Pin D3 on the 8833 board. */
+export const IR_RUNTIME = `
+IRrecv turtleIr(IR_PIN);
+decode_results turtleIrResult;
+unsigned long turtleIrCode = 0;
+
+void irBegin() {
+  turtleIr.enableIRIn();
+}
+
+void irFresh() {
+  turtleIrCode = 0;
+  if (turtleIr.decode(&turtleIrResult)) {
+    unsigned long v = turtleIrResult.value;
+    turtleIr.resume();
+    if (v != 0xFFFFFFFFUL) turtleIrCode = v;
+  }
+}
+
+int irButton(unsigned long code) {
+  return turtleIrCode == code;
 }
 `.trim();
 

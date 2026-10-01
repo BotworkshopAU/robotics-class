@@ -25,4 +25,6 @@ await run(cli, ["core", "update-index"]);
 await run(cli, ["core", "install", "arduino:avr"]);
 await run(cli, ["lib", "update-index"]);
 await run(cli, ["lib", "install", "Servo"]);
+// 2.x API (decode_results) matches Keyestudio Turtle IR examples.
+await run(cli, ["lib", "install", "IRremote@2.6.1"]);
 console.log("Ready. npm run setup:cli (done) → npm run dev → open http://localhost:5173/code.html");

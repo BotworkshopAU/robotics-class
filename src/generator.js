@@ -3,6 +3,7 @@ import {
   PINS,
   MOTOR_RUNTIME,
   SENSOR_RUNTIME,
+  IR_RUNTIME,
   MATRIX_RUNTIME,
   SETUP_BODY,
   SETUP_MOTORS,
@@ -16,6 +17,7 @@ export const arduinoGenerator = new Blockly.Generator("Arduino");
 arduinoGenerator.PRECEDENCE = 0;
 arduinoGenerator.servoNeeded = false;
 arduinoGenerator.matrixNeeded = false;
+arduinoGenerator.irNeeded = false;
 
 arduinoGenerator.scrub_ = function (block, code, thisOnly) {
   const next = block.nextConnection && block.nextConnection.targetBlock();
@@ -72,7 +74,8 @@ arduinoGenerator.forBlock["turtle_wait"] = (block) =>
 
 arduinoGenerator.forBlock["turtle_forever"] = function (block) {
   const inner = arduinoGenerator.statementToCode(block, "DO") || "  delay(10);\n";
-  return `while (true) {\n${inner}}\n`;
+  const prefix = arduinoGenerator.irNeeded ? "  irFresh();\n" : "";
+  return `while (true) {\n${prefix}${inner}}\n`;
 };
 
 arduinoGenerator.forBlock["turtle_repeat"] = function (block) {
@@ -110,6 +113,13 @@ arduinoGenerator.forBlock["turtle_line"] = (block) => [
   `onTheLine(${block.getFieldValue("PIN")})`,
   arduinoGenerator.PRECEDENCE,
 ];
+arduinoGenerator.forBlock["turtle_ir_pressed"] = (block) => {
+  arduinoGenerator.irNeeded = true;
+  return [
+    `irButton(${block.getFieldValue("CODE")})`,
+    arduinoGenerator.PRECEDENCE,
+  ];
+};
 arduinoGenerator.forBlock["turtle_servo"] = function (block) {
   arduinoGenerator.servoNeeded = true;
   return `turtleServo.write(${block.getFieldValue("DEG")});\n delay(200);\n`;
@@ -128,6 +138,7 @@ arduinoGenerator.forBlock["turtle_matrix_clear"] = function () {
 export function workspaceToSketch(workspace) {
   arduinoGenerator.servoNeeded = false;
   arduinoGenerator.matrixNeeded = false;
+  arduinoGenerator.irNeeded = false;
   const hats = workspace.getBlocksByType("turtle_start", false);
   let body = "";
   if (hats.length) {
@@ -140,7 +151,9 @@ export function workspaceToSketch(workspace) {
   const drive = usesDrive(workspace);
   const sense = usesSensors(workspace);
   const forever = hasType(workspace, "turtle_forever");
+  const ir = arduinoGenerator.irNeeded;
 
+  const includeIr = ir ? `#include <IRremote.h>\n` : "";
   const includeServo = arduinoGenerator.servoNeeded
     ? `#include <Servo.h>\nServo turtleServo;\n`
     : "";
@@ -151,12 +164,14 @@ export function workspaceToSketch(workspace) {
   const sensorFns = sense
     ? `\n${SENSOR_RUNTIME.replace("LINE_ON_HIGH_VALUE", String(getLineSense()))}\n`
     : "";
+  const irFns = ir ? `\n${IR_RUNTIME}\n` : "";
   const matrixFns = arduinoGenerator.matrixNeeded ? `\n${MATRIX_RUNTIME}\n` : "";
   const servoSetup = arduinoGenerator.servoNeeded
     ? `  turtleServo.attach(SERVO_PIN);\n  turtleServo.write(90);\n`
     : "";
   const motorSetup = drive ? `${SETUP_MOTORS}\n  driveStop();\n` : "";
   const sensorSetup = sense ? `${SETUP_SENSORS}\n` : "";
+  const irSetup = ir ? `  irBegin();\n` : "";
   const matrixSetup = arduinoGenerator.matrixNeeded ? `  matrixBegin();\n` : "";
 
   const once = indent(body || "");
@@ -164,11 +179,11 @@ export function workspaceToSketch(workspace) {
   const setupEnd = drive && !forever ? "  driveStop();\n" : "";
   const loopBody = forever ? indent(body || "  delay(1000);\n") : "";
 
-  return `${includeMatrix}${includeServo}${PINS}
-${motorFns}${sensorFns}${matrixFns}
+  return `${includeIr}${includeMatrix}${includeServo}${PINS}
+${motorFns}${sensorFns}${irFns}${matrixFns}
 void setup() {
 ${SETUP_BODY}
-${motorSetup}${sensorSetup}${servoSetup}${matrixSetup}${setupExtra}${setupEnd}}
+${motorSetup}${sensorSetup}${irSetup}${servoSetup}${matrixSetup}${setupExtra}${setupEnd}}
 
 void loop() {
 ${loopBody}}

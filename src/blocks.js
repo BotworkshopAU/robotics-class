@@ -229,6 +229,38 @@ export function defineTurtleBlocks(lang = getLang()) {
       colour: 160,
     },
     {
+      type: "turtle_ir_pressed",
+      message0: t.irPressed,
+      args0: [
+        {
+          type: "field_dropdown",
+          name: "CODE",
+          options: [
+            [t.irUp, "0xFF629D"],
+            [t.irDown, "0xFFA857"],
+            [t.irLeft, "0xFF22DD"],
+            [t.irRight, "0xFFC23D"],
+            [t.irOk, "0xFF02FD"],
+            [t.ir1, "0xFF6897"],
+            [t.ir2, "0xFF9867"],
+            [t.ir3, "0xFFB04F"],
+            [t.ir4, "0xFF30CF"],
+            [t.ir5, "0xFF18E7"],
+            [t.ir6, "0xFF7A85"],
+            [t.ir7, "0xFF10EF"],
+            [t.ir8, "0xFF38C7"],
+            [t.ir9, "0xFF5AA5"],
+            [t.ir0, "0xFF4AB5"],
+            [t.irStar, "0xFF42BD"],
+            [t.irHash, "0xFF52AD"],
+          ],
+        },
+      ],
+      output: "Boolean",
+      colour: 65,
+      tooltip: t.irTip,
+    },
+    {
       type: "turtle_servo",
       message0: t.servo,
       args0: [
@@ -317,6 +349,12 @@ export function getTurtleToolbox(lang = getLang()) {
           { kind: "block", type: "turtle_distance_lt" },
           { kind: "block", type: "turtle_line" },
         ],
+      },
+      {
+        kind: "category",
+        name: c.remote,
+        colour: "65",
+        contents: [{ kind: "block", type: "turtle_ir_pressed" }],
       },
       {
         kind: "category",
@@ -538,25 +576,182 @@ export const demos = {
     },
   }),
   dance: startNext({
-    type: "turtle_repeat",
-    fields: { TIMES: 4 },
+    type: "turtle_forever",
     inputs: {
       DO: {
         block: {
-          type: "turtle_forward",
-          fields: { SECS: 0.3 },
+          type: "turtle_if",
+          inputs: {
+            COND: {
+              block: {
+                type: "turtle_ir_pressed",
+                fields: { CODE: "0xFF629D" },
+              },
+            },
+            DO: {
+              block: {
+                type: "turtle_speed",
+                fields: { SPEED: 180 },
+                next: {
+                  block: {
+                    type: "turtle_forward",
+                    fields: { SECS: 0.3 },
+                    next: {
+                      block: {
+                        type: "turtle_left",
+                        fields: { SECS: 0.25 },
+                        next: {
+                          block: {
+                            type: "turtle_backward",
+                            fields: { SECS: 0.3 },
+                            next: {
+                              block: {
+                                type: "turtle_right",
+                                fields: { SECS: 0.25 },
+                              },
+                            },
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
           next: {
             block: {
-              type: "turtle_left",
-              fields: { SECS: 0.25 },
+              type: "turtle_if",
+              inputs: {
+                COND: {
+                  block: {
+                    type: "turtle_ir_pressed",
+                    fields: { CODE: "0xFF6897" },
+                  },
+                },
+                DO: {
+                  block: {
+                    type: "turtle_speed",
+                    fields: { SPEED: 200 },
+                    next: {
+                      block: {
+                        type: "turtle_left",
+                        fields: { SECS: 0.35 },
+                        next: {
+                          block: {
+                            type: "turtle_right",
+                            fields: { SECS: 0.35 },
+                            next: {
+                              block: {
+                                type: "turtle_left",
+                                fields: { SECS: 0.35 },
+                              },
+                            },
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
               next: {
                 block: {
-                  type: "turtle_backward",
-                  fields: { SECS: 0.3 },
+                  type: "turtle_if",
+                  inputs: {
+                    COND: {
+                      block: {
+                        type: "turtle_ir_pressed",
+                        fields: { CODE: "0xFF9867" },
+                      },
+                    },
+                    DO: {
+                      block: {
+                        type: "turtle_speed",
+                        fields: { SPEED: 180 },
+                        next: {
+                          block: {
+                            type: "turtle_forward",
+                            fields: { SECS: 0.2 },
+                            next: {
+                              block: {
+                                type: "turtle_backward",
+                                fields: { SECS: 0.2 },
+                                next: {
+                                  block: {
+                                    type: "turtle_forward",
+                                    fields: { SECS: 0.2 },
+                                    next: {
+                                      block: {
+                                        type: "turtle_backward",
+                                        fields: { SECS: 0.2 },
+                                      },
+                                    },
+                                  },
+                                },
+                              },
+                            },
+                          },
+                        },
+                      },
+                    },
+                  },
                   next: {
                     block: {
-                      type: "turtle_right",
-                      fields: { SECS: 0.25 },
+                      type: "turtle_if",
+                      inputs: {
+                        COND: {
+                          block: {
+                            type: "turtle_ir_pressed",
+                            fields: { CODE: "0xFFB04F" },
+                          },
+                        },
+                        DO: {
+                          block: {
+                            type: "turtle_speed",
+                            fields: { SPEED: 160 },
+                            next: {
+                              block: {
+                                type: "turtle_forward",
+                                fields: { SECS: 0.25 },
+                                next: {
+                                  block: {
+                                    type: "turtle_right",
+                                    fields: { SECS: 0.35 },
+                                    next: {
+                                      block: {
+                                        type: "turtle_forward",
+                                        fields: { SECS: 0.25 },
+                                        next: {
+                                          block: {
+                                            type: "turtle_right",
+                                            fields: { SECS: 0.35 },
+                                          },
+                                        },
+                                      },
+                                    },
+                                  },
+                                },
+                              },
+                            },
+                          },
+                        },
+                      },
+                      next: {
+                        block: {
+                          type: "turtle_if",
+                          inputs: {
+                            COND: {
+                              block: {
+                                type: "turtle_ir_pressed",
+                                fields: { CODE: "0xFF02FD" },
+                              },
+                            },
+                            DO: {
+                              block: { type: "turtle_stop" },
+                            },
+                          },
+                        },
+                      },
                     },
                   },
                 },
