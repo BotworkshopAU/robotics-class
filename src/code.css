@@ -333,18 +333,52 @@ html[dir="rtl"] .lang-label {
   line-height: 1.4;
 }
 
-.hint {
+.status-progress,
+.status-fail {
   padding: 8px 12px;
-  background: var(--panel);
   font-size: 0.85rem;
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
-  align-items: baseline;
+  align-items: center;
 }
 
-.hint strong {
+.status-progress[hidden],
+.status-fail[hidden] {
+  display: none;
+}
+
+.status-progress {
+  background: #e8f3fb;
+  color: #123a5c;
+}
+
+.status-fail {
+  background: #fde8e8;
+  color: #8a1f1f;
+}
+
+.status-progress strong,
+.status-fail strong {
   font-weight: 700;
+}
+
+.status-progress-track {
+  flex: 1;
+  min-width: 120px;
+  max-width: 280px;
+  height: 8px;
+  border-radius: 999px;
+  background: #c5d8ea;
+  overflow: hidden;
+}
+
+.status-progress-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: inherit;
+  background: #2a7ab8;
+  transition: width 0.15s ease-out;
 }
 
 @media (max-width: 900px) {

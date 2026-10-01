@@ -28,6 +28,7 @@ export default defineConfig({
         classIntermediate: resolve(__dirname, "class-intermediate.html"),
         classAdvanced: resolve(__dirname, "class-advanced.html"),
         setup: resolve(__dirname, "setup.html"),
+        extrasTurtle: resolve(__dirname, "extras-turtlerobot.html"),
       },
     },
   },

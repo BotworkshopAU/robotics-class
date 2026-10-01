@@ -42,7 +42,11 @@ if (pageParams.get("robot") === "tello") {
 const blocklyDiv = document.getElementById("blockly");
 const codeEl = document.getElementById("arduino-code");
 const statusEl = document.getElementById("status");
-const hintEl = document.getElementById("hint-static");
+const statusBar = document.getElementById("status-bar");
+const progressBar = document.getElementById("progress-bar");
+const progressText = document.getElementById("progress-text");
+const progressTrack = document.getElementById("progress-track");
+const progressFill = document.getElementById("progress-fill");
 const robotSelect = document.getElementById("robot-select");
 const demoSelect = document.getElementById("demo-select");
 const langSelect = document.getElementById("lang-select");
@@ -58,6 +62,35 @@ const setupHeader = document.getElementById("setup");
 const facePad = document.getElementById("face-pad");
 
 let workspace = null;
+
+function hideStatusBar() {
+  if (statusBar) statusBar.hidden = true;
+  if (statusEl) statusEl.textContent = "";
+  if (progressBar) progressBar.hidden = true;
+  if (progressText) progressText.textContent = "";
+  if (progressTrack) progressTrack.hidden = true;
+  if (progressFill) progressFill.style.width = "0%";
+}
+
+function showFailBar(message) {
+  if (progressBar) progressBar.hidden = true;
+  if (statusEl) statusEl.textContent = message;
+  if (statusBar) statusBar.hidden = false;
+}
+
+function showProgressBar(message, pct) {
+  if (statusBar) statusBar.hidden = true;
+  if (progressText) progressText.textContent = message;
+  if (progressBar) progressBar.hidden = false;
+  if (typeof pct === "number" && Number.isFinite(pct)) {
+    const clamped = Math.max(0, Math.min(100, Math.round(pct)));
+    if (progressTrack) progressTrack.hidden = false;
+    if (progressFill) progressFill.style.width = `${clamped}%`;
+  } else {
+    if (progressTrack) progressTrack.hidden = true;
+    if (progressFill) progressFill.style.width = "0%";
+  }
+}
 
 function currentToolbox() {
   return robot === "tello" ? getTelloToolbox(lang) : getTurtleToolbox(lang);
@@ -230,7 +263,6 @@ function applyChrome() {
   if (langSelect) langSelect.value = lang;
 
   if (robot === "tello") {
-    hintEl.textContent = t.hintTello;
     downloadBtn.textContent = t.downloadTello;
     downloadBtn.classList.add("primary");
     if (uploadBtn) {
@@ -247,7 +279,6 @@ function applyChrome() {
     }
     fillDemos(t.telloDemos, localStorage.getItem("bw-tello-demo"));
   } else {
-    hintEl.textContent = t.hintTurtle;
     downloadBtn.textContent = t.downloadArduino;
     downloadBtn.classList.add("primary");
     if (uploadBtn) {
@@ -282,7 +313,7 @@ function setRobot(next) {
   loadWorkspace();
   refreshCode();
   Blockly.svgResize(workspace);
-  statusEl.textContent = robot === "tello" ? ui(lang).statusTello : ui(lang).statusTurtle;
+  hideStatusBar();
 }
 
 function setLanguage(next) {
@@ -310,7 +341,7 @@ function setLanguage(next) {
   }
   applyChrome();
   refreshCode();
-  statusEl.textContent = ui(lang).ready;
+  hideStatusBar();
 }
 
 injectWorkspace();
@@ -340,17 +371,16 @@ if (robot === "tello" && demoParam && telloDemos[demoParam]) {
   Blockly.serialization.workspaces.load(telloDemos[demoParam], workspace);
   localStorage.setItem("bw-tello-demo", demoParam);
   demoSelect.value = demoParam;
-  statusEl.textContent = `Demo: ${demoSelect.options[demoSelect.selectedIndex]?.text || demoParam}`;
 } else if (robot === "turtle" && demoParam && demos[demoParam]) {
   Blockly.serialization.workspaces.load(demos[demoParam], workspace);
   localStorage.setItem("bw-turtle-demo", demoParam);
   demoSelect.value = demoParam;
   if (demoParam === "face") setFaceHex(SMILE);
-  statusEl.textContent = `Demo: ${demoSelect.options[demoSelect.selectedIndex]?.text || demoParam}`;
 } else {
   loadWorkspace();
 }
 refreshCode();
+hideStatusBar();
 
 robotSelect.addEventListener("change", () => setRobot(robotSelect.value));
 langSelect?.addEventListener("change", () => setLanguage(langSelect.value));
@@ -362,7 +392,7 @@ newBtn.addEventListener("click", () => {
   Blockly.serialization.workspaces.load(starter, workspace);
   demoSelect.value = "";
   localStorage.removeItem(robot === "tello" ? "bw-tello-demo" : "bw-turtle-demo");
-  statusEl.textContent = ui(lang).statusNew;
+  hideStatusBar();
 });
 
 demoSelect.addEventListener("change", () => {
@@ -374,18 +404,16 @@ demoSelect.addEventListener("change", () => {
     Blockly.serialization.workspaces.load(pack[id], workspace);
     if (robot === "turtle" && id === "face") setFaceHex(SMILE);
     localStorage.setItem(robot === "tello" ? "bw-tello-demo" : "bw-turtle-demo", id);
-    const name = demoSelect.options[demoSelect.selectedIndex].text;
-    statusEl.textContent = `Demo: ${name}`;
+    hideStatusBar();
   } catch (err) {
     console.error(err);
-    statusEl.textContent = ui(lang).statusDemoFail;
+    showFailBar(ui(lang).statusDemoFail);
   }
 });
 
 copyBtn.addEventListener("click", async () => {
   await navigator.clipboard.writeText(codeEl.textContent);
-  statusEl.textContent =
-    robot === "tello" ? ui(lang).statusCopyTello : ui(lang).statusCopyArduino;
+  hideStatusBar();
 });
 
 downloadBtn.addEventListener("click", () => {
@@ -395,46 +423,49 @@ downloadBtn.addEventListener("click", () => {
   a.download = robot === "tello" ? "tello_mission.py" : "turtle.ino";
   a.click();
   URL.revokeObjectURL(a.href);
-  statusEl.textContent =
-    robot === "tello" ? ui(lang).statusDownloadTello : ui(lang).statusDownloadArduino;
+  hideStatusBar();
 });
 
 let uploading = false;
 uploadBtn?.addEventListener("click", async () => {
   if (robot !== "turtle") return;
-  if (uploading) {
-    statusEl.textContent = ui(lang).statusUploadBusy;
-    return;
-  }
+  if (uploading) return;
   await refreshUploadAvailability();
   if (!uploadReady) return;
   const t = ui(lang);
   uploading = true;
   uploadBtn.disabled = true;
+  hideStatusBar();
   try {
     await uploadTurtleSketch(codeEl.textContent, (phase, pct) => {
-      if (phase === "compiling") statusEl.textContent = t.statusUploadingCompile;
-      else if (phase === "pick-port") statusEl.textContent = t.statusUploadingPort;
-      else if (phase === "opening") statusEl.textContent = t.statusUploadingOpen;
+      if (phase === "compiling") showProgressBar(t.statusUploadingCompile);
+      else if (phase === "pick-port") showProgressBar(t.statusUploadingPort);
+      else if (phase === "opening") showProgressBar(t.statusUploadingOpen);
       else if (phase === "flashing") {
-        statusEl.textContent =
-          typeof pct === "number"
-            ? t.statusUploadingFlashPct.replace("{pct}", String(Math.round(pct)))
-            : t.statusUploadingFlash;
-      } else if (phase === "done") statusEl.textContent = t.statusUploadDone;
+        if (typeof pct === "number") {
+          showProgressBar(
+            t.statusUploadingFlashPct.replace("{pct}", String(Math.round(pct))),
+            pct,
+          );
+        } else {
+          showProgressBar(t.statusUploadingFlash);
+        }
+      } else if (phase === "done") {
+        showProgressBar(t.statusUploadDone, 100);
+      }
     });
-    statusEl.textContent = t.statusUploadDone;
+    hideStatusBar();
   } catch (err) {
     console.error(err);
     const code = err?.code;
-    if (code === "no-serial") statusEl.textContent = t.statusUploadNoSerial;
-    else if (code === "not-local") statusEl.textContent = t.statusUploadNotLocal;
-    else if (code === "no-api") statusEl.textContent = t.statusUploadNoApi;
-    else if (code === "no-cli") statusEl.textContent = t.statusUploadNoCli;
+    if (code === "no-serial") showFailBar(t.statusUploadNoSerial);
+    else if (code === "not-local") showFailBar(t.statusUploadNotLocal);
+    else if (code === "no-api") showFailBar(t.statusUploadNoApi);
+    else if (code === "no-cli") showFailBar(t.statusUploadNoCli);
     else if (code === "cancelled" || err?.name === "NotFoundError") {
-      statusEl.textContent = t.statusUploadCancelled;
+      showFailBar(t.statusUploadCancelled);
     } else {
-      statusEl.textContent = `${t.statusUploadFail} ${String(err?.message || err).slice(0, 120)}`;
+      showFailBar(`${t.statusUploadFail} ${String(err?.message || err).slice(0, 160)}`);
     }
   } finally {
     uploading = false;
@@ -443,7 +474,7 @@ uploadBtn?.addEventListener("click", async () => {
 });
 
 telloControllerBtn?.addEventListener("click", () => {
-  statusEl.textContent = ui(lang).statusTelloController;
+  hideStatusBar();
 });
 
 window.addEventListener("resize", () => Blockly.svgResize(workspace));

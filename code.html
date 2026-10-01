@@ -39,9 +39,14 @@
         </select>
       </label>
     </header>
-    <div class="hint">
-      <span id="hint-static">Pick Turtle or Tello, then snap blocks.</span>
-      <strong id="status">Ready.</strong>
+    <div class="status-progress" id="progress-bar" hidden>
+      <strong id="progress-text"></strong>
+      <div class="status-progress-track" id="progress-track" hidden>
+        <div class="status-progress-fill" id="progress-fill"></div>
+      </div>
+    </div>
+    <div class="status-fail" id="status-bar" hidden>
+      <strong id="status"></strong>
     </div>
     <div class="work">
       <div id="blockly"></div>

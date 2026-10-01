@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" role="img">
+  <title>Passive buzzer to Arduino robot shield</title>
+  <desc>Wire buzzer minus to GND and S to TX. Leave plus unconnected. Unplug before upload.</desc>
+  <rect width="720" height="320" fill="#f6fbf8"/>
+  <rect x="40" y="70" width="200" height="160" rx="10" fill="#fff" stroke="#0f8a7a" stroke-width="2"/>
+  <text x="140" y="100" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="16" font-weight="600" fill="#12323a">Passive buzzer</text>
+  <circle cx="100" cy="160" r="36" fill="#1a1a1a"/>
+  <circle cx="100" cy="160" r="22" fill="#333" stroke="#666" stroke-width="2"/>
+  <g font-family="Segoe UI,sans-serif" font-size="14" fill="#12323a">
+    <circle cx="210" cy="130" r="5" fill="#12323a"/>
+    <text x="175" y="135" text-anchor="end">-</text>
+    <circle cx="210" cy="165" r="5" fill="#12323a"/>
+    <text x="175" y="170" text-anchor="end">+</text>
+    <circle cx="210" cy="200" r="5" fill="#12323a"/>
+    <text x="175" y="205" text-anchor="end">S</text>
+  </g>
+  <text x="230" y="169" font-family="Segoe UI,sans-serif" font-size="12" fill="#c0392b">not used</text>
+  <rect x="440" y="50" width="240" height="200" rx="10" fill="#fff" stroke="#12323a" stroke-width="2"/>
+  <text x="560" y="85" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="16" font-weight="600" fill="#12323a">Arduino robot shield</text>
+  <g font-family="Segoe UI,sans-serif" font-size="14" fill="#12323a">
+    <rect x="480" y="110" width="28" height="22" rx="3" fill="#e8f5f2" stroke="#0f8a7a"/>
+    <text x="520" y="126">5V</text>
+    <rect x="480" y="142" width="28" height="22" rx="3" fill="#e8f5f2" stroke="#0f8a7a"/>
+    <text x="520" y="158">GND</text>
+    <rect x="480" y="174" width="28" height="22" rx="3" fill="#e8f5f2" stroke="#0f8a7a"/>
+    <text x="520" y="190">RX</text>
+    <rect x="480" y="206" width="28" height="22" rx="3" fill="#fff3d6" stroke="#e07a3d"/>
+    <text x="520" y="222">TX</text>
+  </g>
+  <path d="M215 130 H340 V153 H494" fill="none" stroke="#12323a" stroke-width="4" stroke-linecap="round"/>
+  <path d="M215 200 H360 V217 H494" fill="none" stroke="#e07a3d" stroke-width="4" stroke-linecap="round"/>
+  <text x="300" y="122" font-family="Segoe UI,sans-serif" font-size="12" fill="#12323a">- to GND</text>
+  <text x="320" y="210" font-family="Segoe UI,sans-serif" font-size="12" fill="#e07a3d">S to TX</text>
+  <rect x="40" y="260" width="640" height="40" rx="8" fill="#fff3d6" stroke="#e07a3d"/>
+  <text x="360" y="286" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="15" font-weight="600" fill="#8a4b12">Unplug before Upload - TX/RX are USB serial</text>
+</svg>

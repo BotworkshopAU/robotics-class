@@ -449,6 +449,32 @@ nav a.nav-link:hover {
   margin: 16px 0;
 }
 
+.extras-code {
+  margin: 10px 0 0;
+  padding: 12px 14px;
+  overflow-x: auto;
+  background: #0f2a30;
+  color: #e8f5f2;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+.extras-code code {
+  font-family: Consolas, "Courier New", monospace;
+  white-space: pre;
+}
+
+.extras-pdf {
+  display: block;
+  width: 100%;
+  height: min(70vh, 720px);
+  margin-top: 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+}
+
 a {
   color: var(--teal-dark);
   font-weight: 700;
