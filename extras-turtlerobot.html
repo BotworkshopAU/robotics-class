@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="exPageTitle">Extras · BotWorkshop</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <div class="brand">
+          <a
+            href="class-foundation.html#robot"
+            style="display: flex; align-items: center; gap: 14px; text-decoration: none; color: inherit"
+          >
+            <img src="logo.png" alt="" width="56" height="56" />
+            <div>
+              <h1 data-i18n="exTitle">Extras</h1>
+              <p data-i18n="exSubtitle">Turtle robot shield</p>
+            </div>
+          </a>
+          <label class="site-lang hub-lang">
+            <span class="visually-hidden" data-i18n="language">Language</span>
+            <select
+              id="site-lang"
+              class="site-lang-select"
+              data-i18n-aria="language"
+              aria-label="Language"
+            >
+              <option value="en">English</option>
+              <option value="ar">العربية</option>
+            </select>
+          </label>
+        </div>
+      </header>
+
+      <p class="timeline-code" style="margin-top: 8px">
+        <a href="class-foundation.html#robot" data-i18n="exBackRobot">← Robot</a>
+        ·
+        <a href="code.html" data-i18n="exOpenCoding">Coding (Extras category)</a>
+      </p>
+
+      <main style="padding: 12px 0 40px">
+        <section class="card">
+          <h2 data-i18n="exWhereTitle">Where to plug in</h2>
+          <p data-i18n="exWhereBody">
+            Remove the DX-BT24 Bluetooth module. Use that same 4-pin header on
+            the Arduino robot shield: 5V, GND, RX (D0), TX (D1). Unplug anything
+            on TX/RX before Upload — those pins are USB serial.
+          </p>
+          <div class="grid" style="margin-top: 12px">
+            <article class="card">
+              <h3>5V</h3>
+              <p data-i18n="exPin5v">Power for modules that need + / V+ / 5V.</p>
+            </article>
+            <article class="card">
+              <h3>GND</h3>
+              <p data-i18n="exPinGnd">Ground — connect module - / G / GND here.</p>
+            </article>
+            <article class="card">
+              <h3>RX (D0)</h3>
+              <p data-i18n="exPinRx">
+                Second digital line if you need another signal. Same upload
+                warning as TX.
+              </p>
+            </article>
+            <article class="card">
+              <h3>TX (D1)</h3>
+              <p data-i18n="exPinTx">
+                Main signal pin for class extras. Coding buzz blocks use D1.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="card" style="margin-top: 18px">
+          <h2 data-i18n="exBuzzTitle">Passive buzzer (coded in Extras)</h2>
+          <p data-i18n="exBuzzBody">
+            Passive buzzer module. Only two wires: - to GND, S to TX. Leave +
+            unconnected. Prefer Coding → Extras blocks; snippet below matches
+            what Upload generates.
+          </p>
+          <figure style="margin: 16px 0 8px; text-align: center">
+            <img
+              src="img/buzzer-bt-header-wiring.svg"
+              alt=""
+              width="720"
+              height="320"
+              style="max-width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--line); background: #fff"
+              data-i18n-aria="exBuzzImgAlt"
+              aria-label="Passive buzzer - to GND, S to TX on Arduino robot shield"
+            />
+            <figcaption class="note" style="margin-top: 10px" data-i18n="exBuzzCaption">
+              Passive buzzer to Arduino robot shield (- to GND, S to TX). Unplug before Upload.
+            </figcaption>
+          </figure>
+          <h3 data-i18n="exCodeLabel">Code (shield TX · D1)</h3>
+          <pre class="extras-code"><code>#define BUZZER_PIN 1  // TX on shield header
+
+void setup() {
+  // tone() sets the pin mode
+}
+
+void loop() {
+  tone(BUZZER_PIN, 880);   // A5
+  delay(300);
+  noTone(BUZZER_PIN);
+  delay(200);
+}</code></pre>
+        </section>
+
+        <section class="card" style="margin-top: 18px">
+          <h2 data-i18n="exIdeasTitle">Other modules on the Bluetooth header</h2>
+          <p data-i18n="exIdeasLead">
+            Same header: GND + optional 5V + signal on TX (D1) or RX (D0). Paste
+            into a blank Arduino sketch to try — unplug before every Upload.
+          </p>
+
+          <article class="card" style="margin-top: 12px">
+            <h3 data-i18n="exModLedTitle">Seven-colour LED or laser</h3>
+            <p data-i18n="exModLedBody">
+              - to GND, S to TX (laser also needs + to 5V). Never point a laser at eyes.
+            </p>
+            <pre class="extras-code"><code>#define SIG_PIN 1  // TX
+
+void setup() {
+  pinMode(SIG_PIN, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(SIG_PIN, HIGH);
+  delay(500);
+  digitalWrite(SIG_PIN, LOW);
+  delay(500);
+}</code></pre>
+          </article>
+
+          <article class="card" style="margin-top: 12px">
+            <h3 data-i18n="exModSwitchTitle">Tactile / reed / tilt / shock</h3>
+            <p data-i18n="exModSwitchBody">
+              - to GND, + to 5V, S to TX. Serial Monitor at 9600 — unplug the module to Upload, then plug back in to read.
+            </p>
+            <pre class="extras-code"><code>#define SIG_PIN 1  // TX
+
+void setup() {
+  pinMode(SIG_PIN, INPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  Serial.println(digitalRead(SIG_PIN) ? "HIGH" : "LOW");
+  delay(200);
+}</code></pre>
+          </article>
+
+          <article class="card" style="margin-top: 12px">
+            <h3 data-i18n="exModActiveBuzzTitle">Active buzzer</h3>
+            <p data-i18n="exModActiveBuzzBody">
+              - to GND, S to TX (same as LED blink). Passive buzzer prefers tone() — use Coding Extras.
+            </p>
+            <pre class="extras-code"><code>#define SIG_PIN 1
+
+void setup() {
+  pinMode(SIG_PIN, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(SIG_PIN, HIGH);
+  delay(200);
+  digitalWrite(SIG_PIN, LOW);
+  delay(800);
+}</code></pre>
+          </article>
+
+          <div class="note" style="margin-top: 14px" data-i18n="exAnalogNote">
+            Analog modules (LDR, joystick, heartbeat, many “A0” sensors) need an
+            Arduino analog pin. The Bluetooth header has no analog line — see P3/P4 below.
+          </div>
+        </section>
+
+        <section class="card" style="margin-top: 18px">
+          <h2 data-i18n="exP34Title">Shield ports P3 / P4 (later)</h2>
+          <p data-i18n="exP34Body">
+            P3 and P4 are spare connectors on the turtle shield. Good candidates
+            once we confirm which Arduino pins they map to: LDR or analog
+            temperature (need an analog pin), extra tilt/button on a free digital
+            pin, or a second LED. Blockly / Coding support for P3 and P4 is not
+            ready yet — code and blocks will be added after the pin map is checked
+            in class. Until then, prefer the Bluetooth header examples above.
+          </p>
+          <pre class="extras-code"><code>// Placeholder — replace PIN_P3 / PIN_P4 after we map the silk labels
+// #define PIN_P3  /* TBD */
+// #define PIN_P4  /* TBD */
+//
+// Example idea later:
+//   pinMode(PIN_P3, INPUT);
+//   int light = analogRead(PIN_P4);  // only if that port is analog</code></pre>
+        </section>
+
+        <section class="card" style="margin-top: 18px">
+          <h2 data-i18n="exManualTitle">Sensor kit manual</h2>
+          <p data-i18n="exManualBody">
+            Module pin labels and examples for common sensor boards. Local copy
+            in this project.
+          </p>
+          <p class="timeline-code">
+            <a
+              href="docs/XC4288_37-in-1-sensor-kit-manual.pdf"
+              target="_blank"
+              rel="noopener"
+              data-i18n="exManualOpen"
+              >Open PDF</a
+            >
+          </p>
+          <iframe
+            class="extras-pdf"
+            title="Sensor kit manual"
+            src="docs/XC4288_37-in-1-sensor-kit-manual.pdf"
+          ></iframe>
+        </section>
+      </main>
+
+      <footer>
+        <a href="class-foundation.html#robot" data-i18n="exBackRobot">← Robot</a>
+        ·
+        <a href="code.html" data-i18n="exOpenCoding">Coding (Extras category)</a>
+      </footer>
+    </div>
+    <script type="module">
+      import { applySiteI18n, wireLangSwitcher } from "./js/site-i18n.js";
+      wireLangSwitcher();
+      applySiteI18n();
+    </script>
+  </body>
+</html>

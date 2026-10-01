@@ -4,6 +4,7 @@ import {
   MOTOR_RUNTIME,
   SENSOR_RUNTIME,
   IR_RUNTIME,
+  BUZZER_RUNTIME,
   MATRIX_RUNTIME,
   SETUP_BODY,
   SETUP_MOTORS,
@@ -18,6 +19,7 @@ arduinoGenerator.PRECEDENCE = 0;
 arduinoGenerator.servoNeeded = false;
 arduinoGenerator.matrixNeeded = false;
 arduinoGenerator.irNeeded = false;
+arduinoGenerator.buzzerNeeded = false;
 
 arduinoGenerator.scrub_ = function (block, code, thisOnly) {
   const next = block.nextConnection && block.nextConnection.targetBlock();
@@ -120,6 +122,15 @@ arduinoGenerator.forBlock["turtle_ir_pressed"] = (block) => {
     arduinoGenerator.PRECEDENCE,
   ];
 };
+arduinoGenerator.forBlock["turtle_buzz"] = (block) => {
+  arduinoGenerator.buzzerNeeded = true;
+  const hz = Number(block.getFieldValue("HZ")) || 0;
+  return `buzzTone(${hz}, ${secs(block, "SECS")});\n`;
+};
+arduinoGenerator.forBlock["turtle_buzz_off"] = () => {
+  arduinoGenerator.buzzerNeeded = true;
+  return `buzzOff();\n`;
+};
 arduinoGenerator.forBlock["turtle_servo"] = function (block) {
   arduinoGenerator.servoNeeded = true;
   return `turtleServo.write(${block.getFieldValue("DEG")});\n delay(200);\n`;
@@ -139,6 +150,7 @@ export function workspaceToSketch(workspace) {
   arduinoGenerator.servoNeeded = false;
   arduinoGenerator.matrixNeeded = false;
   arduinoGenerator.irNeeded = false;
+  arduinoGenerator.buzzerNeeded = false;
   const hats = workspace.getBlocksByType("turtle_start", false);
   let body = "";
   if (hats.length) {
@@ -152,6 +164,7 @@ export function workspaceToSketch(workspace) {
   const sense = usesSensors(workspace);
   const forever = hasType(workspace, "turtle_forever");
   const ir = arduinoGenerator.irNeeded;
+  const buzz = arduinoGenerator.buzzerNeeded;
 
   const includeIr = ir ? `#include <IRremote.h>\n` : "";
   const includeServo = arduinoGenerator.servoNeeded
@@ -165,6 +178,7 @@ export function workspaceToSketch(workspace) {
     ? `\n${SENSOR_RUNTIME.replace("LINE_ON_HIGH_VALUE", String(getLineSense()))}\n`
     : "";
   const irFns = ir ? `\n${IR_RUNTIME}\n` : "";
+  const buzzFns = buzz ? `\n${BUZZER_RUNTIME}\n` : "";
   const matrixFns = arduinoGenerator.matrixNeeded ? `\n${MATRIX_RUNTIME}\n` : "";
   const servoSetup = arduinoGenerator.servoNeeded
     ? `  turtleServo.attach(SERVO_PIN);\n  turtleServo.write(90);\n`
@@ -172,6 +186,7 @@ export function workspaceToSketch(workspace) {
   const motorSetup = drive ? `${SETUP_MOTORS}\n  driveStop();\n` : "";
   const sensorSetup = sense ? `${SETUP_SENSORS}\n` : "";
   const irSetup = ir ? `  irBegin();\n` : "";
+  const buzzSetup = buzz ? `  buzzOff();\n` : "";
   const matrixSetup = arduinoGenerator.matrixNeeded ? `  matrixBegin();\n` : "";
 
   const once = indent(body || "");
@@ -180,10 +195,10 @@ export function workspaceToSketch(workspace) {
   const loopBody = forever ? indent(body || "  delay(1000);\n") : "";
 
   return `${includeIr}${includeMatrix}${includeServo}${PINS}
-${motorFns}${sensorFns}${irFns}${matrixFns}
+${motorFns}${sensorFns}${irFns}${buzzFns}${matrixFns}
 void setup() {
 ${SETUP_BODY}
-${motorSetup}${sensorSetup}${irSetup}${servoSetup}${matrixSetup}${setupExtra}${setupEnd}}
+${motorSetup}${sensorSetup}${irSetup}${buzzSetup}${servoSetup}${matrixSetup}${setupExtra}${setupEnd}}
 
 void loop() {
 ${loopBody}}

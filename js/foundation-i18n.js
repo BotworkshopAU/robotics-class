@@ -103,6 +103,51 @@ export const foundationEn = {
   fhFaceTitle: "Face, IR, Bluetooth",
   fhFaceBody:
     "8×8 LED matrix for expressions. IR remote (<10 m). DX-BT24 BLE (<20 m) with Android “Turtle Car” / iOS “keyes BT car”. Unplug the Bluetooth module before uploading code, then plug it back in.",
+  fhExtraTitle: "Extras",
+  fhExtraBody:
+    "Optional sensors on the Bluetooth header (instead of the DX-BT24). Coding has an Extras category for the passive buzzer.",
+  fhExtraOpen: "Open Extras · wiring & code →",
+
+  exPageTitle: "Extras · BotWorkshop",
+  exTitle: "Extras",
+  exSubtitle: "Turtle robot shield",
+  exBackRobot: "← Robot",
+  exOpenCoding: "Coding (Extras category)",
+  exWhereTitle: "Where to plug in",
+  exWhereBody:
+    "Remove the DX-BT24 Bluetooth module. Use that same 4-pin header on the Arduino robot shield: 5V, GND, RX (D0), TX (D1). Unplug anything on TX/RX before Upload — those pins are USB serial.",
+  exPinGnd: "Ground — connect module - / G / GND here.",
+  exPin5v: "Power for modules that need + / V+ / 5V.",
+  exPinTx: "Main signal pin for class extras. Coding buzz blocks use D1.",
+  exPinRx: "Second digital line if you need another signal. Same upload warning as TX.",
+  exBuzzTitle: "Passive buzzer (coded in Extras)",
+  exBuzzBody:
+    "Passive buzzer module. Only two wires: - to GND, S to TX. Leave + unconnected. Prefer Coding → Extras blocks; snippet below matches what Upload generates.",
+  exBuzzImgAlt: "Passive buzzer - to GND, S to TX on Arduino robot shield",
+  exBuzzCaption:
+    "Passive buzzer to Arduino robot shield (- to GND, S to TX). Unplug before Upload.",
+  exCodeLabel: "Code (shield TX · D1)",
+  exIdeasTitle: "Other modules on the Bluetooth header",
+  exIdeasLead:
+    "Same header: GND + optional 5V + signal on TX (D1) or RX (D0). Paste into a blank Arduino sketch to try — unplug before every Upload.",
+  exModLedTitle: "Seven-colour LED or laser",
+  exModLedBody:
+    "- to GND, S to TX (laser also needs + to 5V). Never point a laser at eyes.",
+  exModSwitchTitle: "Tactile / reed / tilt / shock",
+  exModSwitchBody:
+    "- to GND, + to 5V, S to TX. Serial Monitor at 9600 — unplug the module to Upload, then plug back in to read.",
+  exModActiveBuzzTitle: "Active buzzer",
+  exModActiveBuzzBody:
+    "- to GND, S to TX (same as LED blink). Passive buzzer prefers tone() — use Coding Extras.",
+  exAnalogNote:
+    "Analog modules (LDR, joystick, heartbeat, many “A0” sensors) need an Arduino analog pin. The Bluetooth header has no analog line — see P3/P4 below.",
+  exP34Title: "Shield ports P3 / P4 (later)",
+  exP34Body:
+    "P3 and P4 are spare connectors on the turtle shield. Good candidates once we confirm which Arduino pins they map to: LDR or analog temperature (need an analog pin), extra tilt/button on a free digital pin, or a second LED. Blockly / Coding support for P3 and P4 is not ready yet — code and blocks will be added after the pin map is checked in class. Until then, prefer the Bluetooth header examples above.",
+  exManualTitle: "Sensor kit manual",
+  exManualBody:
+    "Module pin labels and examples for common sensor boards. Local copy in this project.",
+  exManualOpen: "Open PDF",
   fhPowerNote:
     "Power: logic 5 V, motor input 6-9 V. Battery holder (18650 or 4×AA in the kit) plus USB for programming. Switch motors off between tests so kits last the session.",
 
@@ -361,6 +406,51 @@ export const foundationAr = {
   fhFaceTitle: "وجه، IR، بلوتوث",
   fhFaceBody:
     "مصفوفة LED 8×8 للتعبيرات. ريموت IR (<10 م). DX-BT24 BLE (<20 م) مع Android «Turtle Car» / iOS «keyes BT car». افصل وحدة البلوتوث قبل رفع الكود ثم أعد توصيلها.",
+  fhExtraTitle: "Extras",
+  fhExtraBody:
+    "حساسات اختيارية على مقبس البلوتوث (بدل DX-BT24). في البرمجة فئة Extras للطنان السلبي.",
+  fhExtraOpen: "فتح Extras · توصيل وكود ←",
+
+  exPageTitle: "Extras · BotWorkshop",
+  exTitle: "Extras",
+  exSubtitle: "درع روبوت السلحفاة",
+  exBackRobot: "← الروبوت",
+  exOpenCoding: "البرمجة (فئة Extras)",
+  exWhereTitle: "أين توصّل",
+  exWhereBody:
+    "أزل وحدة DX-BT24 بلوتوث. استخدم نفس المقبس رباعي الأرجل على درع روبوت الأردوينو: 5V و GND و RX (D0) و TX (D1). افصل أي شيء على TX/RX قبل الرفع — هذه الأرجل سيريال USB.",
+  exPinGnd: "أرضي — وصّل - / G / GND للوحدة هنا.",
+  exPin5v: "طاقة للوحدات التي تحتاج + / V+ / 5V.",
+  exPinTx: "رجل الإشارة الرئيسية لإضافات الصف. كتل الطنين تستخدم D1.",
+  exPinRx: "خط رقمي ثانٍ إن احتجت إشارة أخرى. نفس تحذير الرفع مثل TX.",
+  exBuzzTitle: "طنان سلبي (مبرمج في Extras)",
+  exBuzzBody:
+    "وحدة طنان سلبي. سلكان فقط: - إلى GND و S إلى TX. اترك + بلا توصيل. فضّل كتل البرمجة → Extras؛ المقتطف أدناه يطابق ما يولّده الرفع.",
+  exBuzzImgAlt: "طنان سلبي - إلى GND و S إلى TX على درع روبوت الأردوينو",
+  exBuzzCaption:
+    "طنان سلبي إلى درع روبوت الأردوينو (- إلى GND، S إلى TX). افصله قبل الرفع.",
+  exCodeLabel: "كود (TX على الدرع · D1)",
+  exIdeasTitle: "وحدات أخرى على مقبس البلوتوث",
+  exIdeasLead:
+    "نفس المقبس: GND + 5V اختياري + إشارة على TX (D1) أو RX (D0). الصق في سكتش فارغ للتجربة — افصل قبل كل رفع.",
+  exModLedTitle: "LED سبعة ألوان أو ليزر",
+  exModLedBody:
+    "- إلى GND، S إلى TX (الليزر يحتاج أيضاً + إلى 5V). لا توجّه الليزر نحو العيون.",
+  exModSwitchTitle: "زر / قصبة / ميل / صدمة",
+  exModSwitchBody:
+    "- إلى GND، + إلى 5V، S إلى TX. Serial Monitor على 9600 — افصل الوحدة للرفع ثم أعد توصيلها للقراءة.",
+  exModActiveBuzzTitle: "طنان نشط",
+  exModActiveBuzzBody:
+    "- إلى GND، S إلى TX (مثل وميض LED). الطنان السلبي يفضّل tone() — استخدم Extras في البرمجة.",
+  exAnalogNote:
+    "الوحدات التناظرية (LDR، جويستك، نبض، وكثير من حساسات «A0») تحتاج رجل تناظرية. مقبس البلوتوث بلا خط تناظري — انظر P3/P4 أدناه.",
+  exP34Title: "منافذ الدرع P3 / P4 (لاحقاً)",
+  exP34Body:
+    "P3 و P4 موصلان إضافيان على درع السلحفاة. مرشحون جيدون بعد تأكيد أرجل الأردوينو: LDR أو حرارة تناظرية (تحتاج رجل تناظرية)، ميل/زر إضافي على رجل رقمية حرة، أو LED ثانٍ. دعم Blockly / البرمجة لـ P3 و P4 غير جاهز بعد — يُضاف الكود والكتل بعد التحقق من خريطة الأرجل في الصف. حتى ذلك الحين استخدم أمثلة مقبس البلوتوث أعلاه.",
+  exManualTitle: "دليل طقم الحساسات",
+  exManualBody:
+    "تسميات أرجل الوحدات وأمثلة للوحات الحساسات الشائعة. نسخة محلية في هذا المشروع.",
+  exManualOpen: "فتح PDF",
   fhPowerNote:
     "الطاقة: منطق 5 فولت، دخل المحرك 6–9 فولت. حامل بطارية (18650 أو 4×AA) مع USB للبرمجة. أطفئ المحركات بين الاختبارات ليدوم الطقم.",
 

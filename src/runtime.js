@@ -11,6 +11,7 @@ export const PINS = `
 #define TRIG_PIN 12
 #define ECHO_PIN 13
 #define IR_PIN 3
+#define BUZZER_PIN 1
 `.trim();
 
 export const MOTOR_RUNTIME = `
@@ -108,6 +109,22 @@ void irFresh() {
 
 int irButton(unsigned long code) {
   return turtleIrCode == code;
+}
+`.trim();
+
+/**
+ * Optional passive buzzer on Bluetooth header TX (D1); see extras-turtlerobot.html.
+ */
+export const BUZZER_RUNTIME = `
+void buzzTone(unsigned int hz, float seconds) {
+  if (hz > 0) tone(BUZZER_PIN, hz);
+  else noTone(BUZZER_PIN);
+  delay((unsigned long)(seconds * 1000.0));
+  noTone(BUZZER_PIN);
+}
+
+void buzzOff() {
+  noTone(BUZZER_PIN);
 }
 `.trim();
 

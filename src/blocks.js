@@ -261,6 +261,39 @@ export function defineTurtleBlocks(lang = getLang()) {
       tooltip: t.irTip,
     },
     {
+      type: "turtle_buzz",
+      message0: t.buzz,
+      args0: [
+        {
+          type: "field_number",
+          name: "HZ",
+          value: 880,
+          min: 0,
+          max: 5000,
+        },
+        {
+          type: "field_number",
+          name: "SECS",
+          value: 0.3,
+          min: 0,
+          max: 30,
+          precision: 0.1,
+        },
+      ],
+      previousStatement: null,
+      nextStatement: null,
+      colour: 290,
+      tooltip: t.buzzTip,
+    },
+    {
+      type: "turtle_buzz_off",
+      message0: t.buzzOff,
+      previousStatement: null,
+      nextStatement: null,
+      colour: 290,
+      tooltip: t.buzzTip,
+    },
+    {
       type: "turtle_servo",
       message0: t.servo,
       args0: [
@@ -361,6 +394,15 @@ export function getTurtleToolbox(lang = getLang()) {
         name: c.servo,
         colour: "230",
         contents: [{ kind: "block", type: "turtle_servo" }],
+      },
+      {
+        kind: "category",
+        name: c.buzzer,
+        colour: "290",
+        contents: [
+          { kind: "block", type: "turtle_buzz" },
+          { kind: "block", type: "turtle_buzz_off" },
+        ],
       },
     ],
   };
