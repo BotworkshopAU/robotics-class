@@ -2,6 +2,14 @@
 
 Static site for day robotics workshops: Home, Courses, Products, Explore, Foundation class hub, Turtle/Tello coding.
 
+## Turtle coding only (for students / class laptops)
+
+For programming the Turtle over USB you can distribute a **smaller repo** instead of this full site:
+
+**https://github.com/BotworkshopAU/botworkshop-turtle-coding**
+
+It includes `code.html` (Turtle only), the turtle **agenda** page, and an **install** guide (Node, Arduino CLI, CP210x USB-UART on Windows and Mac).
+
 ## Live site (browse only)
 
 **https://botworkshopau.github.io/robotics-class/**
