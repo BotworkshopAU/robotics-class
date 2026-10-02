@@ -146,7 +146,7 @@ export const foundationEn = {
     "P3 and P4 are spare connectors on the turtle shield. Good candidates once we confirm which Arduino pins they map to: LDR or analog temperature (need an analog pin), extra tilt/button on a free digital pin, or a second LED. Blockly / Coding support for P3 and P4 is not ready yet — code and blocks will be added after the pin map is checked in class. Until then, prefer the Bluetooth header examples above.",
   exManualTitle: "Sensor kit manual",
   exManualBody:
-    "Module pin labels and examples for common sensor boards. Local copy in this project.",
+    "Module pin labels and examples for common sensor boards.",
   exManualOpen: "Open PDF",
   fhPowerNote:
     "Power: logic 5 V, motor input 6-9 V. Battery holder (18650 or 4×AA in the kit) plus USB for programming. Switch motors off between tests so kits last the session.",
@@ -449,7 +449,7 @@ export const foundationAr = {
     "P3 و P4 موصلان إضافيان على درع السلحفاة. مرشحون جيدون بعد تأكيد أرجل الأردوينو: LDR أو حرارة تناظرية (تحتاج رجل تناظرية)، ميل/زر إضافي على رجل رقمية حرة، أو LED ثانٍ. دعم Blockly / البرمجة لـ P3 و P4 غير جاهز بعد — يُضاف الكود والكتل بعد التحقق من خريطة الأرجل في الصف. حتى ذلك الحين استخدم أمثلة مقبس البلوتوث أعلاه.",
   exManualTitle: "دليل طقم الحساسات",
   exManualBody:
-    "تسميات أرجل الوحدات وأمثلة للوحات الحساسات الشائعة. نسخة محلية في هذا المشروع.",
+    "تسميات أرجل الوحدات وأمثلة للوحات الحساسات الشائعة.",
   exManualOpen: "فتح PDF",
   fhPowerNote:
     "الطاقة: منطق 5 فولت، دخل المحرك 6–9 فولت. حامل بطارية (18650 أو 4×AA) مع USB للبرمجة. أطفئ المحركات بين الاختبارات ليدوم الطقم.",
