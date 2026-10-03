@@ -1,0 +1,20 @@
+Basic Tello flight — how to run
+================================
+
+This folder has one script: tello_basic.py
+It takes off, hovers for 3 seconds, then lands.
+
+Steps
+-----
+1. Charge the battery. Put the props on. Fly indoors in a clear space. Stay low.
+2. Power on the Tello. Wait until the LED is blinking.
+3. On this PC, join the Wi-Fi named TELLO-xxxxxx.
+   You will lose internet. That is normal.
+4. Close the Tello phone app. Only this PC may talk to the drone.
+5. Install Python 3 if it is not already installed.
+   Check in a terminal:  py -3 --version
+6. Open a terminal in this folder and run:
+
+     py -3 tello_basic.py
+
+If the drone does not answer, check the Wi-Fi name and that the phone app is closed, then run the command again.
