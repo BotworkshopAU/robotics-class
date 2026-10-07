@@ -84,6 +84,9 @@ function fillHome(config, lang = getLang()) {
   const profile = document.getElementById("home-ig-profile");
   if (profile) profile.href = config.instagramProfile;
 
+  const igProfile = document.getElementById("ig-profile");
+  if (igProfile) igProfile.href = config.instagramProfile;
+
   const course = document.getElementById("register-course");
   if (course && config.enabled && config.level) {
     const match = [...course.options].find((o) => o.value === config.level);
@@ -133,6 +136,46 @@ function wirePartnerForm() {
   });
 }
 
+async function loadInstagram(profileUrl) {
+  const section = document.getElementById("instagram");
+  const grid = document.getElementById("ig-grid");
+  if (!section || !grid) return;
+
+  try {
+    const res = await fetch(`instagram.json?t=${Date.now()}`, { cache: "no-store" });
+    if (!res.ok) throw new Error("missing instagram.json");
+    const data = await res.json();
+    const posts = Array.isArray(data.posts) ? data.posts : [];
+    if (!posts.length) throw new Error("empty feed");
+
+    const profile = document.getElementById("ig-profile");
+    if (profile) profile.href = profileUrl || data.profile || profile.href;
+
+    grid.replaceChildren(
+      ...posts.map((post) => {
+        const link = document.createElement("a");
+        link.href = post.href;
+        link.target = "_blank";
+        link.rel = "noreferrer";
+        link.dataset.kind = post.kind === "reel" ? "reel" : "post";
+        const img = document.createElement("img");
+        img.src = post.image;
+        img.alt = post.alt || "";
+        link.append(img);
+        if (post.kind === "reel") {
+          const badge = document.createElement("span");
+          badge.className = "ig-play";
+          badge.setAttribute("aria-hidden", "true");
+          link.append(badge);
+        }
+        return link;
+      }),
+    );
+  } catch {
+    section.hidden = true;
+  }
+}
+
 const config = await loadWorkshop();
 
 function refreshUi(lang = getLang()) {
@@ -146,3 +189,4 @@ wireLangSwitcher((lang) => {
 refreshUi(getLang());
 wireRegister(config);
 wirePartnerForm();
+loadInstagram(config.instagramProfile);

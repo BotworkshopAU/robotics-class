@@ -68,6 +68,9 @@ const en = {
   levelAdvancedBody:
     "Polish, test, and deploy robots — skills closer to real products and the market.",
   coursesAllLink: "Course details — all levels",
+  igTitle: "On Instagram",
+  igLead: "Photos and clips from the workshops. New dates go up on @botworkshop_au.",
+  igFollow: "Open Instagram",
 
   coursesKicker: "Day workshops",
   coursesTitle: "Courses",
@@ -210,6 +213,9 @@ const ar = {
   levelAdvancedBody:
     "حسّن واختبر وانشر روبوتات — مهارات أقرب للمنتجات الحقيقية والسوق.",
   coursesAllLink: "تفاصيل الدورات — كل المستويات",
+  igTitle: "على إنستغرام",
+  igLead: "صور ومقاطع من الورش. المواعيد الجديدة تُنشر على @botworkshop_au.",
+  igFollow: "فتح إنستغرام",
 
   coursesKicker: "ورش ليوم واحد",
   coursesTitle: "الدورات",
