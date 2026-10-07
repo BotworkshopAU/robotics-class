@@ -16,7 +16,7 @@ import {
   telloDemos,
   workspaceToTelloPython,
 } from "./tello.js";
-import { initFacePad, setFaceHex, SMILE } from "./face_pad.js";
+import { initFacePad, showFaceHex, SMILE } from "./face_pad.js";
 import { getMotorFlip, setMotorFlip, getLineSense, setLineSense } from "./motors_pref.js";
 import { getLang, setLang, ui } from "./i18n.js";
 import { uploadTurtleSketch, webSerialSupported, compileApiAvailable, isLocalCodingHost } from "./upload.js";
@@ -96,6 +96,72 @@ function currentToolbox() {
   return robot === "tello" ? getTelloToolbox(lang) : getTurtleToolbox(lang);
 }
 
+let editingMatrixId = null;
+
+function editingMatrixBlock() {
+  if (!workspace || !editingMatrixId) return null;
+  const block = workspace.getBlockById(editingMatrixId);
+  if (!block || block.type !== "turtle_matrix" || block.isInFlyout) return null;
+  return block;
+}
+
+function bindPadToBlock(block) {
+  if (!block || block.type !== "turtle_matrix" || block.isInFlyout) return;
+  editingMatrixId = block.id;
+  showFaceHex(block.getFieldValue("FACE") || SMILE);
+}
+
+function applyPadToEditingBlock(hex) {
+  let target = editingMatrixBlock();
+  if (!target && workspace) {
+    const only = workspace
+      .getBlocksByType("turtle_matrix", false)
+      .filter((item) => !item.isInFlyout);
+    if (only.length === 1) {
+      editingMatrixId = only[0].id;
+      target = only[0];
+    }
+  }
+  if (!target) return;
+  const field = target.getField("FACE");
+  if (!field || field.getValue() === hex) return;
+  Blockly.Events.disable();
+  try {
+    field.setValue(hex);
+  } finally {
+    Blockly.Events.enable();
+  }
+}
+
+function onMatrixBlockEdit(event) {
+  if (!workspace || event.workspaceId !== workspace.id) return;
+  if (event.type === Blockly.Events.SELECTED) {
+    const block = event.newElementId ? workspace.getBlockById(event.newElementId) : null;
+    if (block) bindPadToBlock(block);
+    return;
+  }
+  if (event.type !== Blockly.Events.BLOCK_CHANGE || event.name !== "FACE") return;
+  if (event.blockId === editingMatrixId && event.newValue != null) showFaceHex(event.newValue);
+}
+
+function migrateMatrixState(state) {
+  const walk = (block) => {
+    if (!block || typeof block !== "object") return;
+    if (block.type === "turtle_matrix" || /^turtle_matrix_\d+$/.test(block.type || "")) {
+      const face = block.fields?.FACE || SMILE;
+      block.type = "turtle_matrix";
+      block.fields = { ...(block.fields || {}), FACE: face };
+    }
+    if (block.next?.block) walk(block.next.block);
+    if (block.inputs) {
+      for (const input of Object.values(block.inputs)) walk(input?.block);
+    }
+  };
+  const roots = state?.blocks?.blocks;
+  if (Array.isArray(roots)) roots.forEach(walk);
+  return state;
+}
+
 function injectWorkspace() {
   if (workspace) {
     workspace.dispose();
@@ -110,6 +176,7 @@ function injectWorkspace() {
     trashcan: true,
     move: { scrollbars: true, drag: true, wheel: true },
   });
+  workspace.addChangeListener(onMatrixBlockEdit);
   workspace.addChangeListener(onWorkspaceChange);
 }
 
@@ -130,13 +197,13 @@ function loadWorkspace() {
   const saved = localStorage.getItem(key);
   if (saved) {
     try {
-      Blockly.serialization.workspaces.load(JSON.parse(saved), workspace);
+      Blockly.serialization.workspaces.load(migrateMatrixState(JSON.parse(saved)), workspace);
       return;
     } catch {
       /* broken save */
     }
   }
-  Blockly.serialization.workspaces.load(fallback, workspace);
+  Blockly.serialization.workspaces.load(migrateMatrixState(fallback), workspace);
 }
 
 function fillDemos(options, selected) {
@@ -169,6 +236,14 @@ function applyFacePadLabels(t) {
     const btn = facePad.querySelector(`[data-face='${key}']`);
     if (btn) btn.textContent = label;
   }
+  const presetTitle = facePad.querySelector(".face-presets-label");
+  if (presetTitle) presetTitle.textContent = t.facePresetTitle;
+  facePad.querySelectorAll("[data-preset]").forEach((btn) => {
+    const name = btn.querySelector(".face-preset-name");
+    const label = t.facePresets?.[btn.dataset.preset];
+    if (name && label) name.textContent = label;
+    if (label) btn.title = label;
+  });
   const motorPrefs = document.getElementById("motor-prefs");
   if (motorPrefs) {
     const mHeader = motorPrefs.querySelector("header");
@@ -332,7 +407,7 @@ function setLanguage(next) {
   injectWorkspace();
   if (saved) {
     try {
-      Blockly.serialization.workspaces.load(saved, workspace);
+      Blockly.serialization.workspaces.load(migrateMatrixState(saved), workspace);
     } catch {
       loadWorkspace();
     }
@@ -346,7 +421,12 @@ function setLanguage(next) {
 
 injectWorkspace();
 applyChrome();
-initFacePad(() => refreshCode());
+initFacePad((hex) => {
+  applyPadToEditingBlock(hex);
+  refreshCode();
+  saveWorkspace();
+});
+applyFacePadLabels(ui(lang));
 
 const motorFlipSelect = document.getElementById("motor-flip");
 if (motorFlipSelect) {
@@ -368,14 +448,17 @@ if (lineSenseSelect) {
 
 const demoParam = new URLSearchParams(location.search).get("demo");
 if (robot === "tello" && demoParam && telloDemos[demoParam]) {
-  Blockly.serialization.workspaces.load(telloDemos[demoParam], workspace);
+  Blockly.serialization.workspaces.load(migrateMatrixState(telloDemos[demoParam]), workspace);
   localStorage.setItem("bw-tello-demo", demoParam);
   demoSelect.value = demoParam;
 } else if (robot === "turtle" && demoParam && demos[demoParam]) {
-  Blockly.serialization.workspaces.load(demos[demoParam], workspace);
+  Blockly.serialization.workspaces.load(migrateMatrixState(demos[demoParam]), workspace);
   localStorage.setItem("bw-turtle-demo", demoParam);
   demoSelect.value = demoParam;
-  if (demoParam === "face") setFaceHex(SMILE);
+  if (demoParam === "face") {
+    const drawn = workspace.getBlocksByType("turtle_matrix", false)[0];
+    if (drawn) bindPadToBlock(drawn);
+  }
 } else {
   loadWorkspace();
 }
@@ -389,7 +472,7 @@ newBtn.addEventListener("click", () => {
   if (!confirm(ui(lang).confirmNew)) return;
   const starter = robot === "tello" ? telloStarterWorkspace() : starterWorkspace();
   workspace.clear();
-  Blockly.serialization.workspaces.load(starter, workspace);
+  Blockly.serialization.workspaces.load(migrateMatrixState(starter), workspace);
   demoSelect.value = "";
   localStorage.removeItem(robot === "tello" ? "bw-tello-demo" : "bw-turtle-demo");
   hideStatusBar();
@@ -401,8 +484,11 @@ demoSelect.addEventListener("change", () => {
   if (!id || !pack[id]) return;
   try {
     workspace.clear();
-    Blockly.serialization.workspaces.load(pack[id], workspace);
-    if (robot === "turtle" && id === "face") setFaceHex(SMILE);
+    Blockly.serialization.workspaces.load(migrateMatrixState(pack[id]), workspace);
+    if (robot === "turtle" && id === "face") {
+      const drawn = workspace.getBlocksByType("turtle_matrix", false)[0];
+      if (drawn) bindPadToBlock(drawn);
+    }
     localStorage.setItem(robot === "tello" ? "bw-tello-demo" : "bw-turtle-demo", id);
     hideStatusBar();
   } catch (err) {

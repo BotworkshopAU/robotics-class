@@ -52,15 +52,12 @@
       <div id="blockly"></div>
       <aside id="face-pad" class="face-pad">
         <header>8×8 face</header>
-        <p class="face-help">Draw upright here. The kit face is mounted upside down — Upload flips it for you.</p>
-        <div id="face-grid" class="face-grid" aria-label="8 by 8 LED face"></div>
-        <div class="face-tools">
-          <button type="button" data-face="smile">Smile</button>
-          <button type="button" data-face="clear">Clear</button>
-          <button type="button" data-face="flip180">Upside down</button>
-          <button type="button" data-face="fliph">Flip L/R</button>
-          <button type="button" data-face="flipv">Flip U/D</button>
-        </div>
+        <p class="face-help">
+          Click a show 8×8 drawing block, then click a quick picture. To draw your own, click the
+          picture on the block. Each block keeps its own picture.
+        </p>
+        <p class="face-presets-label">Quick pictures</p>
+        <div id="face-presets" class="face-presets"></div>
         <div class="motor-prefs" id="motor-prefs">
           <header data-i18n-motor="motorTitle">Motors</header>
           <p class="face-help" data-i18n-motor="motorHelp">

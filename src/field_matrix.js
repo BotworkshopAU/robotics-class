@@ -1,7 +1,7 @@
 import * as Blockly from "blockly";
 
 const EMPTY = "0000000000000000";
-const CELL = 6;
+const CELL = 8;
 const GAP = 1;
 const PAD = 3;
 
@@ -119,10 +119,17 @@ export class FieldLedMatrix extends Blockly.Field {
       }
     }
     const size = PAD * 2 + 8 * CELL + 7 * GAP;
-    this.borderRect_.setAttribute("width", String(size));
-    this.borderRect_.setAttribute("height", String(size));
-    this.setSize_(size, size);
+    this.updateSize_();
     this.renderPreview_();
+  }
+
+  updateSize_() {
+    const size = PAD * 2 + 8 * CELL + 7 * GAP;
+    this.size_ = new Blockly.utils.Size(size, size);
+    if (this.borderRect_) {
+      this.borderRect_.setAttribute("width", String(size));
+      this.borderRect_.setAttribute("height", String(size));
+    }
   }
 
   render_() {
