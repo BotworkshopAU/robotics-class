@@ -30,9 +30,9 @@ const en = {
   homeRegister: "Register",
   homeSeeCourses: "See courses",
   upcomingWhen: "Upcoming workshop",
-  upcomingNoneTitle: "None announced yet",
-  upcomingNoneBlurb:
-    "Follow Instagram for the next public-holiday date, or register interest below.",
+  upcomingNoneTitle: "Coming soon",
+  upcomingNoneBlurb: "The next workshop date will be announced on Instagram.",
+  upcomingInstagram: "Instagram",
   upcomingRegister: "Register",
   classHub: "Class hub",
 
@@ -68,6 +68,9 @@ const en = {
   levelAdvancedBody:
     "Polish, test, and deploy robots — skills closer to real products and the market.",
   coursesAllLink: "Course details — all levels",
+  igTitle: "On Instagram",
+  igLead: "Photos and clips from the workshops. New dates go up on @botworkshop_au.",
+  igFollow: "Open Instagram",
 
   coursesKicker: "Day workshops",
   coursesTitle: "Courses",
@@ -172,9 +175,9 @@ const ar = {
   homeRegister: "سجّل",
   homeSeeCourses: "عرض الدورات",
   upcomingWhen: "ورشة قادمة",
-  upcomingNoneTitle: "لا يوجد إعلان بعد",
-  upcomingNoneBlurb:
-    "تابع إنستغرام لمعرفة موعد العطلة القادمة، أو سجّل اهتمامك أدناه.",
+  upcomingNoneTitle: "قريباً",
+  upcomingNoneBlurb: "سيُعلَن موعد الورشة القادمة على إنستغرام.",
+  upcomingInstagram: "إنستغرام",
   upcomingRegister: "سجّل",
   classHub: "مركز الصف",
 
@@ -210,6 +213,9 @@ const ar = {
   levelAdvancedBody:
     "حسّن واختبر وانشر روبوتات — مهارات أقرب للمنتجات الحقيقية والسوق.",
   coursesAllLink: "تفاصيل الدورات — كل المستويات",
+  igTitle: "على إنستغرام",
+  igLead: "صور ومقاطع من الورش. المواعيد الجديدة تُنشر على @botworkshop_au.",
+  igFollow: "فتح إنستغرام",
 
   coursesKicker: "ورش ليوم واحد",
   coursesTitle: "الدورات",

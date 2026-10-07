@@ -1,5 +1,6 @@
 import * as Blockly from "blockly";
 import "./field_matrix.js";
+import { SMILE } from "./face_pad.js";
 import { getLang, ui } from "./i18n.js";
 
 export function defineTurtleBlocks(lang = getLang()) {
@@ -312,6 +313,14 @@ export function defineTurtleBlocks(lang = getLang()) {
     {
       type: "turtle_matrix",
       message0: t.matrix,
+      message1: "%1",
+      args1: [
+        {
+          type: "field_led_matrix",
+          name: "FACE",
+          value: SMILE,
+        },
+      ],
       previousStatement: null,
       nextStatement: null,
       colour: 45,
@@ -909,6 +918,7 @@ export const demos = {
   }),
   face: startNext({
     type: "turtle_matrix",
+    fields: { FACE: SMILE },
   }),
 };
 

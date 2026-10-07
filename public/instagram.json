@@ -1,0 +1,42 @@
+{
+  "profile": "https://www.instagram.com/botworkshop_au/",
+  "handle": "@botworkshop_au",
+  "posts": [
+    {
+      "href": "https://www.instagram.com/botworkshop_au/p/DeHaqbVCQNE/",
+      "image": "instagram/DeHaqbVCQNE.jpg",
+      "alt": "Photo by Bot Workshop on October 05, 2026.",
+      "kind": "post"
+    },
+    {
+      "href": "https://www.instagram.com/botworkshop_au/reel/DS1jR8tj2OG/",
+      "image": "instagram/DS1jR8tj2OG.jpg",
+      "alt": "Video by Bot Workshop on December 28, 2025.",
+      "kind": "reel"
+    },
+    {
+      "href": "https://www.instagram.com/botworkshop_au/reel/DEcEIeXpdh7/",
+      "image": "instagram/DEcEIeXpdh7.jpg",
+      "alt": "Video by Bot Workshop on January 05, 2025.",
+      "kind": "reel"
+    },
+    {
+      "href": "https://www.instagram.com/botworkshop_au/reel/DeHc4e_pmyV/",
+      "image": "instagram/DeHc4e_pmyV.jpg",
+      "alt": "Video by Bot Workshop on October 05, 2026.",
+      "kind": "reel"
+    },
+    {
+      "href": "https://www.instagram.com/botworkshop_au/p/Ddlx1IWmJI-/",
+      "image": "instagram/Ddlx1IWmJI-.jpg",
+      "alt": "Photo by Bot Workshop on September 22, 2026.",
+      "kind": "post"
+    },
+    {
+      "href": "https://www.instagram.com/botworkshop_au/p/DSy5pehCULS/",
+      "image": "instagram/DSy5pehCULS.jpg",
+      "alt": "Photo by Bot Workshop on December 27, 2025.",
+      "kind": "post"
+    }
+  ]
+}

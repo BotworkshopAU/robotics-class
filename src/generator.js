@@ -10,7 +10,7 @@ import {
   SETUP_MOTORS,
   SETUP_SENSORS,
 } from "./runtime.js";
-import { faceListForSketch } from "./face_pad.js";
+import { hexToRows } from "./field_matrix.js";
 import { getMotorFlip, getLineSense } from "./motors_pref.js";
 
 export const arduinoGenerator = new Blockly.Generator("Arduino");
@@ -136,10 +136,15 @@ arduinoGenerator.forBlock["turtle_servo"] = function (block) {
   return `turtleServo.write(${block.getFieldValue("DEG")});\n delay(200);\n`;
 };
 
-arduinoGenerator.forBlock["turtle_matrix"] = function () {
+function matrixShowCode(block) {
   arduinoGenerator.matrixNeeded = true;
-  return `{ const uint8_t f[] = { ${faceListForSketch()} }; matrixShow(f); }\n`;
-};
+  const bytes = hexToRows(block.getFieldValue("FACE"))
+    .map((n) => `0x${(n & 255).toString(16).padStart(2, "0")}`)
+    .join(", ");
+  return `{ const uint8_t f[] = { ${bytes} }; matrixShow(f); }\n`;
+}
+
+arduinoGenerator.forBlock["turtle_matrix"] = matrixShowCode;
 
 arduinoGenerator.forBlock["turtle_matrix_clear"] = function () {
   arduinoGenerator.matrixNeeded = true;

@@ -6,15 +6,13 @@ import {
 } from "./site-i18n.js";
 
 const DEFAULTS = {
-  enabled: true,
-  level: "Foundation",
-  dateLabel: "Saturday 3 October 2026",
-  title: "Foundation · Saturday 3 October 2026",
-  titleAr: "تأسيسي · السبت 3 أكتوبر 2026",
-  blurb:
-    "Program a real robot with simple code, learn how computers follow instructions, experiment and see the results, explore drones and modern technology, build problem-solving skills — and take home a certificate.",
-  blurbAr:
-    "برمج روبوتاً حقيقياً بكود بسيط، تعلّم كيف تتبع الحواسيب التعليمات، جرّب وراقب النتائج، استكشف الطائرات بدون طيار والتقنية الحديثة، طوّر حل المشكلات — واحصل على شهادة مشاركة.",
+  enabled: false,
+  level: "",
+  dateLabel: "",
+  title: "",
+  titleAr: "",
+  blurb: "",
+  blurbAr: "",
   hubUrl: "class-foundation.html",
   email: "botworkshopau@gmail.com",
   instagramChat: "https://ig.me/m/botworkshop_au",
@@ -43,6 +41,7 @@ function fillHome(config, lang = getLang()) {
   const actions = document.getElementById("upcoming-actions");
 
   if (title && blurb) {
+    const register = actions?.querySelector("a[href='#register'], a[data-i18n='upcomingRegister']");
     if (config.enabled) {
       title.textContent =
         lang === "ar" && config.titleAr
@@ -51,6 +50,12 @@ function fillHome(config, lang = getLang()) {
       blurb.textContent =
         lang === "ar" && config.blurbAr ? config.blurbAr : config.blurb || "";
       if (actions) actions.hidden = false;
+      if (register) {
+        register.href = "#register";
+        register.textContent = t.upcomingRegister;
+        register.removeAttribute("target");
+        register.removeAttribute("rel");
+      }
       if (hub) {
         hub.href = config.hubUrl || "class-foundation.html";
         hub.textContent = `${config.level || "Class"} · ${t.classHub}`;
@@ -60,6 +65,13 @@ function fillHome(config, lang = getLang()) {
       title.textContent = t.upcomingNoneTitle;
       blurb.textContent = t.upcomingNoneBlurb;
       if (hub) hub.hidden = true;
+      if (actions) actions.hidden = false;
+      if (register) {
+        register.href = config.instagramProfile || config.instagramChat;
+        register.textContent = t.upcomingInstagram;
+        register.target = "_blank";
+        register.rel = "noreferrer";
+      }
     }
   }
 
@@ -71,6 +83,9 @@ function fillHome(config, lang = getLang()) {
 
   const profile = document.getElementById("home-ig-profile");
   if (profile) profile.href = config.instagramProfile;
+
+  const igProfile = document.getElementById("ig-profile");
+  if (igProfile) igProfile.href = config.instagramProfile;
 
   const course = document.getElementById("register-course");
   if (course && config.enabled && config.level) {
@@ -121,6 +136,46 @@ function wirePartnerForm() {
   });
 }
 
+async function loadInstagram(profileUrl) {
+  const section = document.getElementById("instagram");
+  const grid = document.getElementById("ig-grid");
+  if (!section || !grid) return;
+
+  try {
+    const res = await fetch(`instagram.json?t=${Date.now()}`, { cache: "no-store" });
+    if (!res.ok) throw new Error("missing instagram.json");
+    const data = await res.json();
+    const posts = Array.isArray(data.posts) ? data.posts : [];
+    if (!posts.length) throw new Error("empty feed");
+
+    const profile = document.getElementById("ig-profile");
+    if (profile) profile.href = profileUrl || data.profile || profile.href;
+
+    grid.replaceChildren(
+      ...posts.map((post) => {
+        const link = document.createElement("a");
+        link.href = post.href;
+        link.target = "_blank";
+        link.rel = "noreferrer";
+        link.dataset.kind = post.kind === "reel" ? "reel" : "post";
+        const img = document.createElement("img");
+        img.src = post.image;
+        img.alt = post.alt || "";
+        link.append(img);
+        if (post.kind === "reel") {
+          const badge = document.createElement("span");
+          badge.className = "ig-play";
+          badge.setAttribute("aria-hidden", "true");
+          link.append(badge);
+        }
+        return link;
+      }),
+    );
+  } catch {
+    section.hidden = true;
+  }
+}
+
 const config = await loadWorkshop();
 
 function refreshUi(lang = getLang()) {
@@ -134,3 +189,4 @@ wireLangSwitcher((lang) => {
 refreshUi(getLang());
 wireRegister(config);
 wirePartnerForm();
+loadInstagram(config.instagramProfile);
